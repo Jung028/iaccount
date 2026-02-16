@@ -1,0 +1,120 @@
+package com.alipay.alipay_plus.core.model.domain;
+
+import com.alipay.alipay_plus.common.service.facade.enums.TransactionStatusEnum;
+import com.alipay.alipay_plus.common.service.facade.enums.TransactionTypeEnum;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.Date;
+
+public class TransactionRecord {
+
+    private String txnId;
+    private Date gmtCreate;
+    private Date gmtModified;
+    private Date gmtComplete;
+    private String payerAccountId;
+    private String payeeAccountId;
+    private BigDecimal amount;
+    private String currency;
+    private TransactionTypeEnum txnType;
+    private TransactionStatusEnum txnStatus;
+    private String failureReason;
+    private String desc;
+
+    public String getTxnId() {
+        return txnId;
+    }
+
+    public void setTxnId(String txnId) {
+        this.txnId = txnId;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
+    public Date getGmtComplete() {
+        return gmtComplete;
+    }
+
+    public void setGmtComplete(Date gmtComplete) {
+        this.gmtComplete = gmtComplete;
+    }
+
+    public String getPayerAccountId() {
+        return payerAccountId;
+    }
+
+    public void setPayerAccountId(String payerAccountId) {
+        this.payerAccountId = payerAccountId;
+    }
+
+    public String getPayeeAccountId() {
+        return payeeAccountId;
+    }
+
+    public void setPayeeAccountId(String payeeAccountId) {
+        this.payeeAccountId = payeeAccountId;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public TransactionTypeEnum getTxnType() {
+        return txnType;
+    }
+
+    public void setTxnType(TransactionTypeEnum txnType) {
+        this.txnType = txnType;
+    }
+
+    public TransactionStatusEnum getTxnStatus() {
+        return txnStatus;
+    }
+
+    public void setTxnStatus(TransactionStatusEnum txnStatus) {
+        this.txnStatus = txnStatus;
+    }
+
+    public String getFailureReason() {
+        return failureReason;
+    }
+
+    public void setFailureReason(String failureReason) {
+        this.failureReason = failureReason;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+}
