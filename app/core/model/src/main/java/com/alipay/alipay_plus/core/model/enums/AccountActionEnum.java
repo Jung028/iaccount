@@ -6,7 +6,9 @@ public enum AccountActionEnum {
     QUERY_ACCOUNT_INFO("QUERY_ACCOUNT_INFO", "Query account info"),
     CREATE_ACCOUNT("CREATE_ACCOUNT", "Create account"),
     QUERY_TRANSACTION_HISTORY("QUERY_TRANSACTION_HISTORY", "Query transaction history"),
-    QUERY_TRANSACTION_RECORD("QUERY_TRANSACTION_RECORD", "Query transaction record");
+    QUERY_TRANSACTION_RECORD("QUERY_TRANSACTION_RECORD", "Query transaction record"),
+    INSERT_TRANSACTION_RECORD("INSERT_TRANSACTION_RECORD", "Insert new transaction record"),
+    UPDATE_TRANSACTION_RECORD("UPDATE_TRANSACTION_RECORD", "update transaction record");
 
     private String code;
     private String desc;

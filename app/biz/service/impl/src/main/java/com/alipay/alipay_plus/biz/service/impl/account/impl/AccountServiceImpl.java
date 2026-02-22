@@ -16,7 +16,11 @@ import com.alipay.alipay_plus.core.model.enums.AccountStatusEnum;
 import com.alipay.alipay_plus.core.model.util.AssertUtil;
 import com.alipay.alipay_plus.biz.service.impl.checker.CheckParamUtil;
 import com.alipay.alipay_plus.core.model.converter.ItemConverter;
+import org.springframework.util.StringUtils;
+
 import java.util.List;
+
+import static io.micrometer.common.util.StringUtils.isEmpty;
 
 public class AccountServiceImpl extends AbstractAccountBizService implements AccountService {
 
@@ -164,6 +168,57 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                         // convert DO to DTO and set result.
                         response.setResult(ItemConverter.convertToItem(transactionHistory));
+                    }
+                });
+    }
+
+    @Override
+    public AccountBizResult<String> insertTransactionRecord(InsertTransactionRecordRequest request) {
+        return accountServiceTemplate.execute(request, AccountActionEnum.INSERT_TRANSACTION_RECORD,
+                new AccountBizCallback<>() {
+                    @Override
+                    protected AccountBizResult<String> createDefaultResponse() {
+                        return new AccountBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(InsertTransactionRecordRequest request) {
+                        CheckParamUtil.checkInsertTransactionRecordRequest();
+                    }
+
+                    @Override
+                    protected void process(InsertTransactionRecordRequest request, AccountBizResult<String> response) {
+                        transactionTemplate.execute(status -> {
+                            // insert sql need for update
+                            TransactionRecord transactionRecord = accountRepository.insertTransactionRecord(request);
+                            if (StringUtils.isEmpty(transactionRecord.getFailureReason())) {
+                                return ItemConverter.convertToItem(transactionRecord);
+                            }
+                            return null;
+                        });
+                    }
+                });
+    }
+
+    @Override
+    public AccountBizResult<TransactionRecordItem> updateTransactionRecord(UpdateTransactionRecordRequest request) {
+        return accountServiceTemplate.execute(request, AccountActionEnum.UPDATE_TRANSACTION_RECORD,
+                new AccountBizCallback<>() {
+
+                    @Override
+                    protected AccountBizResult<TransactionRecordItem> createDefaultResponse() {
+                        return new AccountBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(UpdateTransactionRecordRequest request) {
+                        CheckParamUtil.checkUpdateTransactionRecordRequest(request);
+                    }
+
+                    @Override
+                    protected void process(UpdateTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
+                        // update mainly the status to PENDING from OTP_REQUESST
+
                     }
                 });
     }

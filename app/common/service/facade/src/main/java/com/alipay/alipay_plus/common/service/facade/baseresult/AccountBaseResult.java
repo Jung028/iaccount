@@ -1,8 +1,17 @@
 package com.alipay.alipay_plus.common.service.facade.baseresult;
 
 public class AccountBaseResult {
+    private boolean success;
     private String resultMessage;
     private String resultCode;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 
     public String getResultMessage() {
         return resultMessage;

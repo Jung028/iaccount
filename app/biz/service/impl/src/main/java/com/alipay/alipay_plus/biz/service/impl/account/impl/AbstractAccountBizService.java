@@ -6,6 +6,7 @@ import com.alipay.alipay_plus.common.service.facade.constant.LoggerConstant;
 import com.alipay.alipay_plus.core.service.repository.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.support.TransactionTemplate;
 
 public abstract class AbstractAccountBizService {
 
@@ -29,6 +30,10 @@ public abstract class AbstractAccountBizService {
      */
     protected AccountRepository accountRepository;
 
+    /**
+     * transaction template
+     */
+    protected TransactionTemplate transactionTemplate;
 
     /**
      * set accountServiceTemplate
@@ -44,5 +49,21 @@ public abstract class AbstractAccountBizService {
      */
     public void setAccountOpsService(AccountOpsService accountOpsService) {
         this.accountOpsService = accountOpsService;
+    }
+
+    /**
+     * set account repository
+     * @param accountRepository
+     */
+    public void setAccountRepository(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
+    /**
+     * set transaction template
+     * @param transactionTemplate
+     */
+    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+        this.transactionTemplate = transactionTemplate;
     }
 }

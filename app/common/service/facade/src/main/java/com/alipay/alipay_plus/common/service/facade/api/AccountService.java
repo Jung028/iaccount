@@ -44,4 +44,18 @@ public interface AccountService {
      * @return
      */
     AccountBizResult<List<TransactionHistoryItem>> queryTransactionHistory(QueryTransactionHistoryRequest request);
+
+    /**
+     * insert new transaction record
+     * @param request
+     * @return
+     */
+    AccountBizResult<String> insertTransactionRecord(InsertTransactionRecordRequest request);
+
+    /**
+     * update transaction record
+     * @param request
+     * @return
+     */
+    AccountBizResult<TransactionRecordItem> updateTransactionRecord(UpdateTransactionRecordRequest request);
 }
