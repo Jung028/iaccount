@@ -12,17 +12,11 @@ public interface AccountService {
 
     /**
      * Create account
+     * Called by UserService
      * @param request
      * @return
      */
     AccountBizResult<String> createAccount(CreateAccountRequest request);
-
-    /**
-     * transfer
-     * @param request
-     * @return
-     */
-    AccountBizResult<String> transfer(TransferRequest request);
 
     /**
      * query account info
@@ -50,7 +44,7 @@ public interface AccountService {
      * @param request
      * @return
      */
-    AccountBizResult<String> insertTransactionRecord(InsertTransactionRecordRequest request);
+    AccountBizResult<TransactionRecordItem> insertTransactionRecord(InsertTransactionRecordRequest request);
 
     /**
      * update transaction record

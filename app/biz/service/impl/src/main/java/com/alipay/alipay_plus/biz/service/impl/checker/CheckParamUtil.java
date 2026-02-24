@@ -8,9 +8,6 @@ public class CheckParamUtil {
     public static void checkCreateAccountRequest(CreateAccountRequest request) {
     }
 
-    public static void checkTransferRequest(TransferRequest request) {
-    }
-
     public static void checkQueryAccountInfoRequest(QueryAccountInfoRequest request) {
     }
 

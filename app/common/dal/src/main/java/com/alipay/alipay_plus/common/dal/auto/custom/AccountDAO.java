@@ -5,6 +5,7 @@ import com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO;
 import com.alipay.alipay_plus.common.service.facade.enums.TransactionStatusEnum;
 
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface AccountDAO {
@@ -17,4 +18,8 @@ public interface AccountDAO {
     AccountTransactionDO insertTransactionRecord(AccountTransactionDO accountTransactionDO);
 
     AccountTransactionDO updateTransactionRecord(AccountTransactionDO record);
+
+    AccountDO createAccount(AccountDO accountDO);
+
+    AccountDO lockById(String accountId);
 }

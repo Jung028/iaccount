@@ -2,11 +2,12 @@ package com.alipay.alipay_plus.common.service.facade.request;
 
 import com.alipay.alipay_plus.common.service.facade.baseresult.AccountBaseRequest;
 
+import javax.money.MonetaryAmount;
+
 public class TransferRequest extends AccountBaseRequest {
     private String fromAccountNo;
     private String toAccountNo;
-    private String amount;
-    private String currency;
+    private MonetaryAmount amount;
 
     public String getFromAccountNo() {
         return fromAccountNo;
@@ -24,19 +25,11 @@ public class TransferRequest extends AccountBaseRequest {
         this.toAccountNo = toAccountNo;
     }
 
-    public String getAmount() {
+    public MonetaryAmount getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(MonetaryAmount amount) {
         this.amount = amount;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
     }
 }

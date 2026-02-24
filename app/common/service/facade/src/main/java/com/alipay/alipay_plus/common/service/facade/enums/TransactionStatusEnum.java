@@ -3,8 +3,8 @@ package com.alipay.alipay_plus.common.service.facade.enums;
 public enum TransactionStatusEnum {
     OTP_OVER_LIMIT("OTP_OVER_LIMIT", "require OTP verification for transfer amount over limit"),
     PENDING("PENDING", "transaction record is pending"),
-
-    ;
+    FINISH("FINISH", "finished processing this transaction "),
+    FAILED("FAILED", "Unexpected exception occured, transaction has failed ");
 
     private String code;
     private String desc;

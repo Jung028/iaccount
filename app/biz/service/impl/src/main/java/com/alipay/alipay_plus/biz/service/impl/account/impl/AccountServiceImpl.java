@@ -1,5 +1,7 @@
 package com.alipay.alipay_plus.biz.service.impl.account.impl;
 
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import com.alipay.alipay_plus.common.service.facade.api.AccountService;
 import com.alipay.alipay_plus.biz.service.impl.template.AccountBizCallback;
 import com.alipay.alipay_plus.common.service.facade.baseresult.AccountBizResult;
@@ -16,6 +18,7 @@ import com.alipay.alipay_plus.core.model.enums.AccountStatusEnum;
 import com.alipay.alipay_plus.core.model.util.AssertUtil;
 import com.alipay.alipay_plus.biz.service.impl.checker.CheckParamUtil;
 import com.alipay.alipay_plus.core.model.converter.ItemConverter;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -39,30 +42,10 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
 
                     @Override
-                    protected void process(CreateAccountRequest request, AccountBizResult<String> response) {
-
-                    }
-                });
-    }
-
-    @Override
-    public AccountBizResult<String> transfer(TransferRequest request) {
-        return accountServiceTemplate.execute(request, AccountActionEnum.TRANSFER,
-                new AccountBizCallback<>() {
-                    @Override
-                    protected AccountBizResult<String> createDefaultResponse() {
-                        return new AccountBizResult<>();
-                    }
-
-                    @Override
-                    protected void checkParams(TransferRequest request) {
-                        CheckParamUtil.checkTransferRequest(request);
-                    }
-
-                    @Override
-                    protected void process(TransferRequest request, AccountBizResult<String> response) {
-                        //TODO: Transfer logic.
-
+                    protected void process(CreateAccountRequest request, AccountBizResult<String> result) {
+                        validateUser(request.getOperatorId());
+                        AccountInfo accountInfo = accountRepository.createAccount(request);
+                        result.setSuccess(accountInfo == null);
                     }
                 });
     }
@@ -173,11 +156,11 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
     }
 
     @Override
-    public AccountBizResult<String> insertTransactionRecord(InsertTransactionRecordRequest request) {
+    public AccountBizResult<TransactionRecordItem> insertTransactionRecord(InsertTransactionRecordRequest request) {
         return accountServiceTemplate.execute(request, AccountActionEnum.INSERT_TRANSACTION_RECORD,
                 new AccountBizCallback<>() {
                     @Override
-                    protected AccountBizResult<String> createDefaultResponse() {
+                    protected AccountBizResult<TransactionRecordItem> createDefaultResponse() {
                         return new AccountBizResult<>();
                     }
 
@@ -187,15 +170,18 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
 
                     @Override
-                    protected void process(InsertTransactionRecordRequest request, AccountBizResult<String> response) {
-                        transactionTemplate.execute(status -> {
-                            // insert sql need for update
-                            TransactionRecord transactionRecord = accountRepository.insertTransactionRecord(request);
-                            if (StringUtils.isEmpty(transactionRecord.getFailureReason())) {
-                                return ItemConverter.convertToItem(transactionRecord);
-                            }
-                            return null;
-                        });
+                    protected void process(InsertTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
+                        validateUser(request.getOperatorId());
+                        TransactionRecord transactionRecord =
+                                transactionTemplate.execute(status ->
+                                        accountRepository.insertTransactionRecord(request)
+                                );
+                        if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
+                            response.setResult(ItemConverter.convertToItem(transactionRecord));
+                        } else {
+                            response.setResultCode(AccountResultCode.SYSTEM_EXCEPTION.getCode());
+                            response.setResultMessage("Failed to insert transaction record");
+                        }
                     }
                 });
     }
@@ -216,12 +202,38 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
 
                     @Override
-                    protected void process(UpdateTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
-                        // update mainly the status to PENDING from OTP_REQUESST
-
+                    protected void process(UpdateTransactionRecordRequest request,
+                                           AccountBizResult<TransactionRecordItem> response) {
+                        validateUser(request.getOperatorId());
+                        TransactionRecord transactionRecord =
+                                transactionTemplate.execute(status ->
+                                        accountRepository.updateTransactionRecord(request)
+                                );
+                        if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
+                            response.setResult(ItemConverter.convertToItem(transactionRecord));
+                        } else {
+                            response.setResultCode(AccountResultCode.SYSTEM_EXCEPTION.getCode());
+                            response.setResultMessage("Failed to update transaction record");
+                        }
                     }
                 });
     }
 
+    /**
+     * validate user is authorised
+     * @param operatorId
+     */
+    private static void validateUser(String operatorId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        if (auth == null || auth.getPrincipal() == null) {
+            throw new AccessDeniedException("Unauthenticated request");
+        }
+
+        String currentUserId = auth.getPrincipal().toString();
+
+        if (!operatorId.equals(currentUserId)) {
+            throw new AccessDeniedException("Unauthorized");
+        }
+    }
 }

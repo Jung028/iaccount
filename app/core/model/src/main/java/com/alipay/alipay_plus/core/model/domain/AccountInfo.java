@@ -16,6 +16,24 @@ public class AccountInfo {
     private Date gmtModified;
     private String desc;
 
+    public void debit(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("invalid amount");
+        }
+        if (balance.compareTo(amount) > 0) {
+            throw new IllegalStateException("insufficient balance");
+        }
+        balance = balance.subtract(amount);
+    }
+
+    public void credit(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("invalid amount");
+        }
+        balance = balance.add(amount);
+    }
+
+
     public String getAccountId() {
         return accountId;
     }
