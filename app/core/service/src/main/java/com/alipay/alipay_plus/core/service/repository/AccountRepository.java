@@ -12,13 +12,6 @@ public interface AccountRepository {
 
     AccountInfo createAccount(CreateAccountRequest request);
 
-    TransactionRecord queryTransactionRecord(QueryTransactionRecordRequest request);
-
-    List<TransactionHistory> queryTransactionHistory(QueryTransactionHistoryRequest request);
-
-    TransactionRecord insertTransactionRecord(InsertTransactionRecordRequest request);
-
-    TransactionRecord updateTransactionRecord(UpdateTransactionRecordRequest request);
 
     AccountInfo lockById(String accountId);
 

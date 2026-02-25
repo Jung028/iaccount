@@ -4,10 +4,37 @@
 
 <mapper namespace="com.alipay.alipay_plus.common.dal.auto.custom.AccountTransactionDAO">
 
-    <select id="queryHistoricalDetails" parameterType="string" resultType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO">
-        SELECT *
-        FROM account_transaction
-        WHERE account_id = #{accountId}
+
+    <!-- Query single transaction by txnId -->
+    <select id="queryTransactionRecord" parameterType="string" resultType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO">
+        SELECT txn_id, payer_account_id, payee_account_id, amount, currency, status, created_time, updated_time
+        FROM transaction_record
+        WHERE txn_id = #{txnId}
     </select>
+
+    <!-- Query transaction history with pagination -->
+    <select id="queryTransactionHistory" parameterType="map" resultType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO">
+        SELECT txn_id, payer_account_id, payee_account_id, amount, currency, status, created_time, updated_time
+        FROM transaction_record
+        WHERE txn_id = #{txnId}
+        ORDER BY created_time DESC
+        LIMIT #{pageSize} OFFSET #{pageNo}
+    </select>
+
+    <!-- Insert a new transaction record -->
+    <insert id="insertTransactionRecord" parameterType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO" useGeneratedKeys="false">
+        INSERT INTO transaction_record
+        (txn_id, payer_account_id, payee_account_id, amount, currency, status, created_time, updated_time)
+        VALUES
+        (#{txnId}, #{payerAccountId}, #{payeeAccountId}, #{amount}, #{currency}, #{status}, NOW(), NOW())
+    </insert>
+
+    <!-- Update transaction status -->
+    <update id="updateTransactionRecord" parameterType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO">
+        UPDATE transaction_record
+        SET status = #{status},
+        updated_time = NOW()
+        WHERE txn_id = #{txnId}
+    </update>
 
 </mapper>

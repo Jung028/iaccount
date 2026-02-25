@@ -1,4 +1,4 @@
-package com.alipay.alipay_plus.common.service.integration.message;
+package com.alipay.alipay_plus.biz.service.impl.message;
 
 import com.alipay.alipay_plus.biz.service.impl.account.TransactionService;
 import com.alipay.alipay_plus.common.service.facade.event.EcTransactionEvent;

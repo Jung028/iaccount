@@ -111,7 +111,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                 "User not permitted to access account data");
 
                         // Query Transaction record
-                        TransactionRecord transactionRecord = accountRepository.queryTransactionRecord(request);
+                        TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(request);
 
                         // convert DO to DTO and set result.
                         response.setResult(ItemConverter.convertToItem(transactionRecord));
@@ -147,7 +147,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                 "User not permitted to access account data");
 
                         // Query Transaction record
-                        List<TransactionHistory> transactionHistory = accountRepository.queryTransactionHistory(request);
+                        List<TransactionHistory> transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
 
                         // convert DO to DTO and set result.
                         response.setResult(ItemConverter.convertToItem(transactionHistory));
@@ -156,11 +156,11 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
     }
 
     @Override
-    public AccountBizResult<TransactionRecordItem> insertTransactionRecord(InsertTransactionRecordRequest request) {
+    public AccountBizResult<String > insertTransactionRecord(InsertTransactionRecordRequest request) {
         return accountServiceTemplate.execute(request, AccountActionEnum.INSERT_TRANSACTION_RECORD,
                 new AccountBizCallback<>() {
                     @Override
-                    protected AccountBizResult<TransactionRecordItem> createDefaultResponse() {
+                    protected AccountBizResult<String> createDefaultResponse() {
                         return new AccountBizResult<>();
                     }
 
@@ -170,14 +170,14 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
 
                     @Override
-                    protected void process(InsertTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
+                    protected void process(InsertTransactionRecordRequest request, AccountBizResult<String> response) {
                         validateUser(request.getOperatorId());
                         TransactionRecord transactionRecord =
                                 transactionTemplate.execute(status ->
-                                        accountRepository.insertTransactionRecord(request)
+                                        accountTransactionRepository.insertTransactionRecord(request)
                                 );
                         if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
-                            response.setResult(ItemConverter.convertToItem(transactionRecord));
+                            response.setSuccess(true);
                         } else {
                             response.setResultCode(AccountResultCode.SYSTEM_EXCEPTION.getCode());
                             response.setResultMessage("Failed to insert transaction record");
@@ -207,7 +207,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         validateUser(request.getOperatorId());
                         TransactionRecord transactionRecord =
                                 transactionTemplate.execute(status ->
-                                        accountRepository.updateTransactionRecord(request)
+                                        accountTransactionRepository.updateTransactionRecord(request)
                                 );
                         if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
                             response.setResult(ItemConverter.convertToItem(transactionRecord));

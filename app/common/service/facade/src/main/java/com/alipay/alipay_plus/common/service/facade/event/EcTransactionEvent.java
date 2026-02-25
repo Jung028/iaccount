@@ -1,6 +1,5 @@
 package com.alipay.alipay_plus.common.service.facade.event;
 
-import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 
 public class EcTransactionEvent {
@@ -8,6 +7,13 @@ public class EcTransactionEvent {
     private String payerAccountNo;
     private String payeeAccountNo;
     private BigDecimal amount;
+
+    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount) {
+        this.txnId = txnId;
+        this.payerAccountNo = payerAccountNo;
+        this.payeeAccountNo = payeeAccountNo;
+        this.amount = amount;
+    }
 
     public String getTxnId() {
         return txnId;
@@ -39,4 +45,5 @@ public class EcTransactionEvent {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-}   }
+}
+}

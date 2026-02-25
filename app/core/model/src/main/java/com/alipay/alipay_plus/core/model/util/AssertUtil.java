@@ -8,17 +8,22 @@ import org.springframework.util.Assert;
 
 public class AssertUtil {
 
-    public static void notNull(final Object object, final AccountResultCode accountResultCode, final String resultMsg) {
+    public static void notNull(final Object object, final String accountResultCode, final String resultMsg) {
         check(new AssertTemplate() {
             @Override
             public void doAssert() {
                 Assert.notNull(object, "resultMsg");
             }
-        }, accountResultCode, resultMsg);
+        }, AccountResultCode.valueOf(accountResultCode), resultMsg);
     }
 
     public static void isTrue(final boolean expression, AccountResultCode accountStatusIllegal, String accountStatusIsNotValid) {
         check(() -> Assert.isTrue(expression,"is true"), accountStatusIllegal, accountStatusIsNotValid);
+    }
+
+    public static void isTrue(final boolean expression, final String resultCode,
+                              final String resultMsg) {
+        check(() -> Assert.isTrue(expression,"is true"), AccountResultCode.valueOf(resultCode), resultMsg);
     }
 
     public static interface AssertTemplate {

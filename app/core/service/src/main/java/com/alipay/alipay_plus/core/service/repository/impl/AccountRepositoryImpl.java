@@ -46,57 +46,6 @@ public class AccountRepositoryImpl extends AbstractDomainRepository implements A
     }
 
     @Override
-    public TransactionRecord queryTransactionRecord(QueryTransactionRecordRequest request) {
-        if (request == null) {
-            return null;
-        }
-        AccountTransactionDO accountTransactionDO = accountDAO.queryTransactionRecord(request.getTxnId());
-        return domainConverter.convertToModel(accountTransactionDO);
-    }
-
-    @Override
-    public List<TransactionHistory> queryTransactionHistory(QueryTransactionHistoryRequest request) {
-        if (request == null) {
-            return Collections.emptyList();
-        }
-        List<AccountTransactionDO> transactionDOS = accountDAO.queryTransactionHistory(
-                request.getTxnId(), request.getPageSize(), request.getPageNo());
-        return domainConverter.convertToModelList(transactionDOS);
-    }
-
-    @Override
-    public TransactionRecord insertTransactionRecord(InsertTransactionRecordRequest request) {
-        if  (request == null) {
-            return null;
-        }
-        AccountTransactionDO record = new AccountTransactionDO();
-        record.setTxnId(request.getTxnId());
-        record.setPayerAccountId(request.getPayerAccountNo());
-        record.setPayeeAccountId(request.getPayeeAccountNo());
-        //convert the MonetaryAmount to BigDecimal?
-        BigDecimal dbAmount = request.getAmount().getNumber().numberValueExact(BigDecimal.class);
-        record.setAmount(dbAmount);
-        record.setCurrency(request.getAmount().getCurrency().getCurrencyCode());
-        record.setStatus(request.getStatus().getCode());
-
-        AccountTransactionDO transactionRecordDO = accountDAO.insertTransactionRecord(record);
-
-        return domainConverter.convertToModel(transactionRecordDO);
-    }
-
-    @Override
-    public TransactionRecord updateTransactionRecord(UpdateTransactionRecordRequest request) {
-        if (request == null) {
-            return null;
-        }
-        AccountTransactionDO record = new AccountTransactionDO();
-        record.setTxnId(request.getTxnId());
-        record.setStatus(request.getStatus());
-        AccountTransactionDO accountTransactionDO = accountDAO.updateTransactionRecord(record);
-        return domainConverter.convertToModel(accountTransactionDO);
-    }
-
-    @Override
     public AccountInfo lockById(String accountId) {
         if (accountId.isBlank()) {
             return new AccountInfo();

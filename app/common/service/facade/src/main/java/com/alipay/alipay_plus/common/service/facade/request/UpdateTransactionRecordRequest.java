@@ -5,6 +5,7 @@ import com.alipay.alipay_plus.common.service.facade.baseresult.AccountBaseReques
 public class UpdateTransactionRecordRequest extends AccountBaseRequest {
     private String txnId;
     private String status;
+    private String failReason;
 
     public String getTxnId() {
         return txnId;
@@ -20,5 +21,13 @@ public class UpdateTransactionRecordRequest extends AccountBaseRequest {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getFailReason() {
+        return failReason;
+    }
+
+    public void setFailReason(String failReason) {
+        this.failReason = failReason;
     }
 }
