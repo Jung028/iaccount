@@ -4,7 +4,10 @@ import com.alipay.alipay_plus.common.service.facade.enums.AccountResultCode;
 import com.alipay.alipay_plus.core.model.util.AssertUtil;
 import com.alipay.business.common.service.facade.api.BusinessService;
 import com.alipay.business.common.service.facade.baseresult.BusinessBizResult;
+import com.alipay.business.common.service.facade.item.IdempotencyKeysItem;
+import com.alipay.business.common.service.facade.request.QueryIdempotencyKeysRequest;
 import com.alipay.business.common.service.facade.request.UpdateIdempotencyKeysRequest;
+import com.alipay.business.common.service.facade.result.UpdateIdempotencyKeysResult;
 
 public class WalletServiceClientImpl implements WalletServiceClient {
 
@@ -12,11 +15,21 @@ public class WalletServiceClientImpl implements WalletServiceClient {
 
 
     @Override
-    public BusinessBizResult<String> updateIdempotencyKey(UpdateIdempotencyKeysRequest request) {
+    public BusinessBizResult<UpdateIdempotencyKeysResult> updateIdempotencyKey(UpdateIdempotencyKeysRequest request) {
         AssertUtil.notNull(request, AccountResultCode.PARAM_ILLEGAL.getCode(), "update idempotency keys request is null");
 
         //set cross invoke
-        BusinessBizResult<String> result = businessService.updateIdempotencyKey(request);
+        BusinessBizResult<UpdateIdempotencyKeysResult> result = businessService.updateIdempotencyKeys(request);
+        AssertUtil.notNull(result, AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
+        AssertUtil.notNull(result.getResult(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
+        AssertUtil.isTrue(result.isSuccess(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is not success");
+        return result;
+    }
+
+    @Override
+    public BusinessBizResult<IdempotencyKeysItem> queryIdempotencyKeys(QueryIdempotencyKeysRequest request) {
+
+        BusinessBizResult<IdempotencyKeysItem> result = businessService.queryIdempotencyKeys(request);
         AssertUtil.notNull(result, AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
         AssertUtil.notNull(result.getResult(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
         AssertUtil.isTrue(result.isSuccess(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is not success");
