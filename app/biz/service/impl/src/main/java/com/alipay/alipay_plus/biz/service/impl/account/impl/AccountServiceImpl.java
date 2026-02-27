@@ -69,7 +69,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
-                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND.getCode(), "Account not found");
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
@@ -102,7 +102,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
-                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND.getCode(), "Account not found");
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
@@ -138,7 +138,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
-                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND.getCode(), "Account not found");
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");

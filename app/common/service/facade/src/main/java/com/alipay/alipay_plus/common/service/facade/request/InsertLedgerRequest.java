@@ -1,4 +1,4 @@
-package com.alipay.alipay_plus.biz.service.impl.request;
+package com.alipay.alipay_plus.common.service.facade.request;
 
 import com.alipay.alipay_plus.common.service.facade.baseresult.AccountBaseRequest;
 
