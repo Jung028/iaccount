@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,7 +93,7 @@ public class TransactionServiceImpl implements TransactionService {
                 throw new RuntimeException("transaction record is null");
             }
             if (!transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING)
-                    || !transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)) {
+                    && !transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)) {
                 throw new IllegalStateException("transaction status is " + transactionRecord.getTxnStatus());
             }
 
@@ -152,35 +151,39 @@ public class TransactionServiceImpl implements TransactionService {
             accountTransactionRepository.updateTransactionRecord(updateTransactionRecord);
 
             // 2. Try to update idempotency keys if available
-            BusinessBizResult<UpdateIdempotencyKeysResult> result = null;
+            BusinessBizResult<UpdateIdempotencyKeysResult> result;
             if (queryIdempotencyKeysResult != null && queryIdempotencyKeysResult.getResult() != null) {
                 UpdateIdempotencyKeysRequest request = new UpdateIdempotencyKeysRequest();
                 request.setTxnId(queryIdempotencyKeysResult.getResult().getTxnId());
                 request.setStatus(IdempotencyKeysStatusEnum.FAILED);
                 request.setRetryCount(queryIdempotencyKeysResult.getResult().getRetryCount() + 1);
                 result = walletServiceClient.updateIdempotencyKey(request);
-                if (result == null || !result.isSuccess()) {
+                if (result == null || !result.isSuccess() && result.getResult() != null) {
                     LogUtil.error(logger, "Failed to update idempotency keys for txnId: " + event.getTxnId());
+                    return;
+                }
+
+                // only if the retry count exceeds max, then send to dead letter queue
+                if (result.getResult().getRetryCount() > MAX_RETRY_COUNT) {
+                    EcDlqEvent dlqEvent = new EcDlqEvent();
+                    dlqEvent.setSceneCode("TRANSFER_FAILED");
+                    dlqEvent.setTxnId(txnId);
+                    dlqEvent.setPayerAccountNo(event.getPayerAccountNo());
+                    dlqEvent.setPayeeAccountNo(event.getPayeeAccountNo());
+                    dlqEvent.setAmount(event.getAmount());
+                    dlqEvent.setFailReason(e.getMessage());
+                    dlqEvent.setGmtTaskOccur(String.valueOf(System.currentTimeMillis()));
+                    Map<String, String> extInfo = new HashMap<>();
+                    extInfo.put("ErrorMessage : ", e.getMessage());
+                    extInfo.put("IdempotencyResult: ", result.getResultCode());
+                    dlqEvent.setExtInfo(JSONSerializer.serialize(extInfo));
+
+                    // Publish to dlq
+                    kafkaTemplate.send("EC_DEAD_LETTER_QUEUE", dlqEvent);
                 }
             } else {
                 LogUtil.error(logger, "Idempotency keys not found for txnId: " + event.getTxnId());
             }
-
-            EcDlqEvent dlqEvent = new EcDlqEvent();
-            dlqEvent.setSceneCode("TRANSFER_FAILED");
-            dlqEvent.setTxnId(txnId);
-            dlqEvent.setPayerAccountNo(event.getPayerAccountNo());
-            dlqEvent.setPayeeAccountNo(event.getPayeeAccountNo());
-            dlqEvent.setAmount(event.getAmount());
-            dlqEvent.setFailReason(e.getMessage());
-            dlqEvent.setGmtTaskOccur(String.valueOf(System.currentTimeMillis()));
-            Map<String, String> extInfo = new HashMap<>();
-            extInfo.put("ErrorMessage : ", e.getMessage());
-            extInfo.put("IdempotencyResult: ", result != null ? result.getResultCode() : String.valueOf(false));
-            dlqEvent.setExtInfo(JSONSerializer.serialize(extInfo));
-
-            // Publish to your broker (Kafka, RabbitMQ, etc.)
-            kafkaTemplate.send("EC_DEAD_LETTER_QUEUE", dlqEvent);
         } finally {
             // unlock the lock
             distributedLock.unlock(txnId);
