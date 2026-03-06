@@ -1,7 +1,7 @@
-package com.alipay.alipay_plus.common.dal.auto.daointerface;
+package com.alipay.account.common.dal.auto.daointerface;
 
-import com.alipay.alipay_plus.common.dal.auto.dataobject.LedgerEntryDO;
-import com.alipay.alipay_plus.common.dal.auto.dataobject.LedgerEntryDOExample;
+import com.alipay.account.common.dal.auto.dataobject.LedgerEntryDO;
+import com.alipay.account.common.dal.auto.dataobject.LedgerEntryDOExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

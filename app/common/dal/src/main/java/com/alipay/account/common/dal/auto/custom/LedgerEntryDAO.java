@@ -1,4 +1,4 @@
-package com.alipay.alipay_plus.common.dal.auto.custom;
+package com.alipay.account.common.dal.auto.custom;
 
 
 /**

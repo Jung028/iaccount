@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.alipay.alipay_plus.common.dal.auto.custom.AccountDAO">
+<mapper namespace="com.alipay.account.common.dal.auto.custom.AccountDAO">
 
     <!-- Query account info -->
-    <select id="queryAccountInfo" parameterType="string" resultType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountDO">
+    <select id="queryAccountInfo" parameterType="string" resultType="com.alipay.account.common.dal.auto.dataobject.AccountDO">
         SELECT account_id, user_id, balance, currency
         FROM account
         WHERE account_id = #{accountId}

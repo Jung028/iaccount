@@ -1,18 +1,12 @@
 package com.alipay.alipay_plus.core.service.repository.impl;
 
-import com.alipay.alipay_plus.common.dal.auto.dataobject.AccountDO;
-import com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO;
+import com.alipay.account.common.dal.auto.dataobject.AccountDO;
 import com.alipay.alipay_plus.common.service.facade.request.*;
 import com.alipay.alipay_plus.core.model.domain.AccountInfo;
-import com.alipay.alipay_plus.core.model.domain.TransactionHistory;
-import com.alipay.alipay_plus.core.model.domain.TransactionRecord;
 import com.alipay.alipay_plus.core.model.enums.AccountStatusEnum;
 import com.alipay.alipay_plus.core.service.repository.AbstractDomainRepository;
 import com.alipay.alipay_plus.core.service.repository.AccountRepository;
 
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 

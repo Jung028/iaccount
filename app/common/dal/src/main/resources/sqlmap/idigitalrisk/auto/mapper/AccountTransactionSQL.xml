@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.alipay.alipay_plus.common.dal.auto.custom.AccountTransactionDAO">
+<mapper namespace="com.alipay.account.common.dal.auto.custom.AccountTransactionDAO">
 
 
     <!-- Query single transaction by txnId -->
-    <select id="queryTransactionRecord" parameterType="string" resultType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO">
+    <select id="queryTransactionRecord" parameterType="string" resultType="com.alipay.account.common.dal.auto.dataobject.AccountTransactionDO">
         SELECT txn_id, payer_account_id, payee_account_id, amount, currency, status, created_time, updated_time
         FROM transaction_record
         WHERE txn_id = #{txnId}
     </select>
 
     <!-- Query transaction history with pagination -->
-    <select id="queryTransactionHistory" parameterType="map" resultType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO">
+    <select id="queryTransactionHistory" parameterType="map" resultType="com.alipay.account.common.dal.auto.dataobject.AccountTransactionDO">
         SELECT txn_id, payer_account_id, payee_account_id, amount, currency, status, created_time, updated_time
         FROM transaction_record
         WHERE txn_id = #{txnId}
@@ -22,7 +22,7 @@
     </select>
 
     <!-- Insert a new transaction record -->
-    <insert id="insertTransactionRecord" parameterType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO" useGeneratedKeys="false">
+    <insert id="insertTransactionRecord" parameterType="com.alipay.account.common.dal.auto.dataobject.AccountTransactionDO" useGeneratedKeys="false">
         INSERT INTO transaction_record
         (txn_id, payer_account_id, payee_account_id, amount, currency, status, created_time, updated_time)
         VALUES
@@ -30,7 +30,7 @@
     </insert>
 
     <!-- Update transaction status -->
-    <update id="updateTransactionRecord" parameterType="com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO">
+    <update id="updateTransactionRecord" parameterType="com.alipay.account.common.dal.auto.dataobject.AccountTransactionDO">
         UPDATE transaction_record
         SET status = #{status},
         updated_time = NOW()

@@ -1,7 +1,7 @@
-package com.alipay.alipay_plus.common.dal.auto.daointerface;
+package com.alipay.account.common.dal.auto.daointerface;
 
-import com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO;
-import com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDOExample;
+import com.alipay.account.common.dal.auto.dataobject.AccountTransactionDO;
+import com.alipay.account.common.dal.auto.dataobject.AccountTransactionDOExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

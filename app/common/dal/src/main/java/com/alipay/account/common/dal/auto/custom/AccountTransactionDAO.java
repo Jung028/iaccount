@@ -1,7 +1,7 @@
-package com.alipay.alipay_plus.common.dal.auto.custom;
+package com.alipay.account.common.dal.auto.custom;
 
 
-import com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO;
+import com.alipay.account.common.dal.auto.dataobject.AccountTransactionDO;
 
 import java.util.List;
 

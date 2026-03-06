@@ -1,6 +1,6 @@
 package com.alipay.alipay_plus.core.service.repository.impl;
 
-import com.alipay.alipay_plus.common.dal.auto.dataobject.AccountTransactionDO;
+import com.alipay.account.common.dal.auto.dataobject.AccountTransactionDO;
 import com.alipay.alipay_plus.common.service.facade.request.InsertTransactionRecordRequest;
 import com.alipay.alipay_plus.common.service.facade.request.QueryTransactionHistoryRequest;
 import com.alipay.alipay_plus.common.service.facade.request.QueryTransactionRecordRequest;

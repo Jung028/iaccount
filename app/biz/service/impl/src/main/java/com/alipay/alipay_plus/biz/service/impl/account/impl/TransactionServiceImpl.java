@@ -21,7 +21,6 @@ import com.alipay.business.common.service.facade.item.IdempotencyKeysItem;
 import com.alipay.business.common.service.facade.request.QueryIdempotencyKeysRequest;
 import com.alipay.business.common.service.facade.request.UpdateIdempotencyKeysRequest;
 import com.alipay.business.common.service.facade.result.UpdateIdempotencyKeysResult;
-import com.alipay.sofa.rpc.common.json.JSONSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -176,7 +175,7 @@ public class TransactionServiceImpl implements TransactionService {
                     Map<String, String> extInfo = new HashMap<>();
                     extInfo.put("ErrorMessage : ", e.getMessage());
                     extInfo.put("IdempotencyResult: ", result.getResultCode());
-                    dlqEvent.setExtInfo(JSONSerializer.serialize(extInfo));
+                    dlqEvent.setExtInfo(extInfo.toString());
 
                     // Publish to dlq
                     kafkaTemplate.send("EC_DEAD_LETTER_QUEUE", dlqEvent);

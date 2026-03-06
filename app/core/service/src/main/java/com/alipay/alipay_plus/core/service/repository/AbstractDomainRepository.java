@@ -1,7 +1,7 @@
 package com.alipay.alipay_plus.core.service.repository;
 
-import com.alipay.alipay_plus.common.dal.auto.custom.AccountDAO;
-import com.alipay.alipay_plus.common.dal.auto.custom.AccountTransactionDAO;
+import com.alipay.account.common.dal.auto.custom.AccountDAO;
+import com.alipay.account.common.dal.auto.custom.AccountTransactionDAO;
 import com.alipay.alipay_plus.core.model.converter.DomainConverter;
 
 public class AbstractDomainRepository {

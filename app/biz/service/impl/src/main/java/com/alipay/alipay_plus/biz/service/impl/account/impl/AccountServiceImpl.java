@@ -23,8 +23,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-import static io.micrometer.common.util.StringUtils.isEmpty;
-
 public class AccountServiceImpl extends AbstractAccountBizService implements AccountService {
 
     @Override

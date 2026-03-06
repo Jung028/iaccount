@@ -5,7 +5,7 @@ import com.alipay.alipay_plus.core.model.exception.BaseSlipException;
 import io.micrometer.common.util.StringUtils;
 import org.springframework.util.Assert;
 
-    public class AssertUtil {
+public class AssertUtil {
 
     public static void notNull(final Object object, final AccountResultCode accountResultCode, final String resultMsg) {
         check(new AssertTemplate() {
