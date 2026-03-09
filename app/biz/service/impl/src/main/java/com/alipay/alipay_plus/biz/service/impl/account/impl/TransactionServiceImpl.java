@@ -71,7 +71,7 @@ public class TransactionServiceImpl implements TransactionService {
             if (queryIdempotencyKeysResult == null || !queryIdempotencyKeysResult.isSuccess()) {
                 throw new RuntimeException();
             }
-            if (!queryIdempotencyKeysResult.getResult().getStatus().equals(IdempotencyKeysStatusEnum.INIT.getCode())
+            if (!queryIdempotencyKeysResult.getResult().getStatus().equals(IdempotencyKeysStatusEnum.PENDING.getCode())
                     && !(queryIdempotencyKeysResult.getResult().getRetryCount() < MAX_RETRY_COUNT)) {
                 throw new IllegalStateException("illegal state for idempotency keys, should be INIT status");
             }

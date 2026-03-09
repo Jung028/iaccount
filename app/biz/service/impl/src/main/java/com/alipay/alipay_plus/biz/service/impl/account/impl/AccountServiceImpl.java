@@ -1,5 +1,8 @@
 package com.alipay.alipay_plus.biz.service.impl.account.impl;
 
+import com.alipay.alipay_plus.biz.service.impl.helper.ResponseBuilder;
+import com.alipay.sofa.runtime.api.annotation.SofaService;
+import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import com.alipay.alipay_plus.common.service.facade.api.AccountService;
@@ -19,10 +22,16 @@ import com.alipay.alipay_plus.core.model.util.AssertUtil;
 import com.alipay.alipay_plus.biz.service.impl.checker.CheckParamUtil;
 import com.alipay.alipay_plus.core.model.converter.ItemConverter;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+@SofaService(
+        interfaceType = AccountService.class,
+        uniqueId = "",
+        bindings = {@SofaServiceBinding(bindingType = "bolt")}
+)@Service
 public class AccountServiceImpl extends AbstractAccountBizService implements AccountService {
 
     @Override
@@ -75,8 +84,8 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         AssertUtil.isTrue(request.getOperatorId().equals(accountInfo.getAccRelationId()), AccountResultCode.INVALID_REQUEST,
                                 "User not permitted to access account data");
 
-                        // convert DO to DTO and set result.
-                        response.setResult(ItemConverter.convertToItem(accountInfo));
+                        ResponseBuilder.success(response, ItemConverter.convertToItem(accountInfo), AccountActionEnum.QUERY_ACCOUNT_INFO.getCode(),
+                                AccountActionEnum.QUERY_ACCOUNT_INFO.getDesc());
                     }
                 });
     }
@@ -111,8 +120,8 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // Query Transaction record
                         TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(request);
 
-                        // convert DO to DTO and set result.
-                        response.setResult(ItemConverter.convertToItem(transactionRecord));
+                        ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.QUERY_TRANSACTION_RECORD.getCode(),
+                                AccountActionEnum.QUERY_TRANSACTION_RECORD.getDesc());
                     }
                 });
     }
@@ -148,17 +157,18 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         List<TransactionHistory> transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
 
                         // convert DO to DTO and set result.
-                        response.setResult(ItemConverter.convertToItem(transactionHistory));
+                        ResponseBuilder.success(response, ItemConverter.convertToItem(transactionHistory), AccountActionEnum.QUERY_TRANSACTION_HISTORY.getCode(),
+                                AccountActionEnum.QUERY_TRANSACTION_HISTORY.getDesc());
                     }
                 });
     }
 
     @Override
-    public AccountBizResult<String > insertTransactionRecord(InsertTransactionRecordRequest request) {
+    public AccountBizResult<TransactionRecordItem> insertTransactionRecord(InsertTransactionRecordRequest request) {
         return accountServiceTemplate.execute(request, AccountActionEnum.INSERT_TRANSACTION_RECORD,
                 new AccountBizCallback<>() {
                     @Override
-                    protected AccountBizResult<String> createDefaultResponse() {
+                    protected AccountBizResult<TransactionRecordItem> createDefaultResponse() {
                         return new AccountBizResult<>();
                     }
 
@@ -168,17 +178,17 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
 
                     @Override
-                    protected void process(InsertTransactionRecordRequest request, AccountBizResult<String> response) {
+                    protected void process(InsertTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
                         validateUser(request.getOperatorId());
                         TransactionRecord transactionRecord =
                                 transactionTemplate.execute(status ->
                                         accountTransactionRepository.insertTransactionRecord(request)
                                 );
                         if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
-                            response.setSuccess(true);
+                            ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.INSERT_TRANSACTION_RECORD.getCode(),
+                                    AccountActionEnum.INSERT_TRANSACTION_RECORD.getDesc());
                         } else {
-                            response.setResultCode(AccountResultCode.SYSTEM_EXCEPTION.getCode());
-                            response.setResultMessage("Failed to insert transaction record");
+                            ResponseBuilder.fail(response, AccountResultCode.SYSTEM_EXCEPTION.getCode(), "Insert Transaction Record Fail");
                         }
                     }
                 });
@@ -208,10 +218,10 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                         accountTransactionRepository.updateTransactionRecord(request)
                                 );
                         if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
-                            response.setResult(ItemConverter.convertToItem(transactionRecord));
+                            ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.UPDATE_TRANSACTION_RECORD.getCode(),
+                                    AccountActionEnum.UPDATE_TRANSACTION_RECORD.getDesc());
                         } else {
-                            response.setResultCode(AccountResultCode.SYSTEM_EXCEPTION.getCode());
-                            response.setResultMessage("Failed to update transaction record");
+                            ResponseBuilder.fail(response, AccountResultCode.SYSTEM_EXCEPTION.getCode(), "Update Transaction Record Fail");
                         }
                     }
                 });

@@ -44,7 +44,7 @@ public interface AccountService {
      * @param request
      * @return
      */
-    AccountBizResult<String> insertTransactionRecord(InsertTransactionRecordRequest request);
+    AccountBizResult<TransactionRecordItem> insertTransactionRecord(InsertTransactionRecordRequest request);
 
     /**
      * update transaction record
