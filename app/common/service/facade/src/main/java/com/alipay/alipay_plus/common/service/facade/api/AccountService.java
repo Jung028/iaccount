@@ -52,4 +52,11 @@ public interface AccountService {
      * @return
      */
     AccountBizResult<TransactionRecordItem> updateTransactionRecord(UpdateTransactionRecordRequest request);
+
+    /**
+     * publish transfer event
+     * @param request
+     * @return
+     */
+    AccountBizResult<String> publishTransfer(PublishTransferRequest request);
 }

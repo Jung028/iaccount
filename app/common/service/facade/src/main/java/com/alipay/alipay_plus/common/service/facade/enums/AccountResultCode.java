@@ -38,7 +38,12 @@ public enum AccountResultCode {
      */
     INVALID_REQUEST(GlobalResultCodes.PARAM_ILLEGAL, "Not allowed to access account"),
 
-    ;
+    /**
+     * illegal status
+     */
+    ILLEGAL_STATUS(GlobalResultCodes.PARAM_ILLEGAL, "Illegal status");
+
+
     private final String code;
 
     private final String description;

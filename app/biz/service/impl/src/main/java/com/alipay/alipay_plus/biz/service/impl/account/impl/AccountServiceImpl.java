@@ -1,8 +1,13 @@
 package com.alipay.alipay_plus.biz.service.impl.account.impl;
 
 import com.alipay.alipay_plus.biz.service.impl.helper.ResponseBuilder;
+import com.alipay.alipay_plus.common.service.facade.baseresult.AccountBaseRequest;
+import com.alipay.alipay_plus.common.service.facade.enums.TransactionStatusEnum;
+import com.alipay.alipay_plus.common.service.facade.event.EcTransactionEvent;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import com.alipay.alipay_plus.common.service.facade.api.AccountService;
@@ -25,6 +30,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @SofaService(
@@ -33,6 +40,10 @@ import java.util.List;
         bindings = {@SofaServiceBinding(bindingType = "bolt")}
 )@Service
 public class AccountServiceImpl extends AbstractAccountBizService implements AccountService {
+
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
 
     @Override
     public AccountBizResult<String> createAccount(CreateAccountRequest request) {
@@ -76,7 +87,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
-                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND.getCode(), "Account not found");
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
@@ -109,7 +120,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
-                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND.getCode(), "Account not found");
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
@@ -145,7 +156,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
-                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND.getCode(), "Account not found");
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
@@ -223,6 +234,63 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         } else {
                             ResponseBuilder.fail(response, AccountResultCode.SYSTEM_EXCEPTION.getCode(), "Update Transaction Record Fail");
                         }
+                    }
+                });
+    }
+
+    @Override
+    public AccountBizResult<String> publishTransfer(PublishTransferRequest request) {
+        return accountServiceTemplate.execute(request, AccountActionEnum.PUBLISH_TRANSFER_EVENT,
+                new AccountBizCallback<>() {
+                    @Override
+                    protected AccountBizResult<String> createDefaultResponse() {
+                        return new AccountBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(PublishTransferRequest request) {
+                        CheckParamUtil.checkPublishTransferRequest(request);
+                    }
+
+                    @Override
+                    protected void process(PublishTransferRequest request, AccountBizResult<String> response) {
+
+
+                        // query transaction id/ we get the txnid from the challenge id, or the otp:challenge
+                        QueryTransactionRecordRequest queryTransactionRecordRequest = new QueryTransactionRecordRequest();
+                        queryTransactionRecordRequest.setAccountId(request.getAccountId());
+                        queryTransactionRecordRequest.setTxnId(request.getTxnId());
+                        TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(queryTransactionRecordRequest);
+                        if (transactionRecord == null) {
+                            return;
+                        }
+                        AssertUtil.isTrue(transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)
+                                        || transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
+                                AccountResultCode.ILLEGAL_STATUS, "Transaction status is illegal");
+
+                        // or we need to query the transaction table where user id == userid and the status = OTP_OVER_LIMIT.
+                        if (transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)) {
+                            UpdateTransactionRecordRequest updateTransactionRecordRequest = new UpdateTransactionRecordRequest();
+                            updateTransactionRecordRequest.setTxnId(transactionRecord.getTxnId());
+                            updateTransactionRecordRequest.setStatus(TransactionStatusEnum.PENDING.getCode());
+                            TransactionRecord updatedTransactionRecord = accountTransactionRepository
+                                    .updateTransactionRecord(updateTransactionRecordRequest);
+                            AssertUtil.notNull(updatedTransactionRecord, AccountResultCode.SYSTEM_EXCEPTION, "Transaction update failed");
+                        }
+                        // convert money to big decimal
+                        BigDecimal amount = BigDecimal.valueOf(transactionRecord.getAmount().doubleValue())
+                                .setScale(2, RoundingMode.HALF_UP);
+                        // publish EC_TRANSACTION event code for transfer service to listen
+                        EcTransactionEvent event = new EcTransactionEvent(
+                                transactionRecord.getTxnId(),
+                                transactionRecord.getPayeeAccountId(),
+                                transactionRecord.getPayerAccountId(),
+                                amount
+                        );
+
+                        // Use accountId as key → guarantees ordering per account
+                        kafkaTemplate.send("EC_TRANSACTION", event.getPayeeAccountNo(), event);
+
                     }
                 });
     }

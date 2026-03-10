@@ -1,6 +1,6 @@
 package com.alipay.alipay_plus.biz.service.impl.template;
 
-import com.alipay.alipay_plus.biz.service.impl.helper.IdigitalriskResultHelper;
+import com.alipay.alipay_plus.biz.service.impl.helper.AccountResultHelper;
 import com.alipay.alipay_plus.common.service.facade.baseresult.AccountBaseRequest;
 import com.alipay.alipay_plus.common.service.facade.baseresult.AccountBaseResult;
 import com.alipay.alipay_plus.common.util.LogUtil;
@@ -52,19 +52,19 @@ public class AccountServiceTemplate {
 
             callback.process(request, result);
 
-            IdigitalriskResultHelper.fillSuccessResultCode(result);
+            AccountResultHelper.fillSuccessResultCode(result);
 
         } catch (IdigitalriskException e) {
 
             LogUtil.warn(LOGGER, e, "service process exception[", request, "]", ", code = "
                     , e.getResultCode(), ", msg= ", e.getMessage());
 
-            IdigitalriskResultHelper.fillExceptionResultCode(result, e.getResultCode());
+            AccountResultHelper.fillExceptionResultCode(result, e.getResultCode());
 
         } catch (Throwable e) {
             LogUtil.error(LOGGER, e, "service process unexpected exception[", request, "]");
 
-            IdigitalriskResultHelper.fillExceptionResultCode(result, AccountResultCode.SYSTEM_EXCEPTION);
+            AccountResultHelper.fillExceptionResultCode(result, AccountResultCode.SYSTEM_EXCEPTION);
 
         } finally {
             printDigestLog(result);

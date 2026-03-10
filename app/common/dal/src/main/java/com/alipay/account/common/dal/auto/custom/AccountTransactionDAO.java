@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface AccountTransactionDAO {
 
-    AccountTransactionDO queryTransactionRecord(String transactionId);
+    AccountTransactionDO queryTransactionRecord(String txnId, String transactionId);
 
     List<AccountTransactionDO> queryTransactionHistory(String txnId, String pageSize, String offSet);
 

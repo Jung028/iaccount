@@ -8,7 +8,8 @@ public enum AccountActionEnum {
     QUERY_TRANSACTION_HISTORY("QUERY_TRANSACTION_HISTORY", "Query transaction history"),
     QUERY_TRANSACTION_RECORD("QUERY_TRANSACTION_RECORD", "Query transaction record"),
     INSERT_TRANSACTION_RECORD("INSERT_TRANSACTION_RECORD", "Insert new transaction record"),
-    UPDATE_TRANSACTION_RECORD("UPDATE_TRANSACTION_RECORD", "update transaction record");
+    UPDATE_TRANSACTION_RECORD("UPDATE_TRANSACTION_RECORD", "update transaction record"),
+    PUBLISH_TRANSFER_EVENT("PUBLISH_TRANSFER_EVENT", "publish transfer event");
 
     private String code;
     private String desc;

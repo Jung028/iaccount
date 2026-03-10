@@ -22,7 +22,7 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
         if (request == null) {
             return null;
         }
-        AccountTransactionDO accountTransactionDO = accountTransactionDAO.queryTransactionRecord(request.getTxnId());
+        AccountTransactionDO accountTransactionDO = accountTransactionDAO.queryTransactionRecord(request.getTxnId(), request.getTxnId());
         return domainConverter.convertToModel(accountTransactionDO);
     }
 

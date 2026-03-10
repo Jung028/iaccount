@@ -16,13 +16,13 @@ public class WalletServiceClientImpl implements WalletServiceClient {
 
     @Override
     public BusinessBizResult<UpdateIdempotencyKeysResult> updateIdempotencyKey(UpdateIdempotencyKeysRequest request) {
-        AssertUtil.notNull(request, AccountResultCode.PARAM_ILLEGAL.getCode(), "update idempotency keys request is null");
+        AssertUtil.notNull(request, AccountResultCode.PARAM_ILLEGAL, "update idempotency keys request is null");
 
         //set cross invoke
         BusinessBizResult<UpdateIdempotencyKeysResult> result = businessService.updateIdempotencyKeys(request);
-        AssertUtil.notNull(result, AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
-        AssertUtil.notNull(result.getResult(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
-        AssertUtil.isTrue(result.isSuccess(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is not success");
+        AssertUtil.notNull(result, AccountResultCode.PARAM_ILLEGAL, ", result is null");
+        AssertUtil.notNull(result.getResult(), AccountResultCode.PARAM_ILLEGAL, ", result is null");
+        AssertUtil.isTrue(result.isSuccess(), AccountResultCode.PARAM_ILLEGAL, ", result is not success");
         return result;
     }
 
@@ -30,9 +30,9 @@ public class WalletServiceClientImpl implements WalletServiceClient {
     public BusinessBizResult<IdempotencyKeysItem> queryIdempotencyKeys(QueryIdempotencyKeysRequest request) {
 
         BusinessBizResult<IdempotencyKeysItem> result = businessService.queryIdempotencyKeys(request);
-        AssertUtil.notNull(result, AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
-        AssertUtil.notNull(result.getResult(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is null");
-        AssertUtil.isTrue(result.isSuccess(), AccountResultCode.PARAM_ILLEGAL.getCode(), ", result is not success");
+        AssertUtil.notNull(result, AccountResultCode.PARAM_ILLEGAL, ", result is null");
+        AssertUtil.notNull(result.getResult(), AccountResultCode.PARAM_ILLEGAL, ", result is null");
+        AssertUtil.isTrue(result.isSuccess(), AccountResultCode.PARAM_ILLEGAL, ", result is not success");
         return result;
     }
 }

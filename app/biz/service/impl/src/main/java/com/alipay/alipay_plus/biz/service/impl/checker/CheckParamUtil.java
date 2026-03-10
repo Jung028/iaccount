@@ -25,4 +25,7 @@ public class CheckParamUtil {
     public static void checkUpdateTransactionRecordRequest(AccountBaseRequest request) {
 
     }
+
+    public static void checkPublishTransferRequest(PublishTransferRequest request) {
+    }
 }
