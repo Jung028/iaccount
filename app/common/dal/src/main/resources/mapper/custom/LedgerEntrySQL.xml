@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alipay.account_center.common.dal.auto.custom.AccountTransactionDAO">
+
+    <select id="queryHistoricalDetails" parameterType="string" resultType="com.alipay.account_center.common.dal.auto.dataobject.AccountTransactionDO">
+        SELECT *
+        FROM account_transaction
+        WHERE account_id = #{accountId}
+    </select>
+
+</mapper>
