@@ -6,6 +6,7 @@ import com.alipay.account_center.common.service.facade.event.EcTransactionEvent;
 import com.alipay.account_center.common.service.facade.request.*;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
+import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.AccessDeniedException;
@@ -95,9 +96,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
 
-                        AssertUtil.isTrue(request.getOperatorId().equals(accountInfo.getAccRelationId()), AccountResultCode.INVALID_REQUEST,
-                                "User not permitted to access account data");
-
                         ResponseBuilder.success(response, ItemConverter.convertToItem(accountInfo), AccountActionEnum.QUERY_ACCOUNT_INFO.getCode(),
                                 AccountActionEnum.QUERY_ACCOUNT_INFO.getDesc());
                     }
@@ -127,9 +125,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
-
-                        AssertUtil.isTrue(request.getOperatorId().equals(accountInfo.getAccRelationId()), AccountResultCode.INVALID_REQUEST,
-                                "User not permitted to access account data");
 
                         // Query Transaction record
                         TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(request);
@@ -163,9 +158,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // check if account status is valid
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
-
-                        AssertUtil.isTrue(request.getOperatorId().equals(accountInfo.getAccRelationId()), AccountResultCode.INVALID_REQUEST,
-                                "User not permitted to access account data");
 
                         // Query Transaction record
                         List<TransactionHistory> transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
@@ -228,9 +220,16 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                            AccountBizResult<TransactionRecordItem> response) {
                         validateUser(request.getOperatorId());
                         TransactionRecord transactionRecord =
-                                transactionTemplate.execute(status ->
-                                        accountTransactionRepository.updateTransactionRecord(request)
-                                );
+                                transactionTemplate.execute(status -> {
+                                    // Step 1: update (returns int)
+                                    accountTransactionRepository.updateTransactionRecord(request);
+
+                                    // Step 2: query the updated record
+                                    QueryTransactionRecordRequest queryTransactionRecordRequest = new QueryTransactionRecordRequest();
+                                    queryTransactionRecordRequest.setTxnId(request.getTxnId());
+                                    return accountTransactionRepository.queryTransactionRecord(queryTransactionRecordRequest);
+
+                                });
                         if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
                             ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.UPDATE_TRANSACTION_RECORD.getCode(),
                                     AccountActionEnum.UPDATE_TRANSACTION_RECORD.getDesc());
@@ -267,6 +266,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         if (transactionRecord == null) {
                             return;
                         }
+                        System.out.println(transactionRecord.getTxnStatus());
                         AssertUtil.isTrue(transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)
                                         || transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
                                 AccountResultCode.ILLEGAL_STATUS, "Transaction status is illegal");
@@ -276,9 +276,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                             UpdateTransactionRecordRequest updateTransactionRecordRequest = new UpdateTransactionRecordRequest();
                             updateTransactionRecordRequest.setTxnId(transactionRecord.getTxnId());
                             updateTransactionRecordRequest.setStatus(TransactionStatusEnum.PENDING.getCode());
-                            TransactionRecord updatedTransactionRecord = accountTransactionRepository
-                                    .updateTransactionRecord(updateTransactionRecordRequest);
-                            AssertUtil.notNull(updatedTransactionRecord, AccountResultCode.SYSTEM_EXCEPTION, "Transaction update failed");
+                            accountTransactionRepository.updateTransactionRecord(updateTransactionRecordRequest);
                         }
                         // convert money to big decimal
                         BigDecimal amount = BigDecimal.valueOf(transactionRecord.getAmount().doubleValue())
@@ -293,7 +291,8 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                         // Use accountId as key → guarantees ordering per account
                         kafkaTemplate.send("EC_TRANSACTION", event.getPayeeAccountNo(), event);
-
+                        ResponseBuilder.success(response, null, AccountActionEnum.PUBLISH_TRANSFER_EVENT.getCode(),
+                                AccountActionEnum.PUBLISH_TRANSFER_EVENT.getDesc());
                     }
                 });
     }

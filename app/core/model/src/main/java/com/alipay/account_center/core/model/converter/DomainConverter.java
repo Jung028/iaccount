@@ -1,9 +1,10 @@
 package com.alipay.account_center.core.model.converter;
 
 import com.alipay.account_center.common.dal.auto.dataobject.AccountDO;
-import com.alipay.account_center.common.dal.auto.dataobject.AccountTransactionDO;
+import com.alipay.account_center.common.dal.auto.dataobject.TransactionDO;
 import com.alipay.account_center.common.service.facade.enums.TransactionDirectionEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
+import com.alipay.account_center.common.service.facade.enums.TransactionTypeEnum;
 import com.alipay.account_center.core.model.domain.AccountInfo;
 import com.alipay.account_center.core.model.domain.TransactionHistory;
 import com.alipay.account_center.core.model.domain.TransactionRecord;
@@ -39,27 +40,27 @@ public class DomainConverter {
         return accountInfo;
     }
 
-    public static TransactionRecord convertToModel(AccountTransactionDO accountTransactionDO) {
-    if (accountTransactionDO == null) {
+    public static TransactionRecord convertToModel(TransactionDO transactionDO) {
+    if (transactionDO == null) {
         return null;
     }
     TransactionRecord transactionRecord = new TransactionRecord();
-    transactionRecord.setTxnId(transactionRecord.getTxnId());
-    transactionRecord.setGmtCreate(transactionRecord.getGmtCreate());
-    transactionRecord.setGmtModified(transactionRecord.getGmtModified());
-    transactionRecord.setGmtComplete(transactionRecord.getGmtComplete());
-    transactionRecord.setPayerAccountId(transactionRecord.getPayerAccountId());
-    transactionRecord.setPayeeAccountId(transactionRecord.getPayeeAccountId());
-    transactionRecord.setAmount(transactionRecord.getAmount());
-    transactionRecord.setCurrency(transactionRecord.getCurrency());
-    transactionRecord.setTxnType(transactionRecord.getTxnType());
-    transactionRecord.setTxnStatus(transactionRecord.getTxnStatus());
-    transactionRecord.setFailureReason(transactionRecord.getFailureReason());
-    transactionRecord.setDesc(transactionRecord.getDesc());
+    transactionRecord.setTxnId(transactionDO.getTxnId());
+    transactionRecord.setGmtCreate(transactionDO.getGmtCreate());
+    transactionRecord.setGmtModified(transactionDO.getGmtModified());
+    transactionRecord.setGmtComplete(transactionDO.getGmtComplete());
+    transactionRecord.setPayerAccountId(transactionDO.getPayerAccountId());
+    transactionRecord.setPayeeAccountId(transactionDO.getPayeeAccountId());
+    transactionRecord.setAmount(transactionDO.getAmount());
+    transactionRecord.setCurrency(transactionDO.getCurrency());
+    transactionRecord.setTxnType(TransactionTypeEnum.valueOf(transactionDO.getType()));
+    transactionRecord.setTxnStatus(TransactionStatusEnum.valueOf(transactionDO.getStatus()));
+    transactionRecord.setFailureReason(transactionDO.getFailureReason());
+    transactionRecord.setExtInfo(transactionDO.getExtInfo());
     return transactionRecord;
     }
 
-    public static List<TransactionHistory> convertToModelList(List<AccountTransactionDO> transactionDOS) {
+    public static List<TransactionHistory> convertToModelList(List<TransactionDO> transactionDOS) {
         if (transactionDOS == null || transactionDOS.isEmpty()) {
             return Collections.emptyList();
         }
@@ -74,7 +75,7 @@ public class DomainConverter {
                     item.setCurrency(transaction.getCurrency());
                     item.setDirection(TransactionDirectionEnum.valueOf(transaction.getDirection()));
                     item.setStatus(TransactionStatusEnum.valueOf(transaction.getStatus()));
-                    item.setDesc(transaction.getDesc());
+                    item.setExtInfo(transaction.getExtInfo());
                     return item;
                 })
                 .collect(Collectors.toList());

@@ -30,7 +30,7 @@
 
         <!-- Table(s) to generate -->
         <table tableName="account" domainObjectName="AccountDO" />
-        <table tableName="transaction" domainObjectName="AccountTransactionDO" />
+        <table tableName="transaction" domainObjectName="TransactionDO" />
         <table tableName="ledger_entry" domainObjectName="LedgerEntryDO" />
 
     </context>

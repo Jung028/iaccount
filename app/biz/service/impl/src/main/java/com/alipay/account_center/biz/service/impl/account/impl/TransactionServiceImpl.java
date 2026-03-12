@@ -77,7 +77,9 @@ public class TransactionServiceImpl implements TransactionService {
             // check the idemptency record whether the status is in pending otherwise exit
             QueryIdempotencyKeysRequest queryIdempotencyKeysRequest = new QueryIdempotencyKeysRequest();
             queryIdempotencyKeysRequest.setTxnId(event.getTxnId());
+            System.out.println(event.getTxnId() + event.getPayeeAccountNo());
             queryIdempotencyKeysResult = walletServiceClient.queryIdempotencyKeys(queryIdempotencyKeysRequest);
+            System.out.println(queryIdempotencyKeysRequest.getTxnId());
             if (queryIdempotencyKeysResult == null || !queryIdempotencyKeysResult.isSuccess()) {
                 throw new RuntimeException();
             }

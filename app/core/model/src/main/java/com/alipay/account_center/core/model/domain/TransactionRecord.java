@@ -19,7 +19,7 @@ public class TransactionRecord {
     private TransactionTypeEnum txnType;
     private TransactionStatusEnum txnStatus;
     private String failureReason;
-    private String desc;
+    private String extInfo;
 
     public String getTxnId() {
         return txnId;
@@ -109,11 +109,11 @@ public class TransactionRecord {
         this.failureReason = failureReason;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getExtInfo() {
+        return extInfo;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setExtInfo(String extInfo) {
+        this.extInfo = extInfo;
     }
 }

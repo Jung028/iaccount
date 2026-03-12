@@ -48,7 +48,7 @@ public class ItemConverter {
         transactionRecordItem.setTxnType(transactionRecord.getTxnType());
         transactionRecordItem.setTxnStatus(transactionRecord.getTxnStatus());
         transactionRecordItem.setFailureReason(transactionRecord.getFailureReason());
-        transactionRecordItem.setDesc(transactionRecord.getDesc());
+        transactionRecordItem.setExtInfo(transactionRecord.getExtInfo());
         return transactionRecordItem;
     }
 
@@ -64,7 +64,7 @@ public class ItemConverter {
             item.setCurrency(transaction.getCurrency());
             item.setDirection(transaction.getDirection());
             item.setStatus(transaction.getStatus());
-            item.setDesc(transaction.getDesc());
+            item.setExtInfo(transaction.getExtInfo());
             return item;
         }).collect(Collectors.toList());
     }

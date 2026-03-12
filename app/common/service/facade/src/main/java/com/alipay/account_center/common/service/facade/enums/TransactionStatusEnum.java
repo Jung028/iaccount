@@ -26,6 +26,7 @@ public enum TransactionStatusEnum {
     }
 
     TransactionStatusEnum(String code, String desc) {
-
+        this.code = code;
+        this.desc = desc;
     }
 }

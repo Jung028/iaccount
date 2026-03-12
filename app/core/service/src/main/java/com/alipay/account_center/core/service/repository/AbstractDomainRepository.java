@@ -1,8 +1,7 @@
 package com.alipay.account_center.core.service.repository;
 
 import com.alipay.account_center.common.dal.auto.custom.AccountDAO;
-import com.alipay.account_center.common.dal.auto.custom.AccountTransactionDAO;
-import com.alipay.account_center.core.model.converter.DomainConverter;
+import com.alipay.account_center.common.dal.auto.custom.TransactionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AbstractDomainRepository {
@@ -11,6 +10,6 @@ public class AbstractDomainRepository {
     protected AccountDAO accountDAO;
 
     @Autowired
-    protected AccountTransactionDAO accountTransactionDAO;
+    protected TransactionDAO accountTransactionDAO;
 
 }

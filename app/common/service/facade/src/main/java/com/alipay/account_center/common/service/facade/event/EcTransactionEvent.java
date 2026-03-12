@@ -15,6 +15,10 @@ public class EcTransactionEvent {
         this.amount = amount;
     }
 
+    public EcTransactionEvent() {
+        // default constructor needed by Jackson
+    }
+
     public String getTxnId() {
         return txnId;
     }

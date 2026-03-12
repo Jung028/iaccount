@@ -2,14 +2,17 @@ package com.alipay.account_center.common.service.facade.request;
 
 import com.alipay.account_center.common.service.facade.baseresult.AccountBaseRequest;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
+import org.javamoney.moneta.Money;
 
-import javax.money.MonetaryAmount;
+import javax.money.CurrencyUnit;
+import java.math.BigDecimal;
 
 public class InsertTransactionRecordRequest extends AccountBaseRequest {
     private String txnId;
     private String payeeAccountNo;
     private String payerAccountNo;
-    private MonetaryAmount amount;
+    private BigDecimal amount;
+    private CurrencyUnit currency;
     private TransactionStatusEnum status;
 
     public String getTxnId() {
@@ -36,12 +39,20 @@ public class InsertTransactionRecordRequest extends AccountBaseRequest {
         this.payerAccountNo = payerAccountNo;
     }
 
-    public MonetaryAmount getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(MonetaryAmount amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public CurrencyUnit getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(CurrencyUnit currency) {
+        this.currency = currency;
     }
 
     public TransactionStatusEnum getStatus() {

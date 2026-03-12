@@ -13,7 +13,7 @@ public class TransactionHistory {
     private String currency;
     private TransactionDirectionEnum direction;
     private TransactionStatusEnum status;
-    private String desc;
+    private String extInfo;
 
     public String getTxnId() {
         return txnId;
@@ -63,11 +63,11 @@ public class TransactionHistory {
         this.status = status;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getExtInfo() {
+        return extInfo;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setExtInfo(String extInfo) {
+        this.extInfo = extInfo;
     }
 }

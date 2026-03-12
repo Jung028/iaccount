@@ -16,6 +16,6 @@ public interface AccountTransactionRepository {
 
     TransactionRecord insertTransactionRecord(InsertTransactionRecordRequest request);
 
-    TransactionRecord updateTransactionRecord(UpdateTransactionRecordRequest request);
+    void updateTransactionRecord(UpdateTransactionRecordRequest request);
 
 }
