@@ -8,7 +8,7 @@ public class AccountInfo {
     private String accountNumber;
     private String accountName;
     private String accountType;
-    private String accRelationId;
+    private String accountRelationId;
     private String currency;
     private BigDecimal balance;
     private String status;
@@ -20,7 +20,7 @@ public class AccountInfo {
         if (amount.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("invalid amount");
         }
-        if (balance.compareTo(amount) > 0) {
+        if (balance.compareTo(amount) < 0) {
             throw new IllegalStateException("insufficient balance");
         }
         balance = balance.subtract(amount);
@@ -66,12 +66,12 @@ public class AccountInfo {
         this.accountType = accountType;
     }
 
-    public String getAccRelationId() {
-        return accRelationId;
+    public String getAccountRelationId() {
+        return accountRelationId;
     }
 
-    public void setAccRelationId(String accRelationId) {
-        this.accRelationId = accRelationId;
+    public void setAccountRelationId(String accountRelationId) {
+        this.accountRelationId = accountRelationId;
     }
 
     public String getCurrency() {

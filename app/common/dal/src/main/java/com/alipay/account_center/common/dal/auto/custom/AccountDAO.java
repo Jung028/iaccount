@@ -2,12 +2,15 @@ package com.alipay.account_center.common.dal.auto.custom;
 
 import com.alipay.account_center.common.dal.auto.dataobject.AccountDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AccountDAO {
-    AccountDO queryAccountInfo(String accountId);
+    AccountDO queryAccountInfo(@Param("accountId") String accountId);
 
-    AccountDO createAccount(AccountDO accountDO);
+    int createAccount(AccountDO accountDO);
 
-    AccountDO lockById(String accountId);
+    AccountDO lockById(@Param("accountId") String accountId);
+
+    int updateAccount(AccountDO accountDO);
 }

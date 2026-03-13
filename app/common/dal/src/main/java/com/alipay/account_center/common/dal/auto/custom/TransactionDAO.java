@@ -16,10 +16,10 @@ public interface TransactionDAO {
 
     TransactionDO queryTransactionRecord(@Param("txnId") String txnId, @Param("accountId") String accountId);
 
-    List<TransactionDO> queryTransactionHistory(@Param("txnId") String txnId, @Param("pageSize") String pageSize, @Param("offSet") String offSet);
+    List<TransactionDO> queryTransactionHistory(@Param("txnId") String txnId, @Param("pageSize") String pageSize, @Param("pageNo") String pageNo);
 
-    TransactionDO insertTransactionRecord(TransactionDO transactionDO);
+    int insertTransactionRecord(TransactionDO transactionDO);
 
-    void updateTransactionRecord(TransactionDO record);
+    int updateTransactionRecord(TransactionDO record);
 
 }

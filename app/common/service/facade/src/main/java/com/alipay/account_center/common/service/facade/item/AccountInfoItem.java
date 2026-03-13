@@ -9,7 +9,7 @@ public class AccountInfoItem {
     private String accountNumber;
     private String accountName;
     private String accountType;
-    private String accRelationId;
+    private String accountRelationId;
     private String currency;
     private BigDecimal balance;
     private String status;
@@ -49,12 +49,12 @@ public class AccountInfoItem {
         this.accountType = accountType;
     }
 
-    public String getAccRelationId() {
-        return accRelationId;
+    public String getAccountRelationId() {
+        return accountRelationId;
     }
 
-    public void setAccRelationId(String accRelationId) {
-        this.accRelationId = accRelationId;
+    public void setAccountRelationId(String accountRelationId) {
+        this.accountRelationId = accountRelationId;
     }
 
     public String getCurrency() {

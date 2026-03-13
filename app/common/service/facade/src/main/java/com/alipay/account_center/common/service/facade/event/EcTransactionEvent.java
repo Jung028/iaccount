@@ -7,12 +7,14 @@ public class EcTransactionEvent {
     private String payerAccountNo;
     private String payeeAccountNo;
     private BigDecimal amount;
+    private String currency;
 
-    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount) {
+    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency) {
         this.txnId = txnId;
         this.payerAccountNo = payerAccountNo;
         this.payeeAccountNo = payeeAccountNo;
         this.amount = amount;
+        this.currency = currency;
     }
 
     public EcTransactionEvent() {
@@ -50,4 +52,12 @@ public class EcTransactionEvent {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
 }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

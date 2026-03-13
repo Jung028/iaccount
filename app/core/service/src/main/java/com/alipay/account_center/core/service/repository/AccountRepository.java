@@ -8,8 +8,7 @@ public interface AccountRepository {
 
     AccountInfo createAccount(CreateAccountRequest request);
 
-
     AccountInfo lockById(String accountId);
 
-    void updateAccountRecord(AccountInfo accountInfo);
+    int updateAccountRecord(AccountInfo accountInfo);
 }

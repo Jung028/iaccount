@@ -2,7 +2,6 @@ package com.alipay.account_center.core.model.converter;
 
 import com.alipay.account_center.common.dal.auto.dataobject.AccountDO;
 import com.alipay.account_center.common.dal.auto.dataobject.TransactionDO;
-import com.alipay.account_center.common.service.facade.enums.TransactionDirectionEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionTypeEnum;
 import com.alipay.account_center.core.model.domain.AccountInfo;
@@ -30,7 +29,7 @@ public class DomainConverter {
         accountInfo.setAccountId(accountDO.getAccountId());
         accountInfo.setAccountName(accountDO.getAccountName());
         accountInfo.setAccountType(accountDO.getAccountType());
-        accountInfo.setAccRelationId(accountDO.getAccountRelationId());
+        accountInfo.setAccountRelationId(accountDO.getAccountRelationId());
         accountInfo.setCurrency(accountDO.getCurrency());
         accountInfo.setBalance(accountDO.getBalance());
         accountInfo.setStatus(accountDO.getStatus());
@@ -73,11 +72,28 @@ public class DomainConverter {
                     item.setGmtCreate(transaction.getGmtCreate());
                     item.setAmount(transaction.getAmount());
                     item.setCurrency(transaction.getCurrency());
-                    item.setDirection(TransactionDirectionEnum.valueOf(transaction.getDirection()));
                     item.setStatus(TransactionStatusEnum.valueOf(transaction.getStatus()));
                     item.setExtInfo(transaction.getExtInfo());
                     return item;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public static AccountDO convertToDomain(AccountInfo accountInfo) {
+        if (accountInfo == null) {
+            return null;
+        }
+        AccountDO accountDO = new AccountDO();
+        accountDO.setAccountId(accountInfo.getAccountId());
+        accountDO.setAccountName(accountInfo.getAccountName());
+        accountDO.setAccountType(accountInfo.getAccountType());
+        accountDO.setAccountRelationId(accountInfo.getAccountRelationId());
+        accountDO.setCurrency(accountInfo.getCurrency());
+        accountDO.setBalance(accountInfo.getBalance());
+        accountDO.setStatus(accountInfo.getStatus());
+        accountDO.setGmtCreate(accountInfo.getGmtCreate());
+        accountDO.setGmtModified(accountInfo.getGmtModified());
+        accountDO.setExtInfo(accountInfo.getExtInfo());
+        return accountDO;
     }
 }

@@ -22,7 +22,7 @@ public class ItemConverter {
         accountInfoItem.setAccountNumber(accountInfo.getAccountNumber());
         accountInfoItem.setAccountName(accountInfo.getAccountName());
         accountInfoItem.setAccountType(accountInfo.getAccountType());
-        accountInfoItem.setAccRelationId(accountInfo.getAccRelationId());
+        accountInfoItem.setAccountRelationId(accountInfo.getAccountRelationId());
         accountInfoItem.setCurrency(accountInfo.getCurrency());
         accountInfoItem.setBalance(accountInfo.getBalance());
         accountInfoItem.setStatus(accountInfo.getStatus());
@@ -62,7 +62,6 @@ public class ItemConverter {
             item.setGmtCreate(transaction.getGmtCreate());
             item.setAmount(transaction.getAmount());
             item.setCurrency(transaction.getCurrency());
-            item.setDirection(transaction.getDirection());
             item.setStatus(transaction.getStatus());
             item.setExtInfo(transaction.getExtInfo());
             return item;

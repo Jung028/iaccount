@@ -2,12 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.alipay.account_center.common.dal.auto.custom.TransactionDAO">
-
-    <select id="queryHistoricalDetails" parameterType="string" resultType="com.alipay.account_center.common.dal.auto.dataobject.TransactionDO">
-        SELECT *
-        FROM account_transaction
-        WHERE account_id = #{accountId}
-    </select>
+<mapper namespace="com.alipay.account_center.common.dal.auto.custom.LedgerEntryDAO">
+    <resultMap id="BaseResultMap" type="com.alipay.account_center.common.dal.auto.dataobject.LedgerEntryDO">
+        <id column="ledger_id" jdbcType="BIGINT" property="ledgerId" />
+        <result column="txn_id" jdbcType="VARCHAR" property="txnId" />
+        <result column="account_id" jdbcType="VARCHAR" property="accountId" />
+        <result column="entry_type" jdbcType="VARCHAR" property="entryType" />
+        <result column="amount" jdbcType="NUMERIC" property="amount" />
+        <result column="currency" jdbcType="CHAR" property="currency" />
+        <result column="balance_after" jdbcType="NUMERIC" property="balanceAfter" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+    <!-- Insert a new transaction record -->
+    <insert id="insertLedgerEntry" parameterType="com.alipay.account_center.common.dal.auto.dataobject.LedgerEntryDO">
+        INSERT INTO ledger_entry (txn_id, account_id,
+            entry_type, amount, currency,
+            balance_after, status, remark)
+        VALUES (#{txnId,jdbcType=VARCHAR}, #{accountId,jdbcType=VARCHAR},
+            #{entryType,jdbcType=VARCHAR}, #{amount,jdbcType=NUMERIC}, #{currency,jdbcType=CHAR},
+            #{balanceAfter,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
 
 </mapper>

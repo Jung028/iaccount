@@ -1,6 +1,5 @@
 package com.alipay.account_center.core.model.domain;
 
-import com.alipay.account_center.common.service.facade.enums.TransactionDirectionEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 
 import java.math.BigDecimal;
@@ -11,7 +10,6 @@ public class TransactionHistory {
     private Date gmtCreate;
     private BigDecimal amount;
     private String currency;
-    private TransactionDirectionEnum direction;
     private TransactionStatusEnum status;
     private String extInfo;
 
@@ -45,14 +43,6 @@ public class TransactionHistory {
 
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
-
-    public TransactionDirectionEnum getDirection() {
-        return direction;
-    }
-
-    public void setDirection(TransactionDirectionEnum direction) {
-        this.direction = direction;
     }
 
     public TransactionStatusEnum getStatus() {

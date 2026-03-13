@@ -8,6 +8,7 @@ import com.alipay.account_center.common.service.facade.request.UpdateTransaction
 import com.alipay.account_center.core.model.converter.DomainConverter;
 import com.alipay.account_center.core.model.domain.TransactionHistory;
 import com.alipay.account_center.core.model.domain.TransactionRecord;
+import com.alipay.account_center.core.model.exception.RepositoryException;
 import com.alipay.account_center.core.service.repository.AbstractDomainRepository;
 import com.alipay.account_center.core.service.repository.AccountTransactionRepository;
 import org.springframework.stereotype.Repository;
@@ -41,33 +42,48 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
 
     @Override
     public TransactionRecord insertTransactionRecord(InsertTransactionRecordRequest request) {
-        if  (request == null) {
+        if (request == null) {
             return null;
         }
-        TransactionDO record = new TransactionDO();
-        record.setTxnId(request.getTxnId());
-        record.setPayerAccountId(request.getPayerAccountNo());
-        record.setPayeeAccountId(request.getPayeeAccountNo());
-        //convert the MonetaryAmount to BigDecimal?
-        BigDecimal dbAmount = request.getAmount();
-        record.setAmount(dbAmount);
-        record.setCurrency(request.getCurrency().getCurrencyCode());
-        record.setStatus(request.getStatus().getCode());
+        try {
+            TransactionDO record = new TransactionDO();
+            record.setTxnId(request.getTxnId());
+            record.setPayerAccountId(request.getPayerAccountNo());
+            record.setPayeeAccountId(request.getPayeeAccountNo());
+            record.setAmount(request.getAmount());
+            record.setCurrency(request.getCurrency().getCurrencyCode());
+            record.setStatus(request.getStatus().getCode());
 
-        TransactionDO transactionRecordDO = accountTransactionDAO.insertTransactionRecord(record);
-
-        return DomainConverter.convertToModel(transactionRecordDO);
+            int rows = accountTransactionDAO.insertTransactionRecord(record); // DAO returns int
+            if (rows <= 0) {
+                throw new RepositoryException("Insert failed for txnId: " + request.getTxnId());
+            }
+             return DomainConverter.convertToModel(record);
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during insert", e);
+        }
     }
 
     @Override
-    public void updateTransactionRecord(UpdateTransactionRecordRequest request) {
-        if (request == null) {
-            return;
-        }
-        TransactionDO record = new TransactionDO();
-        record.setTxnId(request.getTxnId());
-        record.setStatus(request.getStatus());
-        accountTransactionDAO.updateTransactionRecord(record);
+    public int updateTransactionRecord(UpdateTransactionRecordRequest request) {
+        if (request == null) return 0;
+        try {
+            TransactionDO record = new TransactionDO();
+            record.setTxnId(request.getTxnId());
+            record.setStatus(request.getStatus());
+            record.setFailureReason(request.getFailReason());
 
+            int rows = accountTransactionDAO.updateTransactionRecord(record);
+            if (rows <= 0) {
+                throw new RepositoryException("Update affected 0 rows for txnId: " + request.getTxnId());
+            }
+            return rows;
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during update", e);
+        }
     }
 }

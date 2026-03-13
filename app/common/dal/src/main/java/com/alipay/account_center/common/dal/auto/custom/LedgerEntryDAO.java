@@ -1,6 +1,7 @@
 package com.alipay.account_center.common.dal.auto.custom;
 
 
+import com.alipay.account_center.common.dal.auto.dataobject.LedgerEntryDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -9,4 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface LedgerEntryDAO {
+
+    int insertLedgerEntry(LedgerEntryDO ledgerEntryDO);
 }

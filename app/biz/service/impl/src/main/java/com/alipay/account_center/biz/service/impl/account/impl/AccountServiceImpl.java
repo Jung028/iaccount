@@ -30,6 +30,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -67,7 +69,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     protected void process(CreateAccountRequest request, AccountBizResult<String> result) {
                         validateUser(request.getOperatorId());
                         AccountInfo accountInfo = accountRepository.createAccount(request);
-                        result.setSuccess(accountInfo == null);
                     }
                 });
     }
@@ -190,7 +191,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                 transactionTemplate.execute(status ->
                                         accountTransactionRepository.insertTransactionRecord(request)
                                 );
-                        if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
+                        if (transactionRecord != null) {
                             ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.INSERT_TRANSACTION_RECORD.getCode(),
                                     AccountActionEnum.INSERT_TRANSACTION_RECORD.getDesc());
                         } else {
@@ -228,9 +229,8 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                     QueryTransactionRecordRequest queryTransactionRecordRequest = new QueryTransactionRecordRequest();
                                     queryTransactionRecordRequest.setTxnId(request.getTxnId());
                                     return accountTransactionRepository.queryTransactionRecord(queryTransactionRecordRequest);
-
                                 });
-                        if (transactionRecord != null && !StringUtils.isEmpty(transactionRecord.getFailureReason())) {
+                        if (transactionRecord != null) {
                             ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.UPDATE_TRANSACTION_RECORD.getCode(),
                                     AccountActionEnum.UPDATE_TRANSACTION_RECORD.getDesc());
                         } else {
@@ -256,8 +256,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(PublishTransferRequest request, AccountBizResult<String> response) {
-
-
                         // query transaction id/ we get the txnid from the challenge id, or the otp:challenge
                         QueryTransactionRecordRequest queryTransactionRecordRequest = new QueryTransactionRecordRequest();
                         queryTransactionRecordRequest.setAccountId(request.getAccountId());
@@ -266,7 +264,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         if (transactionRecord == null) {
                             return;
                         }
-                        System.out.println(transactionRecord.getTxnStatus());
                         AssertUtil.isTrue(transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)
                                         || transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
                                 AccountResultCode.ILLEGAL_STATUS, "Transaction status is illegal");
@@ -281,12 +278,12 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // convert money to big decimal
                         BigDecimal amount = BigDecimal.valueOf(transactionRecord.getAmount().doubleValue())
                                 .setScale(2, RoundingMode.HALF_UP);
-                        // publish EC_TRANSACTION event code for transfer service to listen
                         EcTransactionEvent event = new EcTransactionEvent(
                                 transactionRecord.getTxnId(),
                                 transactionRecord.getPayeeAccountId(),
                                 transactionRecord.getPayerAccountId(),
-                                amount
+                                amount,
+                                transactionRecord.getCurrency()
                         );
 
                         // Use accountId as key → guarantees ordering per account
