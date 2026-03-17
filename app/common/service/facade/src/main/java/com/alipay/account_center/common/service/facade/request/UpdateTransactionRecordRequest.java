@@ -4,8 +4,17 @@ import com.alipay.account_center.common.service.facade.baseresult.AccountBaseReq
 
 public class UpdateTransactionRecordRequest extends AccountBaseRequest {
     private String txnId;
+    private String accountId;
     private String status;
     private String failReason;
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
 
     public String getTxnId() {
         return txnId;

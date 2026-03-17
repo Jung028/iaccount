@@ -4,6 +4,7 @@ import com.alipay.account_center.common.service.facade.baseresult.AccountBaseReq
 
 public class QueryAccountInfoRequest extends AccountBaseRequest {
     private String accountId;
+    private String userId;
 
     public String getAccountId() {
         return accountId;
@@ -11,5 +12,13 @@ public class QueryAccountInfoRequest extends AccountBaseRequest {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

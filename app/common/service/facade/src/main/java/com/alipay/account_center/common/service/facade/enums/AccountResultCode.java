@@ -41,7 +41,12 @@ public enum AccountResultCode {
     /**
      * illegal status
      */
-    ILLEGAL_STATUS(GlobalResultCodes.PARAM_ILLEGAL, "Illegal status");
+    ILLEGAL_STATUS(GlobalResultCodes.PARAM_ILLEGAL, "Illegal status"),
+
+    /**
+     * transaction not found
+     */
+    TRANSACTION_NOT_FOUND(GlobalResultCodes.PARAM_ILLEGAL, "Transaction record not found" ),;
 
 
     private final String code;

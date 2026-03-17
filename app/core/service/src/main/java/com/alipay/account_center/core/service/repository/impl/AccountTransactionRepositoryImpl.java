@@ -15,7 +15,9 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class AccountTransactionRepositoryImpl extends AbstractDomainRepository implements AccountTransactionRepository {
@@ -31,12 +33,21 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
     }
 
     @Override
+    public TransactionRecord queryTransactionByStatus(QueryTransactionRecordRequest request) {
+        if (request == null) {
+            return null;
+        }
+        TransactionDO transactionDO = accountTransactionDAO.queryTransactionByStatus(request.getAccountId(), request.getTxnStatusList());
+        return DomainConverter.convertToModel(transactionDO);
+    }
+
+    @Override
     public List<TransactionHistory> queryTransactionHistory(QueryTransactionHistoryRequest request) {
         if (request == null) {
             return Collections.emptyList();
         }
         List<TransactionDO> transactionDOS = accountTransactionDAO.queryTransactionHistory(
-                request.getTxnId(), request.getPageSize(), request.getPageNo());
+                request.getAccountId(), request.getPageSize(), request.getPageNo());
         return DomainConverter.convertToModelList(transactionDOS);
     }
 
@@ -47,18 +58,22 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
         }
         try {
             TransactionDO record = new TransactionDO();
-            record.setTxnId(request.getTxnId());
+            // generate random UUID
+            record.setTxnId(UUID.randomUUID().toString());
             record.setPayerAccountId(request.getPayerAccountNo());
             record.setPayeeAccountId(request.getPayeeAccountNo());
             record.setAmount(request.getAmount());
-            record.setCurrency(request.getCurrency().getCurrencyCode());
+            record.setCurrency(request.getCurrency());
             record.setStatus(request.getStatus().getCode());
+            record.setGmtCreate(new Date());
+            record.setGmtModified(new Date());
+            record.setType(request.getTxnType().getCode());
 
             int rows = accountTransactionDAO.insertTransactionRecord(record); // DAO returns int
             if (rows <= 0) {
                 throw new RepositoryException("Insert failed for txnId: " + request.getTxnId());
             }
-             return DomainConverter.convertToModel(record);
+            return DomainConverter.convertToModel(record);
         } catch (RepositoryException e) {
             throw e;
         } catch (Exception e) {
@@ -86,4 +101,14 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             throw new RepositoryException("DB error during update", e);
         }
     }
+
+    @Override
+    public int queryTransactionTotalCount(QueryTransactionHistoryRequest request) {
+        if (request == null) {
+            return 0;
+        }
+        return accountTransactionDAO.queryTransactionTotalCount(request.getAccountId());
+
+    }
+
 }

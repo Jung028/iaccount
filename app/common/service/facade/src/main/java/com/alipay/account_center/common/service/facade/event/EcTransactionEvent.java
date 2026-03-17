@@ -1,13 +1,17 @@
 package com.alipay.account_center.common.service.facade.event;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class EcTransactionEvent {
     private String txnId;
     private String payerAccountNo;
     private String payeeAccountNo;
     private BigDecimal amount;
+    private String txnStatus;
     private String currency;
+    private String failReason;
+    private String gmtTaskOccur;
 
     public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency) {
         this.txnId = txnId;
@@ -59,5 +63,29 @@ public class EcTransactionEvent {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getTxnStatus() {
+        return txnStatus;
+    }
+
+    public void setTxnStatus(String txnStatus) {
+        this.txnStatus = txnStatus;
+    }
+
+    public String getFailReason() {
+        return failReason;
+    }
+
+    public void setFailReason(String failReason) {
+        this.failReason = failReason;
+    }
+
+    public String getGmtTaskOccur() {
+        return gmtTaskOccur;
+    }
+
+    public void setGmtTaskOccur(String gmtTaskOccur) {
+        this.gmtTaskOccur = gmtTaskOccur;
     }
 }

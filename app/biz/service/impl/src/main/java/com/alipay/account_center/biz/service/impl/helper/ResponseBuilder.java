@@ -17,7 +17,7 @@ public class ResponseBuilder {
      * @param code
      * @param <T>
      */
-    public static <T> void success(AccountBizResult<T> response, T data, String message, String code) {
+    public static <T> void success(AccountBizResult<T> response, T data, String code, String message) {
         response.setSuccess(true);
         response.setResult(data);
         response.setResultMessage(message);

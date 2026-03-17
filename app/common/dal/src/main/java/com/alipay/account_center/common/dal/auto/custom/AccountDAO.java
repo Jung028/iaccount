@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 public interface AccountDAO {
     AccountDO queryAccountInfo(@Param("accountId") String accountId);
 
+    AccountDO queryAccountInfoByUserId(@Param("userId") String userId);
+
     int createAccount(AccountDO accountDO);
 
     AccountDO lockById(@Param("accountId") String accountId);

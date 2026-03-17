@@ -12,10 +12,13 @@ import java.util.List;
 public interface AccountTransactionRepository {
     TransactionRecord queryTransactionRecord(QueryTransactionRecordRequest request);
 
+    TransactionRecord queryTransactionByStatus(QueryTransactionRecordRequest request);
+
     List<TransactionHistory> queryTransactionHistory(QueryTransactionHistoryRequest request);
 
     TransactionRecord insertTransactionRecord(InsertTransactionRecordRequest request);
 
     int updateTransactionRecord(UpdateTransactionRecordRequest request);
 
+    int queryTransactionTotalCount(QueryTransactionHistoryRequest request);
 }

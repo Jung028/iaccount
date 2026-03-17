@@ -3,22 +3,22 @@ package com.alipay.account_center.common.service.facade.request;
 import com.alipay.account_center.common.service.facade.baseresult.AccountBaseRequest;
 
 public class QueryPageBaseRequest extends AccountBaseRequest {
-    private String pageNo;
-    private String pageSize;
+    private int pageNo = 1;
+    private int pageSize = 10;
 
-    public String getPageNo() {
+    public int getPageNo() {
         return pageNo;
     }
 
-    public void setPageNo(String pageNo) {
+    public void setPageNo(int pageNo) {
         this.pageNo = pageNo;
     }
 
-    public String getPageSize() {
+    public int getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(String pageSize) {
+    public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
 }

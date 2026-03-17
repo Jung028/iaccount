@@ -26,6 +26,15 @@ public class AssertUtil {
         check(() -> Assert.isTrue(expression,"is true"), AccountResultCode.valueOf(resultCode), resultMsg);
     }
 
+    public static void notBlank(final String str, final AccountResultCode accountResultCode, final String resultMsg) {
+        check(() -> Assert.isTrue(StringUtils.isNotBlank(str),"is true"),
+                accountResultCode, resultMsg);
+    }
+
+    public static void isTrue(boolean success, String s) {
+        check(() -> Assert.isTrue(success,"is true"), AccountResultCode.valueOf(s), s);
+    }
+
     public static interface AssertTemplate {
         public void doAssert();
 

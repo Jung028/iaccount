@@ -37,6 +37,16 @@ public interface AccountService {
     AccountBizResult<AccountInfoItem> queryAccountInfo(QueryAccountInfoRequest request);
 
     /**
+     * query account by user id
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/queryAccountInfoByUserId")
+    AccountBizResult<AccountInfoItem> queryAccountInfoByUserId(QueryAccountInfoRequest request);
+
+
+    /**
      * query transaction record
      * @param request
      * @return
@@ -46,13 +56,22 @@ public interface AccountService {
     AccountBizResult<TransactionRecordItem> queryTransactionRecord(QueryTransactionRecordRequest request);
 
     /**
+     * queryTransactionByStatus
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/queryTransactionByStatus")
+    AccountBizResult<TransactionRecordItem> queryTransactionByStatus(QueryTransactionRecordRequest request);
+
+    /**
      * query transaction history
      * @param request
      * @return
      */
     @POST
     @Path("/queryTransactionHistory")
-    AccountBizResult<List<TransactionHistoryItem>> queryTransactionHistory(QueryTransactionHistoryRequest request);
+    AccountBizResult<QueryTransactionHistoryResult> queryTransactionHistory(QueryTransactionHistoryRequest request);
 
     /**
      * insert new transaction record

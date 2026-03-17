@@ -6,17 +6,13 @@ import com.alipay.account_center.common.service.facade.event.EcTransactionEvent;
 import com.alipay.account_center.common.service.facade.request.*;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
-import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.Authentication;
 import com.alipay.account_center.common.service.facade.api.AccountService;
 import com.alipay.account_center.biz.service.impl.template.AccountBizCallback;
 import com.alipay.account_center.common.service.facade.baseresult.AccountBizResult;
 import com.alipay.account_center.common.service.facade.enums.AccountResultCode;
 import com.alipay.account_center.common.service.facade.item.AccountInfoItem;
-import com.alipay.account_center.common.service.facade.item.TransactionHistoryItem;
 import com.alipay.account_center.common.service.facade.item.TransactionRecordItem;
 import com.alipay.account_center.core.model.domain.AccountInfo;
 import com.alipay.account_center.core.model.domain.TransactionHistory;
@@ -26,12 +22,8 @@ import com.alipay.account_center.core.model.enums.AccountStatusEnum;
 import com.alipay.account_center.core.model.util.AssertUtil;
 import com.alipay.account_center.biz.service.impl.checker.CheckParamUtil;
 import com.alipay.account_center.core.model.converter.ItemConverter;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import javax.money.CurrencyUnit;
-import javax.money.Monetary;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -57,7 +49,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                 new AccountBizCallback<>() {
                     @Override
                     protected AccountBizResult<String> createDefaultResponse() {
-                        return null;
+                        return new AccountBizResult<>();
                     }
 
                     @Override
@@ -67,8 +59,14 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(CreateAccountRequest request, AccountBizResult<String> result) {
-                        validateUser(request.getOperatorId());
                         AccountInfo accountInfo = accountRepository.createAccount(request);
+                        if (accountInfo != null) {
+                            ResponseBuilder.success(result, accountInfo.getAccountId(), AccountActionEnum.CREATE_ACCOUNT.getCode(),
+                                    AccountActionEnum.CREATE_ACCOUNT.getDesc());
+                        } else {
+                            ResponseBuilder.fail(result, AccountActionEnum.CREATE_ACCOUNT.getCode(),
+                                    AccountActionEnum.CREATE_ACCOUNT.getDesc());
+                        }
                     }
                 });
     }
@@ -97,11 +95,42 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
 
-                        ResponseBuilder.success(response, ItemConverter.convertToItem(accountInfo), AccountActionEnum.QUERY_ACCOUNT_INFO.getCode(),
-                                AccountActionEnum.QUERY_ACCOUNT_INFO.getDesc());
+                        response.setSuccess(true);
+                        response.setResult(ItemConverter.convertToItem(accountInfo));
                     }
                 });
     }
+
+    @Override
+    public AccountBizResult<AccountInfoItem> queryAccountInfoByUserId(QueryAccountInfoRequest request) {
+        return accountServiceTemplate.execute(request, AccountActionEnum.QUERY_ACCOUNT_INFO,
+                new AccountBizCallback<>() {
+                    @Override
+                    protected AccountBizResult<AccountInfoItem> createDefaultResponse() {
+                        return new AccountBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(QueryAccountInfoRequest request) {
+                        CheckParamUtil.checkQueryAccountInfoRequest(request);
+                    }
+
+                    @Override
+                    protected void process(QueryAccountInfoRequest request, AccountBizResult<AccountInfoItem> response) {
+                        // call account database
+                        AccountInfo accountInfo = accountRepository.queryAccountInfoByUserId(request.getUserId());
+                        // check if account exist
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
+                        // check if account status is valid
+                        AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
+                                AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
+
+                        response.setSuccess(true);
+                        response.setResult(ItemConverter.convertToItem(accountInfo));
+                    }
+                });
+    }
+
 
     @Override
     public AccountBizResult<TransactionRecordItem> queryTransactionRecord(QueryTransactionRecordRequest request) {
@@ -130,18 +159,51 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // Query Transaction record
                         TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(request);
 
-                        ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.QUERY_TRANSACTION_RECORD.getCode(),
-                                AccountActionEnum.QUERY_TRANSACTION_RECORD.getDesc());
+                        response.setSuccess(true);
+                        response.setResult(ItemConverter.convertToItem(transactionRecord));
                     }
                 });
     }
 
     @Override
-    public AccountBizResult<List<TransactionHistoryItem>> queryTransactionHistory(QueryTransactionHistoryRequest request) {
+    public AccountBizResult<TransactionRecordItem> queryTransactionByStatus(QueryTransactionRecordRequest request) {
+        return accountServiceTemplate.execute(request, AccountActionEnum.QUERY_TRANSACTION_BY_STATUS,
+                new AccountBizCallback<>() {
+                    @Override
+                    protected AccountBizResult<TransactionRecordItem> createDefaultResponse() {
+                        return new AccountBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(QueryTransactionRecordRequest request) {
+                        CheckParamUtil.checkQueryTransactionByStatus(request);
+                    }
+
+                    @Override
+                    protected void process(QueryTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
+                        // call account database
+                        AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
+                        // check if account exist
+                        AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
+                        // check if account status is valid
+                        AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
+                                AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
+
+                        // Query Transaction record
+                        TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionByStatus(request);
+
+                        response.setSuccess(true);
+                        response.setResult(ItemConverter.convertToItem(transactionRecord));
+                    }
+                });
+    }
+
+    @Override
+    public AccountBizResult<QueryTransactionHistoryResult> queryTransactionHistory(QueryTransactionHistoryRequest request) {
         return accountServiceTemplate.execute(request, AccountActionEnum.QUERY_TRANSACTION_HISTORY,
                 new AccountBizCallback<>() {
                     @Override
-                    protected AccountBizResult<List<TransactionHistoryItem>> createDefaultResponse() {
+                    protected AccountBizResult<QueryTransactionHistoryResult> createDefaultResponse() {
                         return new AccountBizResult<>();
                     }
 
@@ -151,7 +213,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
 
                     @Override
-                    protected void process(QueryTransactionHistoryRequest request, AccountBizResult<List<TransactionHistoryItem>> response) {
+                    protected void process(QueryTransactionHistoryRequest request, AccountBizResult<QueryTransactionHistoryResult> response) {
                         // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
@@ -163,9 +225,16 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         // Query Transaction record
                         List<TransactionHistory> transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
 
+                        // Query total count
+                        int totalCount = accountTransactionRepository.queryTransactionTotalCount(request);
+
+                        QueryTransactionHistoryResult queryTransactionHistoryResult = new QueryTransactionHistoryResult();
+                        queryTransactionHistoryResult.setTotalCount(totalCount);
+                        queryTransactionHistoryResult.setTransactionHistoryList(ItemConverter.convertToItem(transactionHistory));
+
                         // convert DO to DTO and set result.
-                        ResponseBuilder.success(response, ItemConverter.convertToItem(transactionHistory), AccountActionEnum.QUERY_TRANSACTION_HISTORY.getCode(),
-                                AccountActionEnum.QUERY_TRANSACTION_HISTORY.getDesc());
+                        response.setSuccess(true);
+                        response.setResult(queryTransactionHistoryResult);
                     }
                 });
     }
@@ -186,16 +255,13 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(InsertTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
-                        validateUser(request.getOperatorId());
                         TransactionRecord transactionRecord =
                                 transactionTemplate.execute(status ->
                                         accountTransactionRepository.insertTransactionRecord(request)
                                 );
                         if (transactionRecord != null) {
-                            ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.INSERT_TRANSACTION_RECORD.getCode(),
-                                    AccountActionEnum.INSERT_TRANSACTION_RECORD.getDesc());
-                        } else {
-                            ResponseBuilder.fail(response, AccountResultCode.SYSTEM_EXCEPTION.getCode(), "Insert Transaction Record Fail");
+                            response.setSuccess(true);
+                            response.setResult(ItemConverter.convertToItem(transactionRecord));
                         }
                     }
                 });
@@ -219,7 +285,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     @Override
                     protected void process(UpdateTransactionRecordRequest request,
                                            AccountBizResult<TransactionRecordItem> response) {
-                        validateUser(request.getOperatorId());
                         TransactionRecord transactionRecord =
                                 transactionTemplate.execute(status -> {
                                     // Step 1: update (returns int)
@@ -228,22 +293,21 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                     // Step 2: query the updated record
                                     QueryTransactionRecordRequest queryTransactionRecordRequest = new QueryTransactionRecordRequest();
                                     queryTransactionRecordRequest.setTxnId(request.getTxnId());
+                                    queryTransactionRecordRequest.setAccountId(request.getAccountId());
                                     return accountTransactionRepository.queryTransactionRecord(queryTransactionRecordRequest);
                                 });
                         if (transactionRecord != null) {
-                            ResponseBuilder.success(response, ItemConverter.convertToItem(transactionRecord), AccountActionEnum.UPDATE_TRANSACTION_RECORD.getCode(),
-                                    AccountActionEnum.UPDATE_TRANSACTION_RECORD.getDesc());
-                        } else {
-                            ResponseBuilder.fail(response, AccountResultCode.SYSTEM_EXCEPTION.getCode(), "Update Transaction Record Fail");
+                            response.setSuccess(true);
+                            response.setResult(ItemConverter.convertToItem(transactionRecord));
                         }
                     }
                 });
     }
-
     @Override
     public AccountBizResult<String> publishTransfer(PublishTransferRequest request) {
         return accountServiceTemplate.execute(request, AccountActionEnum.PUBLISH_TRANSFER_EVENT,
                 new AccountBizCallback<>() {
+
                     @Override
                     protected AccountBizResult<String> createDefaultResponse() {
                         return new AccountBizResult<>();
@@ -256,59 +320,44 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(PublishTransferRequest request, AccountBizResult<String> response) {
-                        // query transaction id/ we get the txnid from the challenge id, or the otp:challenge
-                        QueryTransactionRecordRequest queryTransactionRecordRequest = new QueryTransactionRecordRequest();
-                        queryTransactionRecordRequest.setAccountId(request.getAccountId());
-                        queryTransactionRecordRequest.setTxnId(request.getTxnId());
-                        TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(queryTransactionRecordRequest);
-                        if (transactionRecord == null) {
-                            return;
-                        }
-                        AssertUtil.isTrue(transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)
-                                        || transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
-                                AccountResultCode.ILLEGAL_STATUS, "Transaction status is illegal");
 
-                        // or we need to query the transaction table where user id == userid and the status = OTP_OVER_LIMIT.
-                        if (transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)) {
-                            UpdateTransactionRecordRequest updateTransactionRecordRequest = new UpdateTransactionRecordRequest();
-                            updateTransactionRecordRequest.setTxnId(transactionRecord.getTxnId());
-                            updateTransactionRecordRequest.setStatus(TransactionStatusEnum.PENDING.getCode());
-                            accountTransactionRepository.updateTransactionRecord(updateTransactionRecordRequest);
-                        }
-                        // convert money to big decimal
-                        BigDecimal amount = BigDecimal.valueOf(transactionRecord.getAmount().doubleValue())
+                        // fetch and validate the transaction record
+                        QueryTransactionRecordRequest queryRequest = new QueryTransactionRecordRequest();
+                        queryRequest.setAccountId(request.getAccountId());
+                        queryRequest.setTxnId(request.getTxnId());
+                        TransactionRecord transactionRecord =
+                                accountTransactionRepository.queryTransactionRecord(queryRequest);
+
+                        AssertUtil.notNull(transactionRecord, AccountResultCode.TRANSACTION_NOT_FOUND,
+                                "Transaction record not found");
+
+                        // the txn must be PENDING — OTP_OVER_LIMIT is no longer
+                        // a possible status at this point in the new flow
+                        AssertUtil.isTrue(transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
+                                AccountResultCode.ILLEGAL_STATUS,
+                                "Transaction status is illegal: " + transactionRecord.getTxnStatus());
+
+                        BigDecimal amount = BigDecimal.valueOf(
+                                        transactionRecord.getAmount().doubleValue())
                                 .setScale(2, RoundingMode.HALF_UP);
+
                         EcTransactionEvent event = new EcTransactionEvent(
                                 transactionRecord.getTxnId(),
-                                transactionRecord.getPayeeAccountId(),
                                 transactionRecord.getPayerAccountId(),
+                                transactionRecord.getPayeeAccountId(),
                                 amount,
                                 transactionRecord.getCurrency()
                         );
 
-                        // Use accountId as key → guarantees ordering per account
-                        kafkaTemplate.send("EC_TRANSACTION", event.getPayeeAccountNo(), event);
-                        ResponseBuilder.success(response, null, AccountActionEnum.PUBLISH_TRANSFER_EVENT.getCode(),
+                        // use payerAccountId as partition key — guarantees ordering per account
+                        kafkaTemplate.send("EC_TRANSACTION", event.getPayerAccountNo(), event);
+
+                        ResponseBuilder.success(response, null,
+                                AccountActionEnum.PUBLISH_TRANSFER_EVENT.getCode(),
                                 AccountActionEnum.PUBLISH_TRANSFER_EVENT.getDesc());
                     }
                 });
     }
 
-    /**
-     * validate user is authorised
-     * @param operatorId
-     */
-    private static void validateUser(String operatorId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (auth == null || auth.getPrincipal() == null) {
-            throw new AccessDeniedException("Unauthenticated request");
-        }
-
-        String currentUserId = auth.getPrincipal().toString();
-
-        if (!operatorId.equals(currentUserId)) {
-            throw new AccessDeniedException("Unauthorized");
-        }
-    }
 }

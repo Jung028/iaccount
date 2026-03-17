@@ -29,8 +29,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <account-common-service-facade-version>1.0.0.20260311-SNAPSHOT</account-common-service-facade-version>
-        <businesscenter-common-service-facade-version>1.0.0.20260225-SNAPSHOT</businesscenter-common-service-facade-version>
+        <account-common-service-facade-version>1.0.0.20260317.3-SNAPSHOT</account-common-service-facade-version>
+        <businesscenter-common-service-facade-version>1.0.0.20260317-SNAPSHOT</businesscenter-common-service-facade-version>
 
     </properties>
     <parent>

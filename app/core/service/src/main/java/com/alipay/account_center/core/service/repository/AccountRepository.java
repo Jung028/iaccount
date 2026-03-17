@@ -6,6 +6,8 @@ import com.alipay.account_center.core.model.domain.AccountInfo;
 public interface AccountRepository {
     AccountInfo queryAccountInfo(String accountNo);
 
+    AccountInfo queryAccountInfoByUserId(String userId);
+
     AccountInfo createAccount(CreateAccountRequest request);
 
     AccountInfo lockById(String accountId);

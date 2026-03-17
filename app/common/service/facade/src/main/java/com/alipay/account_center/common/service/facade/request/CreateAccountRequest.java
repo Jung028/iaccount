@@ -1,25 +1,15 @@
 package com.alipay.account_center.common.service.facade.request;
 
 import com.alipay.account_center.common.service.facade.baseresult.AccountBaseRequest;
+import com.alipay.account_center.common.service.facade.enums.AccountTypeEnum;
 
 import java.math.BigDecimal;
 
 public class CreateAccountRequest extends AccountBaseRequest {
-    private String accountNumber;
     private String accountName;
-    private String accountType;
-    private String accRelationId;
+    private AccountTypeEnum accountType;
+    private String userId;
     private String currency;
-    private BigDecimal balance;
-    private String extInfo;
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
 
     public String getAccountName() {
         return accountName;
@@ -29,20 +19,20 @@ public class CreateAccountRequest extends AccountBaseRequest {
         this.accountName = accountName;
     }
 
-    public String getAccountType() {
+    public AccountTypeEnum getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    public void setAccountType(AccountTypeEnum accountType) {
         this.accountType = accountType;
     }
 
-    public String getAccRelationId() {
-        return accRelationId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAccRelationId(String accRelationId) {
-        this.accRelationId = accRelationId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getCurrency() {
@@ -51,21 +41,5 @@ public class CreateAccountRequest extends AccountBaseRequest {
 
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public String getExtInfo() {
-        return extInfo;
-    }
-
-    public void setExtInfo(String extInfo) {
-        this.extInfo = extInfo;
     }
 }

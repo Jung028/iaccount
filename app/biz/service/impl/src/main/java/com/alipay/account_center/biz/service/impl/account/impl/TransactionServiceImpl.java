@@ -2,6 +2,7 @@ package com.alipay.account_center.biz.service.impl.account.impl;
 
 import com.alipay.account_center.biz.service.impl.account.TransactionService;
 import com.alipay.account_center.biz.service.impl.lock.DistributedLock;
+import com.alipay.account_center.common.service.facade.enums.AccountResultCode;
 import com.alipay.account_center.common.service.facade.enums.LedgerEntryTypeEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.event.EcDlqEvent;
@@ -13,6 +14,7 @@ import com.alipay.account_center.common.util.LogUtil;
 import com.alipay.account_center.core.model.domain.AccountInfo;
 import com.alipay.account_center.core.model.domain.TransactionRecord;
 import com.alipay.account_center.common.service.facade.event.EcTransactionEvent;
+import com.alipay.account_center.core.model.util.AssertUtil;
 import com.alipay.account_center.core.service.repository.AccountLedgerRepository;
 import com.alipay.account_center.core.service.repository.AccountRepository;
 import com.alipay.account_center.core.service.repository.AccountTransactionRepository;
@@ -70,139 +72,176 @@ public class TransactionServiceImpl implements TransactionService {
     public void processTransfer(EcTransactionEvent event) {
         String txnId = event.getTxnId();
 
-        boolean locked = distributedLock.tryLock(txnId, 5000); // TTL 5s
-        if (!locked) {
+        // ── lock the transaction id ────────────────────────────────────────────
+        boolean txnLocked = distributedLock.tryLock(txnId, 5000);
+        if (!txnLocked) {
             throw new IllegalStateException("Unable to acquire lock for txnId: " + txnId);
         }
-        System.out.println("STARTED TRANSFER");
+
+        // ── lock payer and payee accounts in consistent order (prevents deadlock) ─
+        String firstLock  = event.getPayeeAccountNo().compareTo(event.getPayerAccountNo()) > 0
+                ? event.getPayeeAccountNo() : event.getPayerAccountNo();
+        String secondLock = event.getPayeeAccountNo().compareTo(event.getPayerAccountNo()) > 0
+                ? event.getPayerAccountNo() : event.getPayeeAccountNo();
+
+        boolean firstLocked  = distributedLock.tryLock(firstLock,  5000);
+        boolean secondLocked = distributedLock.tryLock(secondLock, 5000);
+
+        if (!firstLocked || !secondLocked) {
+            if (firstLocked)  distributedLock.unlock(firstLock);
+            if (secondLocked) distributedLock.unlock(secondLock);
+            throw new IllegalStateException(
+                    "Failed to acquire account locks for txnId: " + txnId);
+        }
+
+        // build the result event — will be published in the finally block
+        EcTransactionEvent resultEvent = new EcTransactionEvent();
+        resultEvent.setTxnId(event.getTxnId());
+        resultEvent.setPayerAccountNo(event.getPayerAccountNo());
+        resultEvent.setPayeeAccountNo(event.getPayeeAccountNo());
+        resultEvent.setAmount(event.getAmount());
+        resultEvent.setCurrency(event.getCurrency());
+        resultEvent.setGmtTaskOccur(String.valueOf(System.currentTimeMillis()));
+
         BusinessBizResult<IdempotencyKeysItem> queryIdempotencyKeysResult = null;
+
         try {
-            // check the idemptency record whether the status is in pending otherwise exit
-            QueryIdempotencyKeysRequest queryIdempotencyKeysRequest = new QueryIdempotencyKeysRequest();
+            // ── idempotency guard ──────────────────────────────────────────────
+            // Must be PENDING and within retry limit to proceed.
+            QueryIdempotencyKeysRequest queryIdempotencyKeysRequest =
+                    new QueryIdempotencyKeysRequest();
             queryIdempotencyKeysRequest.setTxnId(event.getTxnId());
-            queryIdempotencyKeysResult = walletServiceClient.queryIdempotencyKeys(queryIdempotencyKeysRequest);
-            if (queryIdempotencyKeysResult == null || !queryIdempotencyKeysResult.isSuccess()) {
-                throw new RuntimeException();
-            }
-            if (!queryIdempotencyKeysResult.getResult().getStatus().equals(IdempotencyKeysStatusEnum.PENDING.getCode())
-                    && !(queryIdempotencyKeysResult.getResult().getRetryCount() < MAX_RETRY_COUNT)) {
-                throw new IllegalStateException("illegal state for idempotency keys, should be INIT status");
-            }
-            // else, update status to processing
-            UpdateIdempotencyKeysRequest request = new UpdateIdempotencyKeysRequest();
-            request.setTxnId(event.getTxnId());
-            request.setStatus(IdempotencyKeysStatusEnum.PROCESSING);
-            BusinessBizResult<UpdateIdempotencyKeysResult> updateIdempotencyKeysResult = walletServiceClient.updateIdempotencyKey(request);
-            if (!updateIdempotencyKeysResult.isSuccess()) {
-                throw new IllegalArgumentException("failed to update idempotency table");
-            }
+            queryIdempotencyKeysResult =
+                    walletServiceClient.queryIdempotencyKeys(queryIdempotencyKeysRequest);
 
-            //query transaction record checkits in OTP_OVER_LIMIT or PENDING otherwise reject
-            QueryTransactionRecordRequest queryTransactionRecordRequest = new QueryTransactionRecordRequest();
-            queryTransactionRecordRequest.setTxnId(event.getTxnId());
-            queryTransactionRecordRequest.setAccountId(event.getPayerAccountNo());
-            TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(queryTransactionRecordRequest);
-            if (transactionRecord == null) {
-                throw new RuntimeException("transaction record is null");
-            }
-            if (!transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING)
-                    && !transactionRecord.getTxnStatus().equals(TransactionStatusEnum.OTP_OVER_LIMIT)) {
-                throw new IllegalStateException("transaction status is " + transactionRecord.getTxnStatus());
-            }
+            AssertUtil.notNull(queryIdempotencyKeysResult,
+                    AccountResultCode.PARAM_ILLEGAL ,txnId);
+            AssertUtil.isTrue(queryIdempotencyKeysResult.isSuccess(),
+                    "Failed to query idempotency keys for txnId: " + txnId);
 
-            String firstLock = event.getPayeeAccountNo().compareTo(event.getPayerAccountNo()) > 0 ? event.getPayeeAccountNo() : event.getPayerAccountNo();
-            String secondLock = event.getPayeeAccountNo().compareTo(event.getPayerAccountNo()) > 0 ? event.getPayerAccountNo() : event.getPayeeAccountNo();
+            boolean isPending = queryIdempotencyKeysResult.getResult().getStatus()
+                    .equals(IdempotencyKeysStatusEnum.PENDING.getCode());
+            boolean withinRetryLimit = queryIdempotencyKeysResult.getResult().getRetryCount()
+                    < MAX_RETRY_COUNT;
 
-            boolean firstLockKey = distributedLock.tryLock(firstLock, 5000);
-            boolean secondLockKey = distributedLock.tryLock(secondLock, 5000);
+            AssertUtil.isTrue(isPending && withinRetryLimit,
+                    "Illegal idempotency state for txnId: " + txnId
+                            + ", status: " + queryIdempotencyKeysResult.getResult().getStatus());
 
-            if (!firstLockKey || !secondLockKey) {
-                if (firstLockKey) distributedLock.unlock(firstLock);
-                if (secondLockKey) distributedLock.unlock(secondLock);
-                throw new IllegalStateException("failed to acquire lock for txnId: " + event.getTxnId() + ", lock : " + firstLock + ", secondLock: " + secondLock);
-            }
+            // mark as PROCESSING to prevent concurrent execution
+            UpdateIdempotencyKeysRequest markProcessing = new UpdateIdempotencyKeysRequest();
+            markProcessing.setTxnId(event.getTxnId());
+            markProcessing.setStatus(IdempotencyKeysStatusEnum.PROCESSING);
+            BusinessBizResult<UpdateIdempotencyKeysResult> processingResult =
+                    walletServiceClient.updateIdempotencyKey(markProcessing);
 
-            try {
-                transactionTemplate.execute(status -> {
-                    // lock the account record
-                    AccountInfo payer = accountRepository.lockById(event.getPayerAccountNo());
-                    AccountInfo payee = accountRepository.lockById(event.getPayeeAccountNo());
+            AssertUtil.isTrue(processingResult != null && processingResult.isSuccess(),
+                    "Failed to mark idempotency key as PROCESSING for txnId: " + txnId);
 
-                    // debit and credit check balance
-                    payer.debit(event.getAmount());
-                    payee.credit(event.getAmount());
-                    payer.setGmtModified(new Date());
-                    payee.setGmtModified(new Date());
+            // ── verify transaction record is still PENDING ─────────────────────
+            QueryTransactionRecordRequest queryTxnRequest = new QueryTransactionRecordRequest();
+            queryTxnRequest.setTxnId(event.getTxnId());
+            queryTxnRequest.setAccountId(event.getPayerAccountNo());
+            TransactionRecord transactionRecord =
+                    accountTransactionRepository.queryTransactionRecord(queryTxnRequest);
 
-                    accountRepository.updateAccountRecord(payer);
-                    accountRepository.updateAccountRecord(payee);
+            AssertUtil.notNull(transactionRecord, AccountResultCode.PARAM_ILLEGAL, txnId);
+            AssertUtil.isTrue(
+                    transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
+                    "Unexpected transaction status: " + transactionRecord.getTxnStatus()
+                            + " for txnId: " + txnId);
 
-                    request.setTxnId(event.getTxnId());
-                    request.setStatus(IdempotencyKeysStatusEnum.SUCCESS);
-                    BusinessBizResult<UpdateIdempotencyKeysResult> result = walletServiceClient.updateIdempotencyKey(request);
-                    if (result == null || !result.isSuccess() && result.getResult() == null) {
-                        LogUtil.error(logger, "Failed to update idempotency keys for txnId: " + event.getTxnId());
-                        throw new RuntimeException("Failed to update idempotency keys for txnId: " + event.getTxnId());
-                    }
+            // ── debit payer, credit payee, write ledger entries ────────────────
+            transactionTemplate.execute(status -> {
 
-                    // then set transaction status success and unlock
-                    UpdateTransactionRecordRequest updateTransactionRecord = new UpdateTransactionRecordRequest();
-                    updateTransactionRecord.setTxnId(event.getTxnId());
-                    updateTransactionRecord.setStatus(TransactionStatusEnum.FINISH.getCode());
-                    accountTransactionRepository.updateTransactionRecord(updateTransactionRecord);
+                // row-level locks on both accounts
+                AccountInfo payer = accountRepository.lockById(event.getPayerAccountNo());
+                AccountInfo payee = accountRepository.lockById(event.getPayeeAccountNo());
 
-                    // insert payer ledger (money leaving payer = DEBIT)
-                    LedgerEntryItem payerLedgerEntry = new LedgerEntryItem();
-                    payerLedgerEntry.setTxnId(event.getTxnId());
-                    payerLedgerEntry.setAccountId(event.getPayerAccountNo());
-                    payerLedgerEntry.setEntryType(LedgerEntryTypeEnum.DEBIT.getCode());
-                    payerLedgerEntry.setAmount(event.getAmount());
-                    payerLedgerEntry.setBalanceAfter(payer.getBalance());
-                    payerLedgerEntry.setCurrency(event.getCurrency());
-                    accountLedgerRepository.insertLedger(payerLedgerEntry);
+                payer.debit(event.getAmount());
+                payee.credit(event.getAmount());
+                payer.setGmtModified(new Date());
+                payee.setGmtModified(new Date());
 
-                    LedgerEntryItem payeeLedgerEntry = new LedgerEntryItem();
-                    payeeLedgerEntry.setTxnId(event.getTxnId());
-                    payeeLedgerEntry.setAccountId(event.getPayeeAccountNo());
-                    payeeLedgerEntry.setEntryType(LedgerEntryTypeEnum.CREDIT.getCode());
-                    payeeLedgerEntry.setAmount(event.getAmount());
-                    payeeLedgerEntry.setBalanceAfter(payee.getBalance());
-                    payeeLedgerEntry.setCurrency(event.getCurrency());
-                    accountLedgerRepository.insertLedger(payeeLedgerEntry);
+                accountRepository.updateAccountRecord(payer);
+                accountRepository.updateAccountRecord(payee);
 
-                    System.out.println("FINISHED TRANSFER");
+                // mark transaction as finished
+                UpdateTransactionRecordRequest finishTxn =
+                        new UpdateTransactionRecordRequest();
+                finishTxn.setTxnId(event.getTxnId());
+                finishTxn.setStatus(TransactionStatusEnum.FINISH.getCode());
+                accountTransactionRepository.updateTransactionRecord(finishTxn);
 
-                    return null;
-                });
+                // payer ledger — money leaving = DEBIT
+                LedgerEntryItem payerLedger = new LedgerEntryItem();
+                payerLedger.setTxnId(event.getTxnId());
+                payerLedger.setAccountId(event.getPayerAccountNo());
+                payerLedger.setEntryType(LedgerEntryTypeEnum.DEBIT.getCode());
+                payerLedger.setAmount(event.getAmount());
+                payerLedger.setBalanceAfter(payer.getBalance());
+                payerLedger.setCurrency(event.getCurrency());
+                accountLedgerRepository.insertLedger(payerLedger);
 
-            } finally {
-                // unlock
-                distributedLock.unlock(firstLock);
-                distributedLock.unlock(secondLock);
-            }
-        } catch (RuntimeException e) {
-            System.out.println("FAILED TRANSFER");
-            UpdateTransactionRecordRequest updateTransactionRecord = new UpdateTransactionRecordRequest();
-            updateTransactionRecord.setTxnId(event.getTxnId());
-            updateTransactionRecord.setFailReason("Update Idempotency Keys failed");
-            updateTransactionRecord.setStatus(TransactionStatusEnum.FAILED.getCode());
-            accountTransactionRepository.updateTransactionRecord(updateTransactionRecord);
+                // payee ledger — money arriving = CREDIT
+                LedgerEntryItem payeeLedger = new LedgerEntryItem();
+                payeeLedger.setTxnId(event.getTxnId());
+                payeeLedger.setAccountId(event.getPayeeAccountNo());
+                payeeLedger.setEntryType(LedgerEntryTypeEnum.CREDIT.getCode());
+                payeeLedger.setAmount(event.getAmount());
+                payeeLedger.setBalanceAfter(payee.getBalance());
+                payeeLedger.setCurrency(event.getCurrency());
+                accountLedgerRepository.insertLedger(payeeLedger);
 
-            // 2. Try to update idempotency keys if available
-            BusinessBizResult<UpdateIdempotencyKeysResult> result;
-            if (queryIdempotencyKeysResult != null && queryIdempotencyKeysResult.getResult() != null) {
-                UpdateIdempotencyKeysRequest request = new UpdateIdempotencyKeysRequest();
-                request.setTxnId(queryIdempotencyKeysResult.getResult().getTxnId());
-                request.setStatus(IdempotencyKeysStatusEnum.FAILED);
-                request.setRetryCount(queryIdempotencyKeysResult.getResult().getRetryCount() + 1);
-                result = walletServiceClient.updateIdempotencyKey(request);
-                if (result == null || !result.isSuccess() && result.getResult() != null) {
-                    LogUtil.error(logger, "Failed to update idempotency keys for txnId: " + event.getTxnId());
-                    return;
+                // mark idempotency key as SUCCESS
+                UpdateIdempotencyKeysRequest markSuccess = new UpdateIdempotencyKeysRequest();
+                markSuccess.setTxnId(event.getTxnId());
+                markSuccess.setStatus(IdempotencyKeysStatusEnum.SUCCESS);
+                BusinessBizResult<UpdateIdempotencyKeysResult> successResult =
+                        walletServiceClient.updateIdempotencyKey(markSuccess);
+
+                if (successResult == null || !successResult.isSuccess()) {
+                    LogUtil.error(logger,
+                            "Failed to mark idempotency key SUCCESS for txnId: " + txnId);
+                    throw new RuntimeException(
+                            "Failed to update idempotency key to SUCCESS for txnId: " + txnId);
                 }
 
-                // only if the retry count exceeds max, then send to dead letter queue
-                if (result.getResult().getRetryCount() > MAX_RETRY_COUNT) {
+                return null;
+            });
+
+            resultEvent.setTxnStatus(TransactionStatusEnum.FINISH.getCode());
+
+        } catch (RuntimeException e) {
+
+            LogUtil.error(logger, "Transfer failed for txnId: " + txnId
+                    + ", reason: " + e.getMessage());
+
+            // mark transaction as FAILED
+            UpdateTransactionRecordRequest failTxn = new UpdateTransactionRecordRequest();
+            failTxn.setTxnId(event.getTxnId());
+            failTxn.setStatus(TransactionStatusEnum.FAILED.getCode());
+            failTxn.setFailReason(e.getMessage());
+            accountTransactionRepository.updateTransactionRecord(failTxn);
+
+            // increment retry count on idempotency key
+            if (queryIdempotencyKeysResult != null
+                    && queryIdempotencyKeysResult.getResult() != null) {
+
+                int newRetryCount = queryIdempotencyKeysResult.getResult().getRetryCount() + 1;
+
+                UpdateIdempotencyKeysRequest markFailed = new UpdateIdempotencyKeysRequest();
+                markFailed.setTxnId(queryIdempotencyKeysResult.getResult().getTxnId());
+                markFailed.setStatus(IdempotencyKeysStatusEnum.FAILED);
+                markFailed.setRetryCount(newRetryCount);
+                BusinessBizResult<UpdateIdempotencyKeysResult> failedResult =
+                        walletServiceClient.updateIdempotencyKey(markFailed);
+
+                // if retry limit exceeded, send to dead letter queue
+                if (failedResult != null
+                        && failedResult.getResult() != null
+                        && failedResult.getResult().getRetryCount() > MAX_RETRY_COUNT) {
+
                     EcDlqEvent dlqEvent = new EcDlqEvent();
                     dlqEvent.setSceneCode("TRANSFER_FAILED");
                     dlqEvent.setTxnId(txnId);
@@ -211,76 +250,32 @@ public class TransactionServiceImpl implements TransactionService {
                     dlqEvent.setAmount(event.getAmount());
                     dlqEvent.setFailReason(e.getMessage());
                     dlqEvent.setGmtTaskOccur(String.valueOf(System.currentTimeMillis()));
+
                     Map<String, String> extInfo = new HashMap<>();
-                    extInfo.put("ErrorMessage : ", e.getMessage());
-                    extInfo.put("IdempotencyResult: ", result.getResultCode());
+                    extInfo.put("errorMessage", e.getMessage());
+                    extInfo.put("idempotencyResult",
+                            failedResult != null ? failedResult.getResultCode() : "unknown");
                     dlqEvent.setExtInfo(extInfo.toString());
 
-                    // Publish to dlq
                     kafkaTemplate.send("EC_DEAD_LETTER_QUEUE", dlqEvent);
                 }
             } else {
-                LogUtil.error(logger, "Idempotency keys not found for txnId: " + event.getTxnId());
+                LogUtil.error(logger,
+                        "Idempotency key not found during failure handling for txnId: " + txnId);
             }
+
+            resultEvent.setTxnStatus(TransactionStatusEnum.FAILED.getCode());
+            resultEvent.setFailReason(e.getMessage());
+
         } finally {
-            // unlock the lock
+            // always unlock in reverse order of acquisition
             distributedLock.unlock(txnId);
+            distributedLock.unlock(firstLock);
+            distributedLock.unlock(secondLock);
+
+            // publish result back to frontend via Kafka
+            kafkaTemplate.send("EC_TRANSACTION_RESULT", resultEvent);
         }
     }
 
-    /**
-     * set account repository
-     * @param accountRepository
-     */
-    public void setAccountRepository(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
-
-    /**
-     * set account transaction repository
-     * @param accountTransactionRepository
-     */
-    public void setAccountTransactionRepository(AccountTransactionRepository accountTransactionRepository) {
-        this.accountTransactionRepository = accountTransactionRepository;
-    }
-
-    /**
-     * set account ledger repository
-     * @param accountLedgerRepository
-     */
-    public void setAccountLedgerRepository(AccountLedgerRepository accountLedgerRepository) {
-        this.accountLedgerRepository = accountLedgerRepository;
-    }
-
-    /**
-     * set distributed lock
-     * @param distributedLock
-     */
-    public void setDistributedLock(DistributedLock distributedLock) {
-        this.distributedLock = distributedLock;
-    }
-
-    /**
-     * set wallet service client
-     * @param walletServiceClient
-     */
-    public void setWalletServiceClient(WalletServiceClient walletServiceClient) {
-        this.walletServiceClient = walletServiceClient;
-    }
-
-    /**
-     * set kafka template
-     * @param kafkaTemplate
-     */
-    public void setKafkaTemplate(KafkaTemplate<String, Object> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
-
-    /**
-     * set transactional template
-     * @param transactionTemplate
-     */
-    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-        this.transactionTemplate = transactionTemplate;
-    }
 }

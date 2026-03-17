@@ -14,12 +14,17 @@ import java.util.List;
 @Mapper
 public interface TransactionDAO {
 
+    TransactionDO queryIncompleteTransactionRecord(@Param("txnId") String txnId);
+
     TransactionDO queryTransactionRecord(@Param("txnId") String txnId, @Param("accountId") String accountId);
 
-    List<TransactionDO> queryTransactionHistory(@Param("txnId") String txnId, @Param("pageSize") String pageSize, @Param("pageNo") String pageNo);
+    TransactionDO queryTransactionByStatus(@Param("accountId") String accountId, @Param("statusList") List<String> statusList);
+
+    List<TransactionDO> queryTransactionHistory(@Param("accountId") String accountId, @Param("pageSize") int pageSize, @Param("pageNo") int pageNo);
 
     int insertTransactionRecord(TransactionDO transactionDO);
 
     int updateTransactionRecord(TransactionDO record);
 
+    int queryTransactionTotalCount(String accountId);
 }

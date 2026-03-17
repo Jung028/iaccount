@@ -10,6 +10,9 @@ import com.alipay.account_center.core.service.repository.AbstractDomainRepositor
 import com.alipay.account_center.core.service.repository.AccountRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Repository
@@ -25,20 +28,31 @@ public class AccountRepositoryImpl extends AbstractDomainRepository implements A
     }
 
     @Override
+    public AccountInfo queryAccountInfoByUserId(String userId) {
+        if (userId.isBlank()) {
+            return null;
+        }
+        AccountDO accountDO = accountDAO.queryAccountInfoByUserId(userId);
+        return DomainConverter.convertToModel(accountDO);
+    }
+
+    @Override
     public AccountInfo createAccount(CreateAccountRequest request) {
         if (request == null) {
-            return null; // never return empty object — null means "nothing created"
+            return null;
         }
         try {
             AccountDO accountDO = new AccountDO();
             accountDO.setAccountId(UUID.randomUUID().toString());
-            accountDO.setAccountName(request.getAccountName());
-            accountDO.setAccountType(request.getAccountType());
-            accountDO.setAccountRelationId(request.getAccRelationId());
+            accountDO.setAccountNumber("ACC_" + request.getUserId().substring(0, 4) + String.format("%06d", new Random().nextInt(999999)));
+            accountDO.setAccountName(request.getAccountName()); // savings
+            accountDO.setAccountType(request.getAccountType().getCode()); // by default is savings account,
+            accountDO.setAccountRelationId(request.getUserId());
             accountDO.setCurrency(request.getCurrency());
-            accountDO.setBalance(request.getBalance());
+            accountDO.setBalance(new BigDecimal(0));
             accountDO.setStatus(AccountStatusEnum.ACTIVE.getCode());
-            accountDO.setExtInfo(request.getExtInfo());
+            accountDO.setGmtModified(new Date());
+            accountDO.setGmtCreate(new Date());
 
             int rows = accountDAO.createAccount(accountDO);
             if (rows <= 0) {
