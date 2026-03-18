@@ -31,10 +31,6 @@ public class AssertUtil {
                 accountResultCode, resultMsg);
     }
 
-    public static void isTrue(boolean success, String s) {
-        check(() -> Assert.isTrue(success,"is true"), AccountResultCode.valueOf(s), s);
-    }
-
     public static interface AssertTemplate {
         public void doAssert();
 

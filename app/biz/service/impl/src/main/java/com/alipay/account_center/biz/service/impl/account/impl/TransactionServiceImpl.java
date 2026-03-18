@@ -71,7 +71,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void processTransfer(EcTransactionEvent event) {
         String txnId = event.getTxnId();
-
+        System.out.println("START TRANSACTION");
         // ── lock the transaction id ────────────────────────────────────────────
         boolean txnLocked = distributedLock.tryLock(txnId, 5000);
         if (!txnLocked) {
@@ -110,23 +110,21 @@ public class TransactionServiceImpl implements TransactionService {
             // Must be PENDING and within retry limit to proceed.
             QueryIdempotencyKeysRequest queryIdempotencyKeysRequest =
                     new QueryIdempotencyKeysRequest();
+            System.out.println(event.getTxnId());
             queryIdempotencyKeysRequest.setTxnId(event.getTxnId());
             queryIdempotencyKeysResult =
                     walletServiceClient.queryIdempotencyKeys(queryIdempotencyKeysRequest);
-
-            AssertUtil.notNull(queryIdempotencyKeysResult,
-                    AccountResultCode.PARAM_ILLEGAL ,txnId);
-            AssertUtil.isTrue(queryIdempotencyKeysResult.isSuccess(),
-                    "Failed to query idempotency keys for txnId: " + txnId);
+            System.out.println(queryIdempotencyKeysResult.getResult().getTxnId());
 
             boolean isPending = queryIdempotencyKeysResult.getResult().getStatus()
                     .equals(IdempotencyKeysStatusEnum.PENDING.getCode());
             boolean withinRetryLimit = queryIdempotencyKeysResult.getResult().getRetryCount()
                     < MAX_RETRY_COUNT;
 
-            AssertUtil.isTrue(isPending && withinRetryLimit,
-                    "Illegal idempotency state for txnId: " + txnId
-                            + ", status: " + queryIdempotencyKeysResult.getResult().getStatus());
+            System.out.println(isPending);
+            System.out.println(withinRetryLimit);
+            AssertUtil.isTrue(isPending && withinRetryLimit, AccountResultCode.ILLEGAL_STATUS,
+                    "either not pending or its not within retry limit");
 
             // mark as PROCESSING to prevent concurrent execution
             UpdateIdempotencyKeysRequest markProcessing = new UpdateIdempotencyKeysRequest();
@@ -136,7 +134,7 @@ public class TransactionServiceImpl implements TransactionService {
                     walletServiceClient.updateIdempotencyKey(markProcessing);
 
             AssertUtil.isTrue(processingResult != null && processingResult.isSuccess(),
-                    "Failed to mark idempotency key as PROCESSING for txnId: " + txnId);
+                    AccountResultCode.SYSTEM_EXCEPTION, "update idempotency key failed :" + txnId);
 
             // ── verify transaction record is still PENDING ─────────────────────
             QueryTransactionRecordRequest queryTxnRequest = new QueryTransactionRecordRequest();
@@ -148,8 +146,7 @@ public class TransactionServiceImpl implements TransactionService {
             AssertUtil.notNull(transactionRecord, AccountResultCode.PARAM_ILLEGAL, txnId);
             AssertUtil.isTrue(
                     transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
-                    "Unexpected transaction status: " + transactionRecord.getTxnStatus()
-                            + " for txnId: " + txnId);
+            AccountResultCode.ILLEGAL_STATUS, "Should be in pending status" + txnId);
 
             // ── debit payer, credit payee, write ledger entries ────────────────
             transactionTemplate.execute(status -> {
@@ -211,8 +208,10 @@ public class TransactionServiceImpl implements TransactionService {
             });
 
             resultEvent.setTxnStatus(TransactionStatusEnum.FINISH.getCode());
+            System.out.println("FINISH TRANSACTION");
 
         } catch (RuntimeException e) {
+            System.out.println("FAILED TRANSACTION");
 
             LogUtil.error(logger, "Transfer failed for txnId: " + txnId
                     + ", reason: " + e.getMessage());
@@ -272,6 +271,7 @@ public class TransactionServiceImpl implements TransactionService {
             distributedLock.unlock(txnId);
             distributedLock.unlock(firstLock);
             distributedLock.unlock(secondLock);
+            System.out.println("FINISH, PUBLISH TRANSACTION");
 
             // publish result back to frontend via Kafka
             kafkaTemplate.send("EC_TRANSACTION_RESULT", resultEvent);
