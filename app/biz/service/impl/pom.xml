@@ -19,6 +19,12 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>6.2.15</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.adam</groupId>
             <artifactId>account_center-common-service-facade</artifactId>
             <version>${account-common-service-facade-version}</version>

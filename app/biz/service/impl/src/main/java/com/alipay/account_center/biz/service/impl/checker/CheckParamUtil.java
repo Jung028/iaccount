@@ -38,4 +38,8 @@ public class CheckParamUtil {
     public static void checkQueryTransactionByStatus(QueryTransactionRecordRequest request) {
 
     }
+
+    public static void checkTopUpRequest(TopUpRequest request) {
+
+    }
 }

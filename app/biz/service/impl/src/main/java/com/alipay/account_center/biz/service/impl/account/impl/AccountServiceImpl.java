@@ -42,7 +42,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;
 
-
     @Override
     public AccountBizResult<String> createAccount(CreateAccountRequest request) {
         return accountServiceTemplate.execute(request, AccountActionEnum.CREATE_ACCOUNT,
@@ -358,6 +357,4 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
                 });
     }
-
-
 }

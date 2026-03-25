@@ -3,9 +3,7 @@ package com.alipay.account_center.common.service.facade.request;
 import com.alipay.account_center.common.service.facade.baseresult.AccountBaseRequest;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionTypeEnum;
-import org.javamoney.moneta.Money;
 
-import javax.money.CurrencyUnit;
 import java.math.BigDecimal;
 
 public class InsertTransactionRecordRequest extends AccountBaseRequest {

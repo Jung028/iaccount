@@ -31,6 +31,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -106,7 +107,6 @@ public class TransactionServiceImpl implements TransactionService {
         BusinessBizResult<IdempotencyKeysItem> queryIdempotencyKeysResult = null;
 
         try {
-            // ── idempotency guard ──────────────────────────────────────────────
             // Must be PENDING and within retry limit to proceed.
             QueryIdempotencyKeysRequest queryIdempotencyKeysRequest =
                     new QueryIdempotencyKeysRequest();
@@ -136,7 +136,6 @@ public class TransactionServiceImpl implements TransactionService {
             AssertUtil.isTrue(processingResult != null && processingResult.isSuccess(),
                     AccountResultCode.SYSTEM_EXCEPTION, "update idempotency key failed :" + txnId);
 
-            // ── verify transaction record is still PENDING ─────────────────────
             QueryTransactionRecordRequest queryTxnRequest = new QueryTransactionRecordRequest();
             queryTxnRequest.setTxnId(event.getTxnId());
             queryTxnRequest.setAccountId(event.getPayerAccountNo());
@@ -189,6 +188,9 @@ public class TransactionServiceImpl implements TransactionService {
                 payeeLedger.setBalanceAfter(payee.getBalance());
                 payeeLedger.setCurrency(event.getCurrency());
                 accountLedgerRepository.insertLedger(payeeLedger);
+
+                // check if balance is less than the threshold.
+                checkBalanceAgainstThreshold(payer.getAccountRelationId(), payerLedger.getBalanceAfter());
 
                 // mark idempotency key as SUCCESS
                 UpdateIdempotencyKeysRequest markSuccess = new UpdateIdempotencyKeysRequest();
@@ -276,6 +278,14 @@ public class TransactionServiceImpl implements TransactionService {
             // publish result back to frontend via Kafka
             kafkaTemplate.send("EC_TRANSACTION_RESULT", resultEvent);
         }
+    }
+
+    private void checkBalanceAgainstThreshold(String accountRelationId, BigDecimal balanceAfter) {
+        // query user client using account rel id, the auto_relload_confg
+        // if the autoReload is true, then check balance is under limit, then call reload / chargeCard
+        // else exit
+        kafkaTemplate.send("EC_AUTO_RELOAD_TRIGGERED", event);
+
     }
 
 }

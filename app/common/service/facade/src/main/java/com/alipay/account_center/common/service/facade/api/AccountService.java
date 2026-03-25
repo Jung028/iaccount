@@ -1,7 +1,6 @@
 package com.alipay.account_center.common.service.facade.api;
 import com.alipay.account_center.common.service.facade.baseresult.AccountBizResult;
 import com.alipay.account_center.common.service.facade.item.AccountInfoItem;
-import com.alipay.account_center.common.service.facade.item.TransactionHistoryItem;
 import com.alipay.account_center.common.service.facade.item.TransactionRecordItem;
 import com.alipay.account_center.common.service.facade.request.*;
 
@@ -10,7 +9,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Path("/accountService")
 @Produces(MediaType.APPLICATION_JSON)
@@ -19,6 +17,7 @@ public interface AccountService {
 
     /**
      * Create account
+...
      * Called by UserService
      * @param request
      * @return

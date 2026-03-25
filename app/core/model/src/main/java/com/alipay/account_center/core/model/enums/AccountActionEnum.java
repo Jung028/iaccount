@@ -2,7 +2,7 @@ package com.alipay.account_center.core.model.enums;
 
 public enum AccountActionEnum {
     TRANSFER("TRANSFER", "Transfer between accounts"),
-    DEPOSIT("DEPOSIT", "Deposit to account"),
+    TOP_UP("TOP_UP", "top up"),
     QUERY_ACCOUNT_INFO("QUERY_ACCOUNT_INFO", "Query account info"),
     CREATE_ACCOUNT("CREATE_ACCOUNT", "Create account"),
     QUERY_TRANSACTION_HISTORY("QUERY_TRANSACTION_HISTORY", "Query transaction history"),
