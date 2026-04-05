@@ -62,10 +62,4 @@ public class AccountBasicController {
             @RequestBody UpdateTransactionRecordRequest request) {
         return accountService.updateTransactionRecord(request);
     }
-
-    @PostMapping("/publishTransfer.json")
-    public AccountBizResult<String> publishTransfer(
-            @RequestBody PublishTransferRequest request) {
-        return accountService.publishTransfer(request);
-    }
 }

@@ -14,7 +14,7 @@ public class EcTransactionListener {
 
     @KafkaListener(
             topics = "EC_TRANSACTION",
-            groupId = "account-center")
+            groupId = "business-center")
     public void transfer(EcTransactionEvent event) {
         transactionService.processTransfer(event);
 

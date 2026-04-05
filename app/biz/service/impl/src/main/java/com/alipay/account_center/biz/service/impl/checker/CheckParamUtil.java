@@ -5,6 +5,7 @@ import com.alipay.account_center.common.service.facade.enums.AccountResultCode;
 import com.alipay.account_center.common.service.facade.request.*;
 import com.alipay.account_center.core.model.enums.AccountActionEnum;
 import com.alipay.account_center.core.model.util.AssertUtil;
+import com.alipay.business.common.service.facade.request.TopUpRequest;
 
 public class CheckParamUtil {
 

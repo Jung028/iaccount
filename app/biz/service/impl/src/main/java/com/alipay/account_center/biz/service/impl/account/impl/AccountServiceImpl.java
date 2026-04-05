@@ -302,59 +302,5 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                     }
                 });
     }
-    @Override
-    public AccountBizResult<String> publishTransfer(PublishTransferRequest request) {
-        return accountServiceTemplate.execute(request, AccountActionEnum.PUBLISH_TRANSFER_EVENT,
-                new AccountBizCallback<>() {
 
-                    @Override
-                    protected AccountBizResult<String> createDefaultResponse() {
-                        return new AccountBizResult<>();
-                    }
-
-                    @Override
-                    protected void checkParams(PublishTransferRequest request) {
-                        CheckParamUtil.checkPublishTransferRequest(request);
-                    }
-
-                    @Override
-                    protected void process(PublishTransferRequest request, AccountBizResult<String> response) {
-
-                        // fetch and validate the transaction record
-                        QueryTransactionRecordRequest queryRequest = new QueryTransactionRecordRequest();
-                        queryRequest.setAccountId(request.getAccountId());
-                        queryRequest.setTxnId(request.getTxnId());
-                        TransactionRecord transactionRecord =
-                                accountTransactionRepository.queryTransactionRecord(queryRequest);
-
-                        AssertUtil.notNull(transactionRecord, AccountResultCode.TRANSACTION_NOT_FOUND,
-                                "Transaction record not found");
-
-                        // the txn must be PENDING — OTP_OVER_LIMIT is no longer
-                        // a possible status at this point in the new flow
-                        AssertUtil.isTrue(transactionRecord.getTxnStatus().equals(TransactionStatusEnum.PENDING),
-                                AccountResultCode.ILLEGAL_STATUS,
-                                "Transaction status is illegal: " + transactionRecord.getTxnStatus());
-
-                        BigDecimal amount = BigDecimal.valueOf(
-                                        transactionRecord.getAmount().doubleValue())
-                                .setScale(2, RoundingMode.HALF_UP);
-
-                        EcTransactionEvent event = new EcTransactionEvent(
-                                transactionRecord.getTxnId(),
-                                transactionRecord.getPayerAccountId(),
-                                transactionRecord.getPayeeAccountId(),
-                                amount,
-                                transactionRecord.getCurrency()
-                        );
-
-                        // use payerAccountId as partition key — guarantees ordering per account
-                        kafkaTemplate.send("EC_TRANSACTION", event.getPayerAccountNo(), event);
-
-                        ResponseBuilder.success(response, null,
-                                AccountActionEnum.PUBLISH_TRANSFER_EVENT.getCode(),
-                                AccountActionEnum.PUBLISH_TRANSFER_EVENT.getDesc());
-                    }
-                });
-    }
 }

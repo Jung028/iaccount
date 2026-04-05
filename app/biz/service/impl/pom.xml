@@ -32,6 +32,12 @@
         </dependency>
         <dependency>
             <groupId>org.adam</groupId>
+            <artifactId>usercenter-common-service-facade</artifactId>
+            <version>${usercenter.common.service.facade.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.adam</groupId>
             <artifactId>account_center-core-model</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

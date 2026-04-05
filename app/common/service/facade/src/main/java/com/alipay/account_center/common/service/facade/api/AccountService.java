@@ -90,12 +90,4 @@ public interface AccountService {
     @Path("/updateTransactionRecord")
     AccountBizResult<TransactionRecordItem> updateTransactionRecord(UpdateTransactionRecordRequest request);
 
-    /**
-     * publish transfer event
-     * @param request
-     * @return
-     */
-    @POST
-    @Path("/publishTransfer")
-    AccountBizResult<String> publishTransfer(PublishTransferRequest request);
 }

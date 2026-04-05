@@ -30,7 +30,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <account-common-service-facade-version>1.0.0.20260317.3-SNAPSHOT</account-common-service-facade-version>
-        <businesscenter-common-service-facade-version>1.0.0.20260317-SNAPSHOT</businesscenter-common-service-facade-version>
+        <businesscenter-common-service-facade-version>1.0.0.20260317.2-SNAPSHOT</businesscenter-common-service-facade-version>
+        <usercenter.common.service.facade.version>1.0.0.20260317.15-SNAPSHOT</usercenter.common.service.facade.version>
 
     </properties>
     <parent>

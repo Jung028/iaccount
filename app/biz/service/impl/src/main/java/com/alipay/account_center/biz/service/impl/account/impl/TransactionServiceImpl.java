@@ -9,6 +9,7 @@ import com.alipay.account_center.common.service.facade.event.EcDlqEvent;
 import com.alipay.account_center.common.service.facade.item.LedgerEntryItem;
 import com.alipay.account_center.common.service.facade.request.QueryTransactionRecordRequest;
 import com.alipay.account_center.common.service.facade.request.UpdateTransactionRecordRequest;
+import com.alipay.account_center.common.service.integration.user.TopUpServiceClient;
 import com.alipay.account_center.common.service.integration.wallet.WalletServiceClient;
 import com.alipay.account_center.common.util.LogUtil;
 import com.alipay.account_center.core.model.domain.AccountInfo;
@@ -20,10 +21,16 @@ import com.alipay.account_center.core.service.repository.AccountRepository;
 import com.alipay.account_center.core.service.repository.AccountTransactionRepository;
 import com.alipay.business.common.service.facade.baseresult.BusinessBizResult;
 import com.alipay.business.common.service.facade.enums.IdempotencyKeysStatusEnum;
+import com.alipay.business.common.service.facade.event.EcAutoReloadEvent;
 import com.alipay.business.common.service.facade.item.IdempotencyKeysItem;
 import com.alipay.business.common.service.facade.request.QueryIdempotencyKeysRequest;
 import com.alipay.business.common.service.facade.request.UpdateIdempotencyKeysRequest;
 import com.alipay.business.common.service.facade.result.UpdateIdempotencyKeysResult;
+import com.alipay.usercenter.common.dal.auto.dataobject.AutoReloadConfigDO;
+import com.alipay.usercenter.common.service.facade.api.TopUpService;
+import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
+import com.alipay.usercenter.common.service.facade.item.AutoReloadConfigItem;
+import com.alipay.usercenter.common.service.facade.request.QueryAutoReloadConfigRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +73,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private TransactionTemplate transactionTemplate;
+
+    @Autowired
+    private TopUpServiceClient topUpServiceClient;
 
     private static final int MAX_RETRY_COUNT = 3;
 
@@ -111,10 +121,10 @@ public class TransactionServiceImpl implements TransactionService {
             QueryIdempotencyKeysRequest queryIdempotencyKeysRequest =
                     new QueryIdempotencyKeysRequest();
             System.out.println(event.getTxnId());
-            queryIdempotencyKeysRequest.setTxnId(event.getTxnId());
+            queryIdempotencyKeysRequest.setReferenceId(event.getTxnId());
             queryIdempotencyKeysResult =
                     walletServiceClient.queryIdempotencyKeys(queryIdempotencyKeysRequest);
-            System.out.println(queryIdempotencyKeysResult.getResult().getTxnId());
+            System.out.println(queryIdempotencyKeysResult.getResult().getReferenceId());
 
             boolean isPending = queryIdempotencyKeysResult.getResult().getStatus()
                     .equals(IdempotencyKeysStatusEnum.PENDING.getCode());
@@ -128,7 +138,7 @@ public class TransactionServiceImpl implements TransactionService {
 
             // mark as PROCESSING to prevent concurrent execution
             UpdateIdempotencyKeysRequest markProcessing = new UpdateIdempotencyKeysRequest();
-            markProcessing.setTxnId(event.getTxnId());
+            markProcessing.setReferenceId(event.getTxnId());
             markProcessing.setStatus(IdempotencyKeysStatusEnum.PROCESSING);
             BusinessBizResult<UpdateIdempotencyKeysResult> processingResult =
                     walletServiceClient.updateIdempotencyKey(markProcessing);
@@ -189,12 +199,12 @@ public class TransactionServiceImpl implements TransactionService {
                 payeeLedger.setCurrency(event.getCurrency());
                 accountLedgerRepository.insertLedger(payeeLedger);
 
-                // check if balance is less than the threshold.
-                checkBalanceAgainstThreshold(payer.getAccountRelationId(), payerLedger.getBalanceAfter());
+                // if balance is less than threshold amount, call chargeCard
+                checkAndTriggerAutoReload(payer.getAccountRelationId(), payerLedger.getBalanceAfter());
 
                 // mark idempotency key as SUCCESS
                 UpdateIdempotencyKeysRequest markSuccess = new UpdateIdempotencyKeysRequest();
-                markSuccess.setTxnId(event.getTxnId());
+                markSuccess.setReferenceId(event.getTxnId());
                 markSuccess.setStatus(IdempotencyKeysStatusEnum.SUCCESS);
                 BusinessBizResult<UpdateIdempotencyKeysResult> successResult =
                         walletServiceClient.updateIdempotencyKey(markSuccess);
@@ -232,7 +242,7 @@ public class TransactionServiceImpl implements TransactionService {
                 int newRetryCount = queryIdempotencyKeysResult.getResult().getRetryCount() + 1;
 
                 UpdateIdempotencyKeysRequest markFailed = new UpdateIdempotencyKeysRequest();
-                markFailed.setTxnId(queryIdempotencyKeysResult.getResult().getTxnId());
+                markFailed.setReferenceId(queryIdempotencyKeysResult.getResult().getReferenceId());
                 markFailed.setStatus(IdempotencyKeysStatusEnum.FAILED);
                 markFailed.setRetryCount(newRetryCount);
                 BusinessBizResult<UpdateIdempotencyKeysResult> failedResult =
@@ -280,12 +290,28 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
-    private void checkBalanceAgainstThreshold(String accountRelationId, BigDecimal balanceAfter) {
-        // query user client using account rel id, the auto_relload_confg
-        // if the autoReload is true, then check balance is under limit, then call reload / chargeCard
-        // else exit
-        kafkaTemplate.send("EC_AUTO_RELOAD_TRIGGERED", event);
-
+    /**
+     * check balance against threshold
+     * @param accountRelationId
+     * @param balanceAfter
+     */
+    private void checkAndTriggerAutoReload(String accountRelationId, BigDecimal balanceAfter) {
+        QueryAutoReloadConfigRequest queryAutoReloadConfigRequest = new QueryAutoReloadConfigRequest();
+        queryAutoReloadConfigRequest.setUserId(accountRelationId);
+        UserBizResult<AutoReloadConfigItem> autoReloadConfig =
+                topUpServiceClient.queryAutoReloadConfig(queryAutoReloadConfigRequest);
+        if (autoReloadConfig != null && autoReloadConfig.getResult().getIsActive().equals(true)) {
+            System.out.println(autoReloadConfig.getResult().getUserId());
+            // if balanceAfter < thresholdAmount
+            if (balanceAfter.compareTo(autoReloadConfig.getResult().getThresholdAmount()) < 0) {
+                // publish Event
+                EcAutoReloadEvent autoReloadEvent = new EcAutoReloadEvent();
+                autoReloadEvent.setAmount(autoReloadConfig.getResult().getReloadAmount());
+                autoReloadEvent.setCurrency(autoReloadConfig.getResult().getCurrency());
+                autoReloadEvent.setUserId(accountRelationId);
+                kafkaTemplate.send("EC_AUTO_RELOAD", autoReloadEvent);
+            }
+        }
     }
 
 }
