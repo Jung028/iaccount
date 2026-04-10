@@ -1,5 +1,7 @@
 package com.alipay.account_center.common.service.facade.event;
 
+import com.alipay.account_center.common.service.facade.enums.TxnEventType;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,13 +14,15 @@ public class EcTransactionEvent {
     private String currency;
     private String failReason;
     private String gmtTaskOccur;
+    private String txnEventType;
 
-    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency) {
+    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency, String txnEventType) {
         this.txnId = txnId;
         this.payerAccountNo = payerAccountNo;
         this.payeeAccountNo = payeeAccountNo;
         this.amount = amount;
         this.currency = currency;
+        this.txnEventType = txnEventType;
     }
 
     public EcTransactionEvent() {
@@ -87,5 +91,13 @@ public class EcTransactionEvent {
 
     public void setGmtTaskOccur(String gmtTaskOccur) {
         this.gmtTaskOccur = gmtTaskOccur;
+    }
+
+    public String getTxnEventType() {
+        return txnEventType;
+    }
+
+    public void setTxnEventType(String txnEventType) {
+        this.txnEventType = txnEventType;
     }
 }

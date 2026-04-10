@@ -1,12 +1,18 @@
 package com.alipay.account_center.biz.service.impl.account.impl;
 
+import com.alipay.account_center.biz.service.impl.lock.DistributedLock;
 import com.alipay.account_center.biz.service.impl.template.AccountServiceTemplate;
+import com.alipay.account_center.biz.service.impl.transaction.factory.TransactionHandlerFactory;
 import com.alipay.account_center.common.service.facade.constant.LoggerConstant;
+import com.alipay.account_center.common.service.integration.user.TopUpServiceClient;
+import com.alipay.account_center.common.service.integration.wallet.WalletServiceClient;
+import com.alipay.account_center.core.service.repository.AccountLedgerRepository;
 import com.alipay.account_center.core.service.repository.AccountRepository;
 import com.alipay.account_center.core.service.repository.AccountTransactionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.transaction.support.TransactionTemplate;
 
 public abstract class AbstractAccountBizService {
@@ -42,34 +48,33 @@ public abstract class AbstractAccountBizService {
     protected TransactionTemplate transactionTemplate;
 
     /**
-     * set accountServiceTemplate
-     * @param accountServiceTemplate
+     * account ledger repository
      */
-    public void setAccountServiceTemplate(AccountServiceTemplate accountServiceTemplate) {
-        this.accountServiceTemplate = accountServiceTemplate;
-    }
+    @Autowired
+    protected AccountLedgerRepository accountLedgerRepository;
 
     /**
-     * set account repository
-     * @param accountRepository
+     * distributed lock
      */
-    public void setAccountRepository(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    @Autowired
+    protected DistributedLock distributedLock;
 
     /**
-     * set account transaction repository
-     * @param accountTransactionRepository
+     * top up service client
      */
-    public void setAccountTransactionRepository(AccountTransactionRepository accountTransactionRepository) {
-        this.accountTransactionRepository = accountTransactionRepository;
-    }
+    @Autowired
+    protected TopUpServiceClient topUpServiceClient;
 
     /**
-     * set transaction template
-     * @param transactionTemplate
+     * kafka template
      */
-    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-        this.transactionTemplate = transactionTemplate;
-    }
+    @Autowired
+    protected KafkaTemplate<String, Object> kafkaTemplate;
+
+    /**
+     * wallet service client
+     */
+    @Autowired
+    protected WalletServiceClient walletServiceClient;
+
 }

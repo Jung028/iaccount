@@ -1,7 +1,7 @@
 package com.alipay.account_center.common.service.facade.item;
 
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
-import com.alipay.account_center.common.service.facade.enums.TransactionTypeEnum;
+import com.alipay.account_center.common.service.facade.enums.TransactionType;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,7 +16,7 @@ public class TransactionRecordItem {
     private String payeeAccountId;
     private BigDecimal amount;
     private String currency;
-    private TransactionTypeEnum txnType;
+    private TransactionType txnType;
     private TransactionStatusEnum txnStatus;
     private String failureReason;
     private String extInfo;
@@ -85,11 +85,11 @@ public class TransactionRecordItem {
         this.currency = currency;
     }
 
-    public TransactionTypeEnum getTxnType() {
+    public TransactionType getTxnType() {
         return txnType;
     }
 
-    public void setTxnType(TransactionTypeEnum txnType) {
+    public void setTxnType(TransactionType txnType) {
         this.txnType = txnType;
     }
 

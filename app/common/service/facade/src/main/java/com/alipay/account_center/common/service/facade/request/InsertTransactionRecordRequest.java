@@ -2,7 +2,7 @@ package com.alipay.account_center.common.service.facade.request;
 
 import com.alipay.account_center.common.service.facade.baseresult.AccountBaseRequest;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
-import com.alipay.account_center.common.service.facade.enums.TransactionTypeEnum;
+import com.alipay.account_center.common.service.facade.enums.TransactionType;
 
 import java.math.BigDecimal;
 
@@ -13,7 +13,7 @@ public class InsertTransactionRecordRequest extends AccountBaseRequest {
     private BigDecimal amount;
     private String currency;
     private TransactionStatusEnum status;
-    private TransactionTypeEnum txnType;
+    private TransactionType txnType;
 
     public String getTxnId() {
         return txnId;
@@ -63,11 +63,11 @@ public class InsertTransactionRecordRequest extends AccountBaseRequest {
         this.status = status;
     }
 
-    public TransactionTypeEnum getTxnType() {
+    public TransactionType getTxnType() {
         return txnType;
     }
 
-    public void setTxnType(TransactionTypeEnum txnType) {
+    public void setTxnType(TransactionType txnType) {
         this.txnType = txnType;
     }
 }

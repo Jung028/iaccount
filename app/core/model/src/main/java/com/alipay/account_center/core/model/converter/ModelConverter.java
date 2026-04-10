@@ -3,7 +3,7 @@ package com.alipay.account_center.core.model.converter;
 
 import com.alipay.account_center.common.dal.auto.dataobject.TransactionDO;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
-import com.alipay.account_center.common.service.facade.enums.TransactionTypeEnum;
+import com.alipay.account_center.common.service.facade.enums.TransactionType;
 import com.alipay.account_center.core.model.domain.TransactionRecord;
 
 /**
@@ -25,7 +25,7 @@ public class ModelConverter {
         transactionRecord.setPayeeAccountId(TransactionDO.getPayeeAccountId());
         transactionRecord.setAmount(TransactionDO.getAmount());
         transactionRecord.setCurrency(TransactionDO.getCurrency());
-        transactionRecord.setTxnType(TransactionTypeEnum.valueOf(TransactionDO.getType()));
+        transactionRecord.setTxnType(TransactionType.valueOf(TransactionDO.getType()));
         transactionRecord.setTxnStatus(TransactionStatusEnum.valueOf(TransactionDO.getStatus()));
         transactionRecord.setFailureReason(TransactionDO.getFailureReason());
         transactionRecord.setExtInfo(TransactionDO.getExtInfo());

@@ -1,16 +1,17 @@
 package com.alipay.account_center.common.service.facade.enums;
 
-public enum TransactionTypeEnum {
+public enum TransactionType {
     TRANSFER("TRANSFER", "transfer"),
     REFUND("REFUND", "refund"),
-    DEPOSIT("DEPOSIT", "deposit")
+    DEPOSIT("DEPOSIT", "deposit"),
+    TOP_UP("TOP_UP", "top_up"),
 
 
     ;
     private String code;
     private String desc;
 
-    TransactionTypeEnum(String code, String desc) {
+    TransactionType(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

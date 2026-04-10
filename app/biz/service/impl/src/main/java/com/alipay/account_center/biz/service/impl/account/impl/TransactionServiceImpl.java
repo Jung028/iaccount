@@ -1,83 +1,48 @@
 package com.alipay.account_center.biz.service.impl.account.impl;
 
 import com.alipay.account_center.biz.service.impl.account.TransactionService;
-import com.alipay.account_center.biz.service.impl.lock.DistributedLock;
+import com.alipay.account_center.biz.service.impl.transaction.factory.TransactionHandlerFactory;
+import com.alipay.account_center.biz.service.impl.transaction.handler.TransactionalHandler;
 import com.alipay.account_center.common.service.facade.enums.AccountResultCode;
 import com.alipay.account_center.common.service.facade.enums.LedgerEntryTypeEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.event.EcDlqEvent;
 import com.alipay.account_center.common.service.facade.item.LedgerEntryItem;
+import com.alipay.account_center.common.service.facade.pair.LockPair;
 import com.alipay.account_center.common.service.facade.request.QueryTransactionRecordRequest;
 import com.alipay.account_center.common.service.facade.request.UpdateTransactionRecordRequest;
-import com.alipay.account_center.common.service.integration.user.TopUpServiceClient;
-import com.alipay.account_center.common.service.integration.wallet.WalletServiceClient;
 import com.alipay.account_center.common.util.LogUtil;
-import com.alipay.account_center.core.model.domain.AccountInfo;
 import com.alipay.account_center.core.model.domain.TransactionRecord;
 import com.alipay.account_center.common.service.facade.event.EcTransactionEvent;
+import com.alipay.account_center.core.model.domain.pair.AccountPair;
 import com.alipay.account_center.core.model.util.AssertUtil;
-import com.alipay.account_center.core.service.repository.AccountLedgerRepository;
-import com.alipay.account_center.core.service.repository.AccountRepository;
-import com.alipay.account_center.core.service.repository.AccountTransactionRepository;
 import com.alipay.business.common.service.facade.baseresult.BusinessBizResult;
 import com.alipay.business.common.service.facade.enums.IdempotencyKeysStatusEnum;
-import com.alipay.business.common.service.facade.event.EcAutoReloadEvent;
 import com.alipay.business.common.service.facade.item.IdempotencyKeysItem;
 import com.alipay.business.common.service.facade.request.QueryIdempotencyKeysRequest;
 import com.alipay.business.common.service.facade.request.UpdateIdempotencyKeysRequest;
 import com.alipay.business.common.service.facade.result.UpdateIdempotencyKeysResult;
-import com.alipay.usercenter.common.dal.auto.dataobject.AutoReloadConfigDO;
-import com.alipay.usercenter.common.service.facade.api.TopUpService;
-import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
-import com.alipay.usercenter.common.service.facade.item.AutoReloadConfigItem;
-import com.alipay.usercenter.common.service.facade.request.QueryAutoReloadConfigRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.support.TransactionTemplate;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+
+import static com.alipay.account_center.biz.service.impl.constant.GlobalBizConstant.MAX_RETRY_COUNT;
 
 /**
  * @author adam
  * @date 26/2/2026 7:46 PM
  */
 @Service
-public class TransactionServiceImpl implements TransactionService {
+public class TransactionServiceImpl extends AbstractAccountBizService implements TransactionService {
 
     private static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
     @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private AccountTransactionRepository accountTransactionRepository;
-
-    @Autowired
-    private AccountLedgerRepository accountLedgerRepository;
-
-    @Autowired
-    private DistributedLock distributedLock;
-
-    @Autowired
-    private WalletServiceClient walletServiceClient;
-
-    @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
-
-    @Autowired
-    private TransactionTemplate transactionTemplate;
-
-    @Autowired
-    private TopUpServiceClient topUpServiceClient;
-
-    private static final int MAX_RETRY_COUNT = 3;
+    private TransactionHandlerFactory transactionHandlerFactory;
 
     @Override
     public void processTransfer(EcTransactionEvent event) {
@@ -88,22 +53,18 @@ public class TransactionServiceImpl implements TransactionService {
         if (!txnLocked) {
             throw new IllegalStateException("Unable to acquire lock for txnId: " + txnId);
         }
+        // get handler
+        System.out.println(event.getTxnEventType());
+        // TODO: here, it AssertUtil not null becuse the handler is null.
+        TransactionalHandler handler = transactionHandlerFactory.getHandler(event.getTxnEventType());
+        System.out.println("HANDLER: " + handler.getClass().getName());
 
-        // ── lock payer and payee accounts in consistent order (prevents deadlock) ─
-        String firstLock  = event.getPayeeAccountNo().compareTo(event.getPayerAccountNo()) > 0
-                ? event.getPayeeAccountNo() : event.getPayerAccountNo();
-        String secondLock = event.getPayeeAccountNo().compareTo(event.getPayerAccountNo()) > 0
-                ? event.getPayerAccountNo() : event.getPayeeAccountNo();
+        // lock only payee since top up payer account is from bank, not account
+        LockPair lockPair = handler.setFirstAndSecondLock(event);
+        String firstLock = lockPair.getFirstLock();
+        String secondLock = lockPair.getSecondLock();
 
-        boolean firstLocked  = distributedLock.tryLock(firstLock,  5000);
-        boolean secondLocked = distributedLock.tryLock(secondLock, 5000);
 
-        if (!firstLocked || !secondLocked) {
-            if (firstLocked)  distributedLock.unlock(firstLock);
-            if (secondLocked) distributedLock.unlock(secondLock);
-            throw new IllegalStateException(
-                    "Failed to acquire account locks for txnId: " + txnId);
-        }
 
         // build the result event — will be published in the finally block
         EcTransactionEvent resultEvent = new EcTransactionEvent();
@@ -148,7 +109,7 @@ public class TransactionServiceImpl implements TransactionService {
 
             QueryTransactionRecordRequest queryTxnRequest = new QueryTransactionRecordRequest();
             queryTxnRequest.setTxnId(event.getTxnId());
-            queryTxnRequest.setAccountId(event.getPayerAccountNo());
+            queryTxnRequest.setAccountId(event.getPayeeAccountNo());
             TransactionRecord transactionRecord =
                     accountTransactionRepository.queryTransactionRecord(queryTxnRequest);
 
@@ -159,18 +120,8 @@ public class TransactionServiceImpl implements TransactionService {
 
             // ── debit payer, credit payee, write ledger entries ────────────────
             transactionTemplate.execute(status -> {
-
-                // row-level locks on both accounts
-                AccountInfo payer = accountRepository.lockById(event.getPayerAccountNo());
-                AccountInfo payee = accountRepository.lockById(event.getPayeeAccountNo());
-
-                payer.debit(event.getAmount());
-                payee.credit(event.getAmount());
-                payer.setGmtModified(new Date());
-                payee.setGmtModified(new Date());
-
-                accountRepository.updateAccountRecord(payer);
-                accountRepository.updateAccountRecord(payee);
+                // update account record
+                AccountPair accountPair = handler.updateAccountRecord(event);
 
                 // mark transaction as finished
                 UpdateTransactionRecordRequest finishTxn =
@@ -185,7 +136,7 @@ public class TransactionServiceImpl implements TransactionService {
                 payerLedger.setAccountId(event.getPayerAccountNo());
                 payerLedger.setEntryType(LedgerEntryTypeEnum.DEBIT.getCode());
                 payerLedger.setAmount(event.getAmount());
-                payerLedger.setBalanceAfter(payer.getBalance());
+                payerLedger.setBalanceAfter(accountPair.getPayer().getBalance());
                 payerLedger.setCurrency(event.getCurrency());
                 accountLedgerRepository.insertLedger(payerLedger);
 
@@ -195,12 +146,10 @@ public class TransactionServiceImpl implements TransactionService {
                 payeeLedger.setAccountId(event.getPayeeAccountNo());
                 payeeLedger.setEntryType(LedgerEntryTypeEnum.CREDIT.getCode());
                 payeeLedger.setAmount(event.getAmount());
-                payeeLedger.setBalanceAfter(payee.getBalance());
+                payeeLedger.setBalanceAfter(accountPair.getPayee().getBalance());
                 payeeLedger.setCurrency(event.getCurrency());
                 accountLedgerRepository.insertLedger(payeeLedger);
 
-                // if balance is less than threshold amount, call chargeCard
-                checkAndTriggerAutoReload(payer.getAccountRelationId(), payerLedger.getBalanceAfter());
 
                 // mark idempotency key as SUCCESS
                 UpdateIdempotencyKeysRequest markSuccess = new UpdateIdempotencyKeysRequest();
@@ -265,7 +214,7 @@ public class TransactionServiceImpl implements TransactionService {
                     Map<String, String> extInfo = new HashMap<>();
                     extInfo.put("errorMessage", e.getMessage());
                     extInfo.put("idempotencyResult",
-                            failedResult != null ? failedResult.getResultCode() : "unknown");
+                            failedResult.getResultCode());
                     dlqEvent.setExtInfo(extInfo.toString());
 
                     kafkaTemplate.send("EC_DEAD_LETTER_QUEUE", dlqEvent);
@@ -284,34 +233,12 @@ public class TransactionServiceImpl implements TransactionService {
             distributedLock.unlock(firstLock);
             distributedLock.unlock(secondLock);
             System.out.println("FINISH, PUBLISH TRANSACTION");
-
+            System.out.println(resultEvent.getTxnStatus());
             // publish result back to frontend via Kafka
             kafkaTemplate.send("EC_TRANSACTION_RESULT", resultEvent);
         }
     }
 
-    /**
-     * check balance against threshold
-     * @param accountRelationId
-     * @param balanceAfter
-     */
-    private void checkAndTriggerAutoReload(String accountRelationId, BigDecimal balanceAfter) {
-        QueryAutoReloadConfigRequest queryAutoReloadConfigRequest = new QueryAutoReloadConfigRequest();
-        queryAutoReloadConfigRequest.setUserId(accountRelationId);
-        UserBizResult<AutoReloadConfigItem> autoReloadConfig =
-                topUpServiceClient.queryAutoReloadConfig(queryAutoReloadConfigRequest);
-        if (autoReloadConfig != null && autoReloadConfig.getResult().getIsActive().equals(true)) {
-            System.out.println(autoReloadConfig.getResult().getUserId());
-            // if balanceAfter < thresholdAmount
-            if (balanceAfter.compareTo(autoReloadConfig.getResult().getThresholdAmount()) < 0) {
-                // publish Event
-                EcAutoReloadEvent autoReloadEvent = new EcAutoReloadEvent();
-                autoReloadEvent.setAmount(autoReloadConfig.getResult().getReloadAmount());
-                autoReloadEvent.setCurrency(autoReloadConfig.getResult().getCurrency());
-                autoReloadEvent.setUserId(accountRelationId);
-                kafkaTemplate.send("EC_AUTO_RELOAD", autoReloadEvent);
-            }
-        }
-    }
+
 
 }
