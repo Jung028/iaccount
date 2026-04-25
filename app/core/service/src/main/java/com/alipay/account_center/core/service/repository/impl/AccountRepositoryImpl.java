@@ -28,6 +28,14 @@ public class AccountRepositoryImpl extends AbstractDomainRepository implements A
     }
 
     @Override
+    public AccountInfo queryAccountInfoByName(String accountName) {
+        if (accountName.isBlank()) {
+            return null;
+        }
+        AccountDO accountDO = accountDAO.queryAccountInfoByName(accountName);
+        return DomainConverter.convertToModel(accountDO);    }
+
+    @Override
     public AccountInfo queryAccountInfoByUserId(String userId) {
         if (userId.isBlank()) {
             return null;

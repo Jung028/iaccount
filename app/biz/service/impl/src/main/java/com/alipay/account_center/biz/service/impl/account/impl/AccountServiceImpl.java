@@ -126,6 +126,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                         response.setSuccess(true);
                         response.setResult(ItemConverter.convertToItem(accountInfo));
+                        System.out.print(accountInfo.getAccountId());
                     }
                 });
     }
@@ -213,7 +214,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(QueryTransactionHistoryRequest request, AccountBizResult<QueryTransactionHistoryResult> response) {
-                        // call account database
                         AccountInfo accountInfo = accountRepository.queryAccountInfo(request.getAccountId());
                         // check if account exist
                         AssertUtil.notNull(accountInfo, AccountResultCode.ACCOUNT_NOT_FOUND, "Account not found");
@@ -221,7 +221,6 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
 
-                        // Query Transaction record
                         List<TransactionHistory> transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
 
                         // Query total count

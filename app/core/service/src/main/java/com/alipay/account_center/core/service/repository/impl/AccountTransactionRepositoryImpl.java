@@ -47,7 +47,8 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             return Collections.emptyList();
         }
         List<TransactionDO> transactionDOS = accountTransactionDAO.queryTransactionHistory(
-                request.getAccountId(), request.getPageSize(), request.getPageNo());
+                request.getAccountId(), request.getPageSize(), request.getPageNo(), request.getPayerAccountId(),
+                request.getGmtCreate());
         return DomainConverter.convertToModelList(transactionDOS);
     }
 
@@ -67,6 +68,7 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             record.setStatus(request.getStatus().getCode());
             record.setGmtCreate(new Date());
             record.setGmtModified(new Date());
+            System.out.println("HELLO HERE" + request.getTxnType().getCode());
             record.setType(request.getTxnType().getCode());
 
             int rows = accountTransactionDAO.insertTransactionRecord(record); // DAO returns int

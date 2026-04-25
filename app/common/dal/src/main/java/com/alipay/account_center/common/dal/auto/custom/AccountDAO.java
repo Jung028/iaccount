@@ -15,4 +15,6 @@ public interface AccountDAO {
     AccountDO lockById(@Param("accountId") String accountId);
 
     int updateAccount(AccountDO accountDO);
+
+    AccountDO queryAccountInfoByName(String accountName);
 }

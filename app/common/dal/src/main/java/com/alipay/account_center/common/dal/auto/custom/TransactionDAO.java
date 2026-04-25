@@ -20,11 +20,12 @@ public interface TransactionDAO {
 
     TransactionDO queryTransactionByStatus(@Param("accountId") String accountId, @Param("statusList") List<String> statusList);
 
-    List<TransactionDO> queryTransactionHistory(@Param("accountId") String accountId, @Param("pageSize") int pageSize, @Param("pageNo") int pageNo);
-
     int insertTransactionRecord(TransactionDO transactionDO);
 
     int updateTransactionRecord(TransactionDO record);
 
     int queryTransactionTotalCount(String accountId);
+
+    List<TransactionDO> queryTransactionHistory(@Param("accountId") String accountId, @Param("pageSize") int pageSize, @Param("pageNo") int pageNo,
+                                                @Param("payerAccountId") String payerAccountId, @Param("gmtCreate") String gmtCreate);
 }
