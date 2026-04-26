@@ -29,14 +29,15 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <account-common-service-facade-version>1.0.0.20260215-SNAPSHOT</account-common-service-facade-version>
+        <account-common-service-facade-version>1.0.0.20260317.5-SNAPSHOT</account-common-service-facade-version>
+        <businesscenter-common-service-facade-version>1.0.0.20260317.2-SNAPSHOT</businesscenter-common-service-facade-version>
+        <usercenter.common.service.facade.version>1.0.0.20260317.15-SNAPSHOT</usercenter.common.service.facade.version>
 
     </properties>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.alipay.sofa</groupId>
+        <artifactId>sofaboot-dependencies</artifactId>
+        <version>4.6.0</version>
     </parent>
     <dependencyManagement>
         <dependencies>
@@ -44,7 +45,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>6.2.1</version>
+                <version>6.1.11</version> <!-- Change this to 6.1.11 -->
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -68,11 +69,15 @@
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>3.0.5</version>
-                <scope>test</scope>
+                <version>4.0.1</version>
+                <scope>compile</scope>
             </dependency>
             <!-- MyBatis -->
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>3.3.2</version>
+            </dependency>
             <!-- PostgreSQL JDBC -->
             <dependency>
                 <groupId>org.postgresql</groupId>
@@ -101,6 +106,25 @@
                         <version>42.7.3</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

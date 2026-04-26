@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alipay.account_center.common.dal.auto.custom.AccountDAO">
+
+    <resultMap id="BaseResultMap" type="com.alipay.account_center.common.dal.auto.dataobject.AccountDO">
+        <id column="account_id" jdbcType="VARCHAR" property="accountId" />
+        <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+        <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+        <result column="account_type" jdbcType="VARCHAR" property="accountType" />
+        <result column="currency" jdbcType="CHAR" property="currency" />
+        <result column="balance" jdbcType="NUMERIC" property="balance" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="ext_info" jdbcType="VARCHAR" property="extInfo" />
+        <result column="account_relation_id" jdbcType="VARCHAR" property="accountRelationId" />
+    </resultMap>
+
+    <!-- Query account info -->
+    <select id="queryAccountInfo" parameterType="string" resultMap="BaseResultMap">
+        SELECT account_id, account_number, account_name, account_type, currency, balance, status,
+        gmt_create, gmt_modified, ext_info, account_relation_id
+        FROM account
+        WHERE account_id = #{accountId}
+    </select>
+
+    <select id="queryAccountInfoByUserId" parameterType="string" resultMap="BaseResultMap">
+        SELECT account_id, account_number, account_name, account_type, currency, balance, status,
+        gmt_create, gmt_modified, ext_info, account_relation_id
+        FROM account
+        WHERE account_relation_id = #{userId}
+    </select>
+
+    <!-- Insert new account -->
+    <insert id="createAccount" parameterType="com.alipay.account_center.common.dal.auto.dataobject.AccountDO">
+        INSERT INTO account (
+        account_id, account_number, account_name, account_type,
+        currency, balance, status, gmt_create, gmt_modified,
+        ext_info, account_relation_id
+        )
+        VALUES (
+        #{accountId,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR},
+        #{accountType,jdbcType=VARCHAR}, #{currency,jdbcType=CHAR}, #{balance,jdbcType=NUMERIC},
+        #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+        #{extInfo,jdbcType=VARCHAR}, #{accountRelationId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!-- Lock account row for update -->
+    <select id="lockById" parameterType="string" resultMap="BaseResultMap">
+        SELECT account_id, account_number, account_name, account_type,
+        currency, balance, status, gmt_create, gmt_modified,
+        ext_info, account_relation_id
+        FROM account
+        WHERE account_id = #{accountId}
+        FOR UPDATE
+    </select>
+
+    <!-- Dynamic update for account -->
+    <update id="updateAccount" parameterType="com.alipay.account_center.common.dal.auto.dataobject.AccountDO">
+        UPDATE account
+        <set>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="gmtModified != null">gmt_modified = #{gmtModified},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="accountName != null">account_name = #{accountName},</if>
+            <if test="extInfo != null">ext_info = #{extInfo},</if>
+        </set>
+        WHERE account_id = #{accountId}
+    </update>
+
+</mapper>

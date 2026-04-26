@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alipay.account_center.common.dal.auto.custom.TransactionDAO">
+
+    <resultMap id="BaseResultMap" type="com.alipay.account_center.common.dal.auto.dataobject.TransactionDO">
+        <id column="txn_id" jdbcType="VARCHAR" property="txnId" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="gmt_complete" jdbcType="TIMESTAMP" property="gmtComplete" />
+        <result column="payer_account_id" jdbcType="VARCHAR" property="payerAccountId" />
+        <result column="payee_account_id" jdbcType="VARCHAR" property="payeeAccountId" />
+        <result column="amount" jdbcType="NUMERIC" property="amount" />
+        <result column="currency" jdbcType="CHAR" property="currency" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="failure_reason" jdbcType="VARCHAR" property="failureReason" />
+        <result column="ext_info" jdbcType="VARCHAR" property="extInfo" />
+    </resultMap>
+
+    <!-- Query single transaction by txnId and accountId -->
+    <select id="queryTransactionRecord" resultMap="BaseResultMap">
+        SELECT
+        txn_id, gmt_create, gmt_modified, gmt_complete,
+        payer_account_id, payee_account_id,
+        amount, currency, type, status,
+        failure_reason, ext_info
+        FROM transaction
+        WHERE txn_id = #{txnId}
+        AND (payer_account_id = #{accountId} OR payee_account_id = #{accountId})
+        LIMIT 1
+    </select>
+
+    <select id="queryTransactionByStatus" resultMap="BaseResultMap">
+        SELECT
+            txn_id, gmt_create, gmt_modified, gmt_complete,
+            payer_account_id, payee_account_id,
+            amount, currency, type, status,
+            failure_reason, ext_info
+        FROM transaction
+        WHERE payer_account_id = #{accountId}
+        AND status IN
+        <foreach item="s" collection="statusList" open="(" separator="," close=")">
+            #{s}
+        </foreach>
+        LIMIT 1
+    </select>
+
+    <!-- Query transaction history with pagination -->
+    <select id="queryTransactionHistory" parameterType="map" resultMap="BaseResultMap">
+        SELECT txn_id, gmt_create, gmt_modified, gmt_complete,
+        payer_account_id, payee_account_id, amount, currency,
+        type, status, failure_reason, ext_info
+        FROM transaction
+        WHERE payer_account_id = #{accountId}
+        ORDER BY gmt_create DESC
+        LIMIT #{pageSize} OFFSET #{pageNo}
+    </select>
+
+    <insert id="insertTransactionRecord" parameterType="com.alipay.account_center.common.dal.auto.dataobject.TransactionDO">
+        INSERT INTO transaction (
+        <if test="txnId != null">txn_id,</if>
+        gmt_create, gmt_modified, gmt_complete,
+        payer_account_id, payee_account_id, amount, currency,
+        type, status, failure_reason, ext_info
+        )
+        VALUES (
+        <if test="txnId != null">#{txnId},</if>
+        NOW(), NOW(), #{gmtComplete},
+        #{payerAccountId}, #{payeeAccountId}, #{amount}, #{currency},
+        #{type}, #{status}, #{failureReason}, #{extInfo}
+        )
+    </insert>
+
+    <!-- Dynamic update transaction record -->
+    <update id="updateTransactionRecord" parameterType="com.alipay.account_center.common.dal.auto.dataobject.TransactionDO">
+        UPDATE transaction
+        <set>
+            <if test="status != null">status = #{status},</if>
+            <if test="failureReason != null">failure_reason = #{failureReason},</if>
+            <if test="extInfo != null">ext_info = #{extInfo},</if>
+            <if test="gmtComplete != null">gmt_complete = #{gmtComplete},</if>
+            gmt_modified = NOW()
+        </set>
+        WHERE txn_id = #{txnId}
+    </update>
+
+    <select id="queryTransactionTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM transaction
+        WHERE payer_account_id = #{accountId}
+    </select>
+
+</mapper>

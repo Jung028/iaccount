@@ -1,0 +1,36 @@
+name: PR Code Coverage
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build and run tests
+        run: mvn clean verify
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: target/site/jacoco/jacoco.xml
+          fail_ci_if_error: true
+
+      - name: Verify coverage (optional)
+        run: |
+          if ! grep -q "<counter type=\"LINE\" missed=\"0\"" target/site/jacoco/jacoco.xml; then
+            echo "Coverage failed on some lines"
+            exit 1
+          fi
