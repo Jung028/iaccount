@@ -1,5 +1,6 @@
 package com.alipay.account_center.common.service.facade.item;
 
+import com.alipay.account_center.common.service.facade.enums.TransactionDirection;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionType;
 
@@ -20,6 +21,7 @@ public class TransactionRecordItem {
     private TransactionStatusEnum txnStatus;
     private String failureReason;
     private String extInfo;
+    private TransactionDirection txnDirection;
 
     public String getTxnId() {
         return txnId;
@@ -115,5 +117,13 @@ public class TransactionRecordItem {
 
     public void setExtInfo(String extInfo) {
         this.extInfo = extInfo;
+    }
+
+    public TransactionDirection getTxnDirection() {
+        return txnDirection;
+    }
+
+    public void setTxnDirection(TransactionDirection txnDirection) {
+        this.txnDirection = txnDirection;
     }
 }

@@ -2,7 +2,6 @@ package com.alipay.account_center.biz.service.impl.account.impl;
 
 import com.alipay.account_center.biz.service.impl.lock.DistributedLock;
 import com.alipay.account_center.biz.service.impl.template.AccountServiceTemplate;
-import com.alipay.account_center.biz.service.impl.transaction.factory.TransactionHandlerFactory;
 import com.alipay.account_center.common.service.facade.constant.LoggerConstant;
 import com.alipay.account_center.common.service.integration.user.TopUpServiceClient;
 import com.alipay.account_center.common.service.integration.wallet.WalletServiceClient;

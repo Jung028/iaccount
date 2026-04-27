@@ -68,6 +68,7 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             record.setStatus(request.getStatus().getCode());
             record.setGmtCreate(new Date());
             record.setGmtModified(new Date());
+            record.setGmtComplete(new Date());
             System.out.println("HELLO HERE" + request.getTxnType().getCode());
             record.setType(request.getTxnType().getCode());
 

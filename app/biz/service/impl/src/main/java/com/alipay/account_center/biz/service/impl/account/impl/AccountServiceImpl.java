@@ -156,7 +156,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(request);
 
                         response.setSuccess(true);
-                        response.setResult(ItemConverter.convertToItem(transactionRecord));
+                        response.setResult(ItemConverter.convertToItem(transactionRecord, request.getAccountId()));
                     }
                 });
     }
@@ -217,6 +217,16 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
 
+                        //TODO: we need to fix transaction history because
+                        // we will query based on the payer, hence all will just be the where payer.
+                        // but we also have instance where we are the payee. so we need to identify if its
+                        // us that is payee.
+                        // select * from transaction where WHERE payer_account_id = #{accountId}
+                        // but this is an issue because transaction record also is like this. we cant retrieve.
+                        // cant we just query payer = or payee = accountid. so that we can get both records?
+                        // it will work for transaction history but transaction record will fail because it
+                        // so then for transaction history, if im user A and I query, the record where im the payer,
+                        // will show as credit, but for user B it will show debit.
                         List<TransactionHistory> transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
 
                         // Query total count
@@ -224,7 +234,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                         QueryTransactionHistoryResult queryTransactionHistoryResult = new QueryTransactionHistoryResult();
                         queryTransactionHistoryResult.setTotalCount(totalCount);
-                        queryTransactionHistoryResult.setTransactionHistoryList(ItemConverter.convertToItem(transactionHistory));
+                        queryTransactionHistoryResult.setTransactionHistoryList(ItemConverter.convertToItem(transactionHistory, request.getAccountId()));
 
                         // convert DO to DTO and set result.
                         response.setSuccess(true);
@@ -255,7 +265,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                                 );
                         if (transactionRecord != null) {
                             response.setSuccess(true);
-                            response.setResult(ItemConverter.convertToItem(transactionRecord));
+                            response.setResult(ItemConverter.convertToItem(transactionRecord, request.getPayerAccountNo()));
                         }
                     }
                 });

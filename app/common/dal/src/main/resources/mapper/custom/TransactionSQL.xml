@@ -53,7 +53,7 @@
         payer_account_id, payee_account_id, amount, currency,
         type, status, failure_reason, ext_info
         FROM transaction
-        WHERE payer_account_id = #{accountId}
+        WHERE (payer_account_id = #{accountId} OR payee_account_id = #{accountId})
         ORDER BY gmt_create DESC
         LIMIT #{pageSize} OFFSET #{pageNo}
     </select>

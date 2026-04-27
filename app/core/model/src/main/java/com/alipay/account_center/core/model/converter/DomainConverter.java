@@ -71,6 +71,9 @@ public class DomainConverter {
                     item.setTxnId(transaction.getTxnId());
                     item.setGmtCreate(transaction.getGmtCreate());
                     item.setAmount(transaction.getAmount());
+                    item.setPayeeAccountId(transaction.getPayeeAccountId());
+                    item.setTransactionType(TransactionType.valueOf(transaction.getType()));
+                    item.setCompletedAt(transaction.getGmtComplete());
                     item.setCurrency(transaction.getCurrency());
                     item.setStatus(TransactionStatusEnum.valueOf(transaction.getStatus()));
                     item.setExtInfo(transaction.getExtInfo());
