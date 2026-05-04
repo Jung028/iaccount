@@ -30,6 +30,7 @@ public class ItemConverter {
         accountInfoItem.setGmtCreate(accountInfo.getGmtCreate());
         accountInfoItem.setGmtModified(accountInfo.getGmtModified());
         accountInfoItem.setExtInfo(accountInfo.getExtInfo());
+        accountInfoItem.setOwnerType(accountInfo.getOwnerType());
         return accountInfoItem;
     }
 
@@ -56,6 +57,8 @@ public class ItemConverter {
         transactionRecordItem.setTxnStatus(transactionRecord.getTxnStatus());
         transactionRecordItem.setFailureReason(transactionRecord.getFailureReason());
         transactionRecordItem.setExtInfo(transactionRecord.getExtInfo());
+        transactionRecordItem.setTxnCategory(transactionRecord.getCategory());
+
         return transactionRecordItem;
     }
 
@@ -76,6 +79,7 @@ public class ItemConverter {
         transactionRecordItem.setTxnStatus(transactionRecord.getTxnStatus());
         transactionRecordItem.setFailureReason(transactionRecord.getFailureReason());
         transactionRecordItem.setExtInfo(transactionRecord.getExtInfo());
+        transactionRecordItem.setTxnCategory(transactionRecord.getCategory());
         return transactionRecordItem;
     }
 
@@ -101,6 +105,7 @@ public class ItemConverter {
             item.setCurrency(transaction.getCurrency());
             item.setStatus(transaction.getStatus());
             item.setExtInfo(transaction.getExtInfo());
+            item.setTxnCategory(transaction.getCategory());
             return item;
         }).collect(Collectors.toList());
     }

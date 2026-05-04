@@ -1,8 +1,10 @@
 package com.alipay.account_center.common.service.facade.item;
 
+import com.alipay.account_center.common.service.facade.enums.TransactionCategory;
 import com.alipay.account_center.common.service.facade.enums.TransactionDirection;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionType;
+import org.apache.ibatis.transaction.Transaction;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class TransactionHistoryItem {
     private TransactionStatusEnum status;
     private String extInfo;
     private TransactionDirection transactionDirection;
+    private TransactionCategory txnCategory;
 
     public String getTxnId() {
         return txnId;
@@ -97,5 +100,13 @@ public class TransactionHistoryItem {
 
     public void setTransactionDirection(TransactionDirection transactionDirection) {
         this.transactionDirection = transactionDirection;
+    }
+
+    public TransactionCategory getTxnCategory() {
+        return txnCategory;
+    }
+
+    public void setTxnCategory(TransactionCategory txnCategory) {
+        this.txnCategory = txnCategory;
     }
 }

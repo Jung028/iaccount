@@ -17,6 +17,7 @@
         <result column="status" jdbcType="VARCHAR" property="status" />
         <result column="failure_reason" jdbcType="VARCHAR" property="failureReason" />
         <result column="ext_info" jdbcType="VARCHAR" property="extInfo" />
+        <result column="category" jdbcType="VARCHAR" property="category" />
     </resultMap>
 
     <!-- Query single transaction by txnId and accountId -->
@@ -25,7 +26,7 @@
         txn_id, gmt_create, gmt_modified, gmt_complete,
         payer_account_id, payee_account_id,
         amount, currency, type, status,
-        failure_reason, ext_info
+        failure_reason, ext_info, category
         FROM transaction
         WHERE txn_id = #{txnId}
         AND (payer_account_id = #{accountId} OR payee_account_id = #{accountId})
@@ -37,7 +38,7 @@
             txn_id, gmt_create, gmt_modified, gmt_complete,
             payer_account_id, payee_account_id,
             amount, currency, type, status,
-            failure_reason, ext_info
+            failure_reason, ext_info, category
         FROM transaction
         WHERE payer_account_id = #{accountId}
         AND status IN
@@ -51,7 +52,7 @@
     <select id="queryTransactionHistory" parameterType="map" resultMap="BaseResultMap">
         SELECT txn_id, gmt_create, gmt_modified, gmt_complete,
         payer_account_id, payee_account_id, amount, currency,
-        type, status, failure_reason, ext_info
+        type, status, failure_reason, ext_info, category
         FROM transaction
         WHERE (payer_account_id = #{accountId} OR payee_account_id = #{accountId})
         ORDER BY gmt_create DESC
@@ -63,13 +64,13 @@
         <if test="txnId != null">txn_id,</if>
         gmt_create, gmt_modified, gmt_complete,
         payer_account_id, payee_account_id, amount, currency,
-        type, status, failure_reason, ext_info
+        type, status, failure_reason, ext_info, category
         )
         VALUES (
         <if test="txnId != null">#{txnId},</if>
         NOW(), NOW(), #{gmtComplete},
         #{payerAccountId}, #{payeeAccountId}, #{amount}, #{currency},
-        #{type}, #{status}, #{failureReason}, #{extInfo}
+        #{type}, #{status}, #{failureReason}, #{extInfo}, #{category}
         )
     </insert>
 

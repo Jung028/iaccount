@@ -16,6 +16,7 @@ public class AccountInfoItem {
     private Date gmtCreate;
     private Date gmtModified;
     private String extInfo;
+    private String ownerType;
 
     public String getAccountId() {
         return accountId;
@@ -103,5 +104,13 @@ public class AccountInfoItem {
 
     public void setExtInfo(String extInfo) {
         this.extInfo = extInfo;
+    }
+
+    public String getOwnerType() {
+        return ownerType;
+    }
+
+    public void setOwnerType(String ownerType) {
+        this.ownerType = ownerType;
     }
 }
