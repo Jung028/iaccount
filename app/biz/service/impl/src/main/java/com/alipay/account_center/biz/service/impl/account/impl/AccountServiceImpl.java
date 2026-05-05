@@ -54,6 +54,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(CreateAccountRequest request, AccountBizResult<String> result) {
+                        //TODO: Add compatability for merchant to create account as well. change userId to ownerId.
                         AccountInfo accountInfo = accountRepository.createAccount(request);
                         if (accountInfo != null) {
                             ResponseBuilder.success(result, accountInfo.getAccountId(), AccountActionEnum.CREATE_ACCOUNT.getCode(),

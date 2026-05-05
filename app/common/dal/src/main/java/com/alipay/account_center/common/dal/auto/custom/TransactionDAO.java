@@ -5,6 +5,8 @@ import com.alipay.account_center.common.dal.auto.dataobject.TransactionDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,8 +26,11 @@ public interface TransactionDAO {
 
     int updateTransactionRecord(TransactionDO record);
 
-    int queryTransactionTotalCount(String accountId);
+    int queryTransactionTotalCount(@Param("accountId") String accountId);
 
     List<TransactionDO> queryTransactionHistory(@Param("accountId") String accountId, @Param("pageSize") int pageSize, @Param("pageNo") int pageNo,
-                                                @Param("payerAccountId") String payerAccountId, @Param("gmtCreate") String gmtCreate);
+                                                @Param("payerAccountId") String payerAccountId, @Param("gmtCreate") LocalDateTime gmtCreate,
+                                                @Param("amountMax") int amountMax, @Param("amountMin") int amountMin,
+                                                @Param("txnCategory") String txnCategory, @Param("txnType") String txnType,
+                                                @Param("txnStatus") String txnStatus);
 }

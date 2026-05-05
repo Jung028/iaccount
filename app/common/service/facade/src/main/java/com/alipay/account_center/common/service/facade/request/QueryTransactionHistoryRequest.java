@@ -1,18 +1,16 @@
 package com.alipay.account_center.common.service.facade.request;
 
-import com.alipay.account_center.common.service.facade.enums.TransactionCategory;
-import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
-import com.alipay.account_center.common.service.facade.enums.TransactionType;
+import java.time.LocalDateTime;
 
 public class QueryTransactionHistoryRequest extends QueryPageBaseRequest {
     private String accountId;
     private String payerAccountId;
-    private String gmtCreate;
-    private TransactionCategory category;
-    private String amountMin;
-    private String amountMax;
-    private TransactionStatusEnum txnStatus;
-    private TransactionType txnType;
+    private LocalDateTime gmtCreate;
+    private int amountMin;
+    private int amountMax;
+    private String txnStatus;
+    private String txnType;
+    private String txnCategory;
 
     public String getAccountId() {
         return accountId;
@@ -30,51 +28,51 @@ public class QueryTransactionHistoryRequest extends QueryPageBaseRequest {
         this.payerAccountId = payerAccountId;
     }
 
-    public String getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(String gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getAmountMin() {
+    public int getAmountMin() {
         return amountMin;
     }
 
-    public void setAmountMin(String amountMin) {
+    public void setAmountMin(int amountMin) {
         this.amountMin = amountMin;
     }
 
-    public String getAmountMax() {
+    public int getAmountMax() {
         return amountMax;
     }
 
-    public void setAmountMax(String amountMax) {
+    public void setAmountMax(int amountMax) {
         this.amountMax = amountMax;
     }
 
-    public TransactionStatusEnum getTxnStatus() {
+    public String getTxnStatus() {
         return txnStatus;
     }
 
-    public void setTxnStatus(TransactionStatusEnum txnStatus) {
+    public void setTxnStatus(String txnStatus) {
         this.txnStatus = txnStatus;
     }
 
-    public TransactionType getTxnType() {
+    public String getTxnType() {
         return txnType;
     }
 
-    public void setTxnType(TransactionType txnType) {
+    public void setTxnType(String txnType) {
         this.txnType = txnType;
+    }
+
+    public String getTxnCategory() {
+        return txnCategory;
+    }
+
+    public void setTxnCategory(String txnCategory) {
+        this.txnCategory = txnCategory;
     }
 }
