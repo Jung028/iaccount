@@ -61,6 +61,7 @@ public class AccountRepositoryImpl extends AbstractDomainRepository implements A
             accountDO.setStatus(AccountStatusEnum.ACTIVE.getCode());
             accountDO.setGmtModified(new Date());
             accountDO.setGmtCreate(new Date());
+            accountDO.setOwnerType(request.getOwnerType());
 
             int rows = accountDAO.createAccount(accountDO);
             if (rows <= 0) {

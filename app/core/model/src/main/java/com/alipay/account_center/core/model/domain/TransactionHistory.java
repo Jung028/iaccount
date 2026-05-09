@@ -1,6 +1,8 @@
 package com.alipay.account_center.core.model.domain;
 
+import com.alipay.account_center.common.service.facade.enums.TransactionCategory;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
+import com.alipay.account_center.common.service.facade.enums.TransactionType;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,9 +11,13 @@ public class TransactionHistory {
     private String txnId;
     private Date gmtCreate;
     private BigDecimal amount;
+    private String payeeAccountId;
+    private TransactionType transactionType;
+    private Date completedAt;
     private String currency;
     private TransactionStatusEnum status;
     private String extInfo;
+    private TransactionCategory category;
 
     public String getTxnId() {
         return txnId;
@@ -45,6 +51,30 @@ public class TransactionHistory {
         this.currency = currency;
     }
 
+    public String getPayeeAccountId() {
+        return payeeAccountId;
+    }
+
+    public void setPayeeAccountId(String payeeAccountId) {
+        this.payeeAccountId = payeeAccountId;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public Date getCompletedAt() {
+        return completedAt;
+    }
+
+    public void setCompletedAt(Date completedAt) {
+        this.completedAt = completedAt;
+    }
+
     public TransactionStatusEnum getStatus() {
         return status;
     }
@@ -59,5 +89,13 @@ public class TransactionHistory {
 
     public void setExtInfo(String extInfo) {
         this.extInfo = extInfo;
+    }
+
+    public TransactionCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(TransactionCategory category) {
+        this.category = category;
     }
 }

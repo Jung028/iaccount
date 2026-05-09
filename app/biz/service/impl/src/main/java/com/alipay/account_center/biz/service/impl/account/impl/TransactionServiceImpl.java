@@ -4,7 +4,7 @@ import com.alipay.account_center.biz.service.impl.account.TransactionService;
 import com.alipay.account_center.biz.service.impl.transaction.factory.TransactionHandlerFactory;
 import com.alipay.account_center.biz.service.impl.transaction.handler.TransactionalHandler;
 import com.alipay.account_center.common.service.facade.enums.AccountResultCode;
-import com.alipay.account_center.common.service.facade.enums.LedgerEntryTypeEnum;
+import com.alipay.account_center.common.service.facade.enums.TransactionDirection;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.event.EcDlqEvent;
 import com.alipay.account_center.common.service.facade.item.LedgerEntryItem;
@@ -134,7 +134,7 @@ public class TransactionServiceImpl extends AbstractAccountBizService implements
                 LedgerEntryItem payerLedger = new LedgerEntryItem();
                 payerLedger.setTxnId(event.getTxnId());
                 payerLedger.setAccountId(event.getPayerAccountNo());
-                payerLedger.setEntryType(LedgerEntryTypeEnum.DEBIT.getCode());
+                payerLedger.setEntryType(TransactionDirection.DEBIT.getCode());
                 payerLedger.setAmount(event.getAmount());
                 payerLedger.setBalanceAfter(accountPair.getPayer().getBalance());
                 payerLedger.setCurrency(event.getCurrency());
@@ -144,7 +144,7 @@ public class TransactionServiceImpl extends AbstractAccountBizService implements
                 LedgerEntryItem payeeLedger = new LedgerEntryItem();
                 payeeLedger.setTxnId(event.getTxnId());
                 payeeLedger.setAccountId(event.getPayeeAccountNo());
-                payeeLedger.setEntryType(LedgerEntryTypeEnum.CREDIT.getCode());
+                payeeLedger.setEntryType(TransactionDirection.CREDIT.getCode());
                 payeeLedger.setAmount(event.getAmount());
                 payeeLedger.setBalanceAfter(accountPair.getPayee().getBalance());
                 payeeLedger.setCurrency(event.getCurrency());

@@ -1,5 +1,6 @@
 package com.alipay.account_center.core.model.domain;
 
+import com.alipay.account_center.common.service.facade.enums.TransactionCategory;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionType;
 
@@ -20,6 +21,7 @@ public class TransactionRecord {
     private TransactionStatusEnum txnStatus;
     private String failureReason;
     private String extInfo;
+    private TransactionCategory category;
 
     public String getTxnId() {
         return txnId;
@@ -115,5 +117,13 @@ public class TransactionRecord {
 
     public void setExtInfo(String extInfo) {
         this.extInfo = extInfo;
+    }
+
+    public TransactionCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(TransactionCategory category) {
+        this.category = category;
     }
 }

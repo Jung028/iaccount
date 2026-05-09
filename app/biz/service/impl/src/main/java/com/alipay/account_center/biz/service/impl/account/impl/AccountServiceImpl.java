@@ -54,6 +54,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(CreateAccountRequest request, AccountBizResult<String> result) {
+                        //TODO: Add compatability for merchant to create account as well. change userId to ownerId.
                         AccountInfo accountInfo = accountRepository.createAccount(request);
                         if (accountInfo != null) {
                             ResponseBuilder.success(result, accountInfo.getAccountId(), AccountActionEnum.CREATE_ACCOUNT.getCode(),
@@ -156,7 +157,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         TransactionRecord transactionRecord = accountTransactionRepository.queryTransactionRecord(request);
 
                         response.setSuccess(true);
-                        response.setResult(ItemConverter.convertToItem(transactionRecord));
+                        response.setResult(ItemConverter.convertToItem(transactionRecord, request.getAccountId()));
                     }
                 });
     }
@@ -224,7 +225,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                         QueryTransactionHistoryResult queryTransactionHistoryResult = new QueryTransactionHistoryResult();
                         queryTransactionHistoryResult.setTotalCount(totalCount);
-                        queryTransactionHistoryResult.setTransactionHistoryList(ItemConverter.convertToItem(transactionHistory));
+                        queryTransactionHistoryResult.setTransactionHistoryList(ItemConverter.convertToItem(transactionHistory, request.getAccountId()));
 
                         // convert DO to DTO and set result.
                         response.setSuccess(true);
@@ -249,13 +250,14 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(InsertTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
+                        System.out.print("CATEGORY: " + request.getCategory());
                         TransactionRecord transactionRecord =
                                 transactionTemplate.execute(status ->
                                         accountTransactionRepository.insertTransactionRecord(request)
                                 );
                         if (transactionRecord != null) {
                             response.setSuccess(true);
-                            response.setResult(ItemConverter.convertToItem(transactionRecord));
+                            response.setResult(ItemConverter.convertToItem(transactionRecord, request.getPayerAccountNo()));
                         }
                     }
                 });

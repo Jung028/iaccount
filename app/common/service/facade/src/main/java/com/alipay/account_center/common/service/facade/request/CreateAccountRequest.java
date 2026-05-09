@@ -10,6 +10,7 @@ public class CreateAccountRequest extends AccountBaseRequest {
     private AccountTypeEnum accountType;
     private String userId;
     private String currency;
+    private String ownerType;
 
     public String getAccountName() {
         return accountName;
@@ -41,5 +42,13 @@ public class CreateAccountRequest extends AccountBaseRequest {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getOwnerType() {
+        return ownerType;
+    }
+
+    public void setOwnerType(String ownerType) {
+        this.ownerType = ownerType;
     }
 }

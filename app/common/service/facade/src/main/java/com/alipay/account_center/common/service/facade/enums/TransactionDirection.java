@@ -4,7 +4,7 @@ package com.alipay.account_center.common.service.facade.enums;
  * @author adam
  * @date 13/3/2026 12:08 AM
  */
-public enum LedgerEntryTypeEnum {
+public enum TransactionDirection {
     DEBIT("DEBIT", "deduct"),
     CREDIT("CREDIT", "add");
 
@@ -27,7 +27,7 @@ public enum LedgerEntryTypeEnum {
         this.desc = desc;
     }
 
-    LedgerEntryTypeEnum(String code, String desc) {
+    TransactionDirection(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

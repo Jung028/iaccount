@@ -2,6 +2,7 @@ package com.alipay.account_center.core.model.converter;
 
 import com.alipay.account_center.common.dal.auto.dataobject.AccountDO;
 import com.alipay.account_center.common.dal.auto.dataobject.TransactionDO;
+import com.alipay.account_center.common.service.facade.enums.TransactionCategory;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionType;
 import com.alipay.account_center.core.model.domain.AccountInfo;
@@ -36,27 +37,29 @@ public class DomainConverter {
         accountInfo.setGmtCreate(accountDO.getGmtCreate());
         accountInfo.setGmtModified(accountDO.getGmtModified());
         accountInfo.setExtInfo(accountDO.getExtInfo());
+        accountInfo.setOwnerType(accountDO.getOwnerType());
         return accountInfo;
     }
 
     public static TransactionRecord convertToModel(TransactionDO transactionDO) {
-    if (transactionDO == null) {
-        return null;
-    }
-    TransactionRecord transactionRecord = new TransactionRecord();
-    transactionRecord.setTxnId(transactionDO.getTxnId());
-    transactionRecord.setGmtCreate(transactionDO.getGmtCreate());
-    transactionRecord.setGmtModified(transactionDO.getGmtModified());
-    transactionRecord.setGmtComplete(transactionDO.getGmtComplete());
-    transactionRecord.setPayerAccountId(transactionDO.getPayerAccountId());
-    transactionRecord.setPayeeAccountId(transactionDO.getPayeeAccountId());
-    transactionRecord.setAmount(transactionDO.getAmount());
-    transactionRecord.setCurrency(transactionDO.getCurrency());
-    transactionRecord.setTxnType(TransactionType.valueOf(transactionDO.getType()));
-    transactionRecord.setTxnStatus(TransactionStatusEnum.valueOf(transactionDO.getStatus()));
-    transactionRecord.setFailureReason(transactionDO.getFailureReason());
-    transactionRecord.setExtInfo(transactionDO.getExtInfo());
-    return transactionRecord;
+        if (transactionDO == null) {
+            return null;
+        }
+        TransactionRecord transactionRecord = new TransactionRecord();
+        transactionRecord.setTxnId(transactionDO.getTxnId());
+        transactionRecord.setGmtCreate(transactionDO.getGmtCreate());
+        transactionRecord.setGmtModified(transactionDO.getGmtModified());
+        transactionRecord.setGmtComplete(transactionDO.getGmtComplete());
+        transactionRecord.setPayerAccountId(transactionDO.getPayerAccountId());
+        transactionRecord.setPayeeAccountId(transactionDO.getPayeeAccountId());
+        transactionRecord.setAmount(transactionDO.getAmount());
+        transactionRecord.setCurrency(transactionDO.getCurrency());
+        transactionRecord.setTxnType(TransactionType.fromCode(transactionDO.getType()));
+        transactionRecord.setTxnStatus(TransactionStatusEnum.fromCode(transactionDO.getStatus()));
+        transactionRecord.setFailureReason(transactionDO.getFailureReason());
+        transactionRecord.setExtInfo(transactionDO.getExtInfo());
+        transactionRecord.setCategory(TransactionCategory.fromCode(transactionDO.getCategory()));
+        return transactionRecord;
     }
 
     public static List<TransactionHistory> convertToModelList(List<TransactionDO> transactionDOS) {
@@ -71,9 +74,13 @@ public class DomainConverter {
                     item.setTxnId(transaction.getTxnId());
                     item.setGmtCreate(transaction.getGmtCreate());
                     item.setAmount(transaction.getAmount());
+                    item.setPayeeAccountId(transaction.getPayeeAccountId());
+                    item.setTransactionType(TransactionType.fromCode(transaction.getType()));
+                    item.setCompletedAt(transaction.getGmtComplete());
                     item.setCurrency(transaction.getCurrency());
-                    item.setStatus(TransactionStatusEnum.valueOf(transaction.getStatus()));
+                    item.setStatus(TransactionStatusEnum.fromCode(transaction.getStatus()));
                     item.setExtInfo(transaction.getExtInfo());
+                    item.setCategory(TransactionCategory.fromCode(transaction.getCategory()));
                     return item;
                 })
                 .collect(Collectors.toList());
@@ -94,6 +101,7 @@ public class DomainConverter {
         accountDO.setGmtCreate(accountInfo.getGmtCreate());
         accountDO.setGmtModified(accountInfo.getGmtModified());
         accountDO.setExtInfo(accountInfo.getExtInfo());
+        accountDO.setOwnerType(accountInfo.getOwnerType());
         return accountDO;
     }
 }

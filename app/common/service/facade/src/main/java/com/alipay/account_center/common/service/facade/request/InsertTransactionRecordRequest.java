@@ -1,6 +1,7 @@
 package com.alipay.account_center.common.service.facade.request;
 
 import com.alipay.account_center.common.service.facade.baseresult.AccountBaseRequest;
+import com.alipay.account_center.common.service.facade.enums.TransactionCategory;
 import com.alipay.account_center.common.service.facade.enums.TransactionStatusEnum;
 import com.alipay.account_center.common.service.facade.enums.TransactionType;
 
@@ -14,6 +15,7 @@ public class InsertTransactionRecordRequest extends AccountBaseRequest {
     private String currency;
     private TransactionStatusEnum status;
     private TransactionType txnType;
+    private TransactionCategory category;
 
     public String getTxnId() {
         return txnId;
@@ -69,5 +71,13 @@ public class InsertTransactionRecordRequest extends AccountBaseRequest {
 
     public void setTxnType(TransactionType txnType) {
         this.txnType = txnType;
+    }
+
+    public TransactionCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(TransactionCategory category) {
+        this.category = category;
     }
 }

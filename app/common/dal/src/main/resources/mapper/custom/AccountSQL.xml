@@ -16,19 +16,20 @@
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
         <result column="ext_info" jdbcType="VARCHAR" property="extInfo" />
         <result column="account_relation_id" jdbcType="VARCHAR" property="accountRelationId" />
+        <result column="owner_type" jdbcType="VARCHAR" property="ownerType" />
     </resultMap>
 
     <!-- Query account info -->
     <select id="queryAccountInfo" parameterType="string" resultMap="BaseResultMap">
         SELECT account_id, account_number, account_name, account_type, currency, balance, status,
-        gmt_create, gmt_modified, ext_info, account_relation_id
+        gmt_create, gmt_modified, ext_info, account_relation_id, owner_type
         FROM account
         WHERE account_id = #{accountId}
     </select>
 
     <select id="queryAccountInfoByUserId" parameterType="string" resultMap="BaseResultMap">
         SELECT account_id, account_number, account_name, account_type, currency, balance, status,
-        gmt_create, gmt_modified, ext_info, account_relation_id
+        gmt_create, gmt_modified, ext_info, account_relation_id, owner_type
         FROM account
         WHERE account_relation_id = #{userId}
     </select>
@@ -38,13 +39,13 @@
         INSERT INTO account (
         account_id, account_number, account_name, account_type,
         currency, balance, status, gmt_create, gmt_modified,
-        ext_info, account_relation_id
+        ext_info, account_relation_id, owner_type
         )
         VALUES (
         #{accountId,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR},
         #{accountType,jdbcType=VARCHAR}, #{currency,jdbcType=CHAR}, #{balance,jdbcType=NUMERIC},
         #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-        #{extInfo,jdbcType=VARCHAR}, #{accountRelationId,jdbcType=VARCHAR}
+        #{extInfo,jdbcType=VARCHAR}, #{accountRelationId,jdbcType=VARCHAR}, #{ownerType,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -52,7 +53,7 @@
     <select id="lockById" parameterType="string" resultMap="BaseResultMap">
         SELECT account_id, account_number, account_name, account_type,
         currency, balance, status, gmt_create, gmt_modified,
-        ext_info, account_relation_id
+        ext_info, account_relation_id, owner_type
         FROM account
         WHERE account_id = #{accountId}
         FOR UPDATE

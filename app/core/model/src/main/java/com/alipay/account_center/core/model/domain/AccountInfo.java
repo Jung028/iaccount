@@ -15,6 +15,7 @@ public class AccountInfo {
     private Date gmtCreate;
     private Date gmtModified;
     private String extInfo;
+    private String ownerType;
 
     public void debit(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) < 0) {
@@ -121,4 +122,13 @@ public class AccountInfo {
     public void setExtInfo(String extInfo) {
         this.extInfo = extInfo;
     }
+
+    public String getOwnerType() {
+        return ownerType;
+    }
+
+    public void setOwnerType(String ownerType) {
+        this.ownerType = ownerType;
+    }
 }
+
