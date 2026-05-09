@@ -62,6 +62,7 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             TransactionDO record = new TransactionDO();
             // generate random UUID
             record.setTxnId(UUID.randomUUID().toString());
+            record.setCategory(request.getCategory().getCode());
             record.setPayerAccountId(request.getPayerAccountNo());
             record.setPayeeAccountId(request.getPayeeAccountNo());
             record.setAmount(request.getAmount());
@@ -70,7 +71,6 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             record.setGmtCreate(new Date());
             record.setGmtModified(new Date());
             record.setGmtComplete(new Date());
-            System.out.println("HELLO HERE" + request.getTxnType().getCode());
             record.setType(request.getTxnType().getCode());
 
             int rows = accountTransactionDAO.insertTransactionRecord(record); // DAO returns int

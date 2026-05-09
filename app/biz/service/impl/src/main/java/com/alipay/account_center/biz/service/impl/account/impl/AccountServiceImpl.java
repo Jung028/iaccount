@@ -250,6 +250,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                     @Override
                     protected void process(InsertTransactionRecordRequest request, AccountBizResult<TransactionRecordItem> response) {
+                        System.out.print("CATEGORY: " + request.getCategory());
                         TransactionRecord transactionRecord =
                                 transactionTemplate.execute(status ->
                                         accountTransactionRepository.insertTransactionRecord(request)

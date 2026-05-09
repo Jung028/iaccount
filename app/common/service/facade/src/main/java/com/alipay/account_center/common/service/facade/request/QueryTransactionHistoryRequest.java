@@ -75,4 +75,5 @@ public class QueryTransactionHistoryRequest extends QueryPageBaseRequest {
     public void setTxnCategory(String txnCategory) {
         this.txnCategory = txnCategory;
     }
+
 }

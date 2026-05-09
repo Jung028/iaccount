@@ -54,11 +54,11 @@ public class DomainConverter {
         transactionRecord.setPayeeAccountId(transactionDO.getPayeeAccountId());
         transactionRecord.setAmount(transactionDO.getAmount());
         transactionRecord.setCurrency(transactionDO.getCurrency());
-        transactionRecord.setTxnType(TransactionType.valueOf(transactionDO.getType()));
-        transactionRecord.setTxnStatus(TransactionStatusEnum.valueOf(transactionDO.getStatus()));
+        transactionRecord.setTxnType(TransactionType.fromCode(transactionDO.getType()));
+        transactionRecord.setTxnStatus(TransactionStatusEnum.fromCode(transactionDO.getStatus()));
         transactionRecord.setFailureReason(transactionDO.getFailureReason());
         transactionRecord.setExtInfo(transactionDO.getExtInfo());
-        transactionRecord.setCategory(TransactionCategory.valueOf(transactionDO.getCategory()));
+        transactionRecord.setCategory(TransactionCategory.fromCode(transactionDO.getCategory()));
         return transactionRecord;
     }
 
@@ -75,12 +75,12 @@ public class DomainConverter {
                     item.setGmtCreate(transaction.getGmtCreate());
                     item.setAmount(transaction.getAmount());
                     item.setPayeeAccountId(transaction.getPayeeAccountId());
-                    item.setTransactionType(TransactionType.valueOf(transaction.getType()));
+                    item.setTransactionType(TransactionType.fromCode(transaction.getType()));
                     item.setCompletedAt(transaction.getGmtComplete());
                     item.setCurrency(transaction.getCurrency());
-                    item.setStatus(TransactionStatusEnum.valueOf(transaction.getStatus()));
+                    item.setStatus(TransactionStatusEnum.fromCode(transaction.getStatus()));
                     item.setExtInfo(transaction.getExtInfo());
-                    item.setCategory(TransactionCategory.valueOf(transaction.getCategory()));
+                    item.setCategory(TransactionCategory.fromCode(transaction.getCategory()));
                     return item;
                 })
                 .collect(Collectors.toList());

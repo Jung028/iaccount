@@ -29,4 +29,16 @@ public enum TransactionStatusEnum {
         this.code = code;
         this.desc = desc;
     }
+
+    public static TransactionStatusEnum fromCode(String code) {
+        if (code == null) {
+            return PENDING;
+        }
+        for (TransactionStatusEnum status : values()) {
+            if (status.code.equalsIgnoreCase(code)) {
+                return status;
+            }
+        }
+        return PENDING;
+    }
 }

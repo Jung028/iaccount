@@ -31,4 +31,16 @@ public enum TransactionType {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public static TransactionType fromCode(String code) {
+        if (code == null) {
+            return TRANSFER;
+        }
+        for (TransactionType type : values()) {
+            if (type.code.equalsIgnoreCase(code)) {
+                return type;
+            }
+        }
+        return TRANSFER;
+    }
 }
