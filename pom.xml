@@ -29,7 +29,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <account-common-service-facade-version>1.0.0.20260317.10-SNAPSHOT</account-common-service-facade-version>
+        <account-common-service-facade-version>1.0.0.20260520</account-common-service-facade-version>
         <businesscenter-common-service-facade-version>1.0.0.20260317.2-SNAPSHOT</businesscenter-common-service-facade-version>
         <usercenter.common.service.facade.version>1.0.0.20260317.23-SNAPSHOT</usercenter.common.service.facade.version>
 
@@ -165,8 +165,12 @@
             <distributionManagement>
                 <repository>
                     <id>Alipay_Releases</id>
-                    <url>http://localhost:8081/repository/maven-snapshots/</url>
+                    <url>http://localhost:8081/repository/maven-releases/</url>
                 </repository>
+                <snapshotRepository>
+                    <id>Alipay_Snapshots</id>
+                    <url>http://localhost:8081/repository/maven-snapshots/</url>
+                </snapshotRepository>
             </distributionManagement>
         </profile>
     </profiles>
