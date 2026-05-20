@@ -6,6 +6,7 @@ target/
 **/maven-status/
 **/maven-archiver/
 **/*.jar
+!libs/**/*.jar
 *.pem
 
 # -------------------------
