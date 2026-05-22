@@ -193,6 +193,12 @@
                     <url>https://repo1.maven.org/maven2/</url>
                 </repository>
                 <repository>
+                    <id>project-local</id>
+                    <url>file://${maven.multiModuleProjectDirectory}/libs</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                </repository>
+                <repository>
                     <id>github-iuser</id>
                     <url>https://maven.pkg.github.com/Jung028/iuser</url>
                     <releases><enabled>true</enabled></releases>
