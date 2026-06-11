@@ -1,0 +1,630 @@
+2026-06-07 00:12:38.277 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m15s613ms).
+2026-06-07 00:35:56.638 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m47s856ms).
+2026-06-07 00:51:55.207 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s217ms).
+2026-06-07 00:56:06.964 WARN  [kafka-producer-network-thread | account-web-producer-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Producer clientId=account-web-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:07.067 WARN  [kafka-producer-network-thread | account-web-producer-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Producer clientId=account-web-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:07.127 WARN  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Consumer clientId=consumer-account-center-1, groupId=account-center] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:07.242 WARN  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Consumer clientId=consumer-account-center-1, groupId=account-center] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:07.309 WARN  [kafka-producer-network-thread | account-web-producer-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Producer clientId=account-web-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:07.497 WARN  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Consumer clientId=consumer-account-center-1, groupId=account-center] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:07.771 WARN  [kafka-producer-network-thread | account-web-producer-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Producer clientId=account-web-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:07.915 WARN  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Consumer clientId=consumer-account-center-1, groupId=account-center] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:08.694 WARN  [kafka-producer-network-thread | account-web-producer-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Producer clientId=account-web-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:08.835 WARN  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Consumer clientId=consumer-account-center-1, groupId=account-center] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:09.695 WARN  [kafka-producer-network-thread | account-web-producer-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Producer clientId=account-web-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 00:56:30.655 WARN  [kafka-producer-network-thread | account-web-producer-1] service=iaccount traceId= org.apache.kafka.clients.NetworkClient - [Producer clientId=account-web-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-06-07 01:10:21.285 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m55s513ms).
+2026-06-07 01:24:27.607 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 5, active threads = 1, queued tasks = 0, completed tasks = 4]
+2026-06-07 01:54:27.647 INFO  [MessageBroker-2] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 6, active threads = 1, queued tasks = 0, completed tasks = 5]
+2026-06-07 02:24:27.671 INFO  [MessageBroker-4] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 7, active threads = 1, queued tasks = 0, completed tasks = 6]
+2026-06-07 02:40:24.810 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m32s816ms).
+2026-06-07 02:57:35.674 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m40s855ms).
+2026-06-07 03:16:14.742 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m39s34ms).
+2026-06-07 03:26:50.364 INFO  [MessageBroker-1] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 8, active threads = 1, queued tasks = 0, completed tasks = 7]
+2026-06-07 03:56:50.380 INFO  [MessageBroker-5] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 9, active threads = 1, queued tasks = 0, completed tasks = 8]
+2026-06-07 04:26:50.395 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 9]
+2026-06-07 04:56:50.409 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 10]
+2026-06-07 05:26:50.424 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 11]
+2026-06-07 05:56:50.436 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 12]
+2026-06-07 06:26:50.443 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 13]
+2026-06-07 07:12:39.034 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m21s859ms).
+2026-06-07 07:12:42.306 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 14]
+2026-06-07 07:28:37.547 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s501ms).
+2026-06-07 07:44:54.996 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m17s450ms).
+2026-06-07 08:01:51.448 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m26s444ms).
+2026-06-07 08:18:02.520 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m41s58ms).
+2026-06-07 08:30:48.953 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m16s409ms).
+2026-06-07 08:48:11.373 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m22s421ms).
+2026-06-07 09:05:32.839 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m51s458ms).
+2026-06-07 09:23:18.406 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m15s562ms).
+2026-06-07 09:39:17.296 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m58s891ms).
+2026-06-07 09:52:52.393 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m5s61ms).
+2026-06-07 10:03:21.161 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m58s756ms).
+2026-06-07 10:19:17.030 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m55s870ms).
+2026-06-07 10:31:43.569 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m56s533ms).
+2026-06-07 10:48:05.104 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m51s528ms).
+2026-06-07 11:05:24.193 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m19s89ms).
+2026-06-07 11:21:25.712 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m31s506ms).
+2026-06-07 11:32:46.221 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m50s501ms).
+2026-06-07 11:48:36.167 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m49s947ms).
+2026-06-07 12:06:11.687 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m5s510ms).
+2026-06-07 12:23:08.310 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m26s611ms).
+2026-06-07 12:33:11.279 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 15]
+2026-06-07 13:03:11.286 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 16]
+2026-06-07 13:33:11.293 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 17]
+2026-06-07 13:53:08.844 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m29s909ms).
+2026-06-07 13:59:47.020 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m8s168ms).
+2026-06-07 14:24:49.382 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 18]
+2026-06-07 14:54:49.406 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 19]
+2026-06-07 15:25:02.458 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 20]
+2026-06-07 15:54:23.929 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m23s159ms).
+2026-06-07 15:59:23.718 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59s745ms).
+2026-06-07 16:11:25.372 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 21]
+2026-06-07 16:41:25.383 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 22]
+2026-06-07 16:55:12.471 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m18s384ms).
+2026-06-07 16:57:11.254 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m58s782ms).
+2026-06-07 16:59:59.297 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48s16ms).
+2026-06-07 17:02:47.175 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m17s872ms).
+2026-06-07 17:09:53.267 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m6s78ms).
+2026-06-07 17:17:23.631 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m360ms).
+2026-06-07 17:31:54.863 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 23]
+2026-06-07 17:59:23.616 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59s685ms).
+2026-06-07 18:02:24.561 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 24]
+2026-06-07 18:32:24.571 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 25]
+2026-06-07 19:02:24.597 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 26]
+2026-06-07 19:32:24.619 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 27]
+2026-06-07 20:02:24.633 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 28]
+2026-06-07 20:25:22.256 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m57s601ms).
+2026-06-07 20:42:08.915 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m46s659ms).
+2026-06-07 20:48:39.058 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m130ms).
+2026-06-07 20:55:39.021 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 29]
+2026-06-07 21:21:42.191 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m32s898ms).
+2026-06-07 21:25:02.247 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m5s848ms).
+2026-06-07 21:32:58.564 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m26s309ms).
+2026-06-07 21:47:13.816 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m45s243ms).
+2026-06-07 21:51:25.529 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m11s713ms).
+2026-06-07 21:56:33.913 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 30]
+2026-06-07 21:56:34.261 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m38s719ms).
+2026-06-07 21:59:49.288 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m15s28ms).
+2026-06-07 22:01:56.039 WARN  [HikariPool-1:housekeeper] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m36s740ms).
+2026-06-07 22:30:25.693 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 31]
+2026-06-07 23:00:25.708 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 32]
+2026-06-07 23:30:25.723 INFO  [MessageBroker-3] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 10, active threads = 1, queued tasks = 0, completed tasks = 33]
+2026-06-07 23:45:21.355 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:45:21.360 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:45:21.362 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@4c192ed2]
+2026-06-07 23:45:21.367 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:45:21.574 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfoByUserId(..) (207ms)
+2026-06-07 23:45:21.581 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@966dece]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@4c192ed2]
+2026-06-07 23:45:21.581 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (220ms)
+2026-06-07 23:45:21.583 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfoByUserId(..) (225ms)
+2026-06-07 23:45:21.655 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.insertTransactionRecord(..)
+2026-06-07 23:45:21.726 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:45:21.726 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@141d4041]
+2026-06-07 23:45:21.745 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.insertTransactionRecord(..)
+2026-06-07 23:45:21.754 ERROR [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Error in: AccountTransactionRepositoryImpl.insertTransactionRecord(..) (7ms). Message: DB error during insert
+2026-06-07 23:45:21.756 ERROR [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a RISK-BIZ-SERVICE - service process unexpected exception[[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@141d4041]
+com.alipay.account_center.core.model.exception.RepositoryException: DB error during insert
+	at com.alipay.account_center.core.service.repository.impl.AccountTransactionRepositoryImpl.insertTransactionRecord(AccountTransactionRepositoryImpl.java:84)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.account_center.web.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.account_center.core.service.repository.impl.AccountTransactionRepositoryImpl$$SpringCGLIB$$0.insertTransactionRecord(<generated>)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$7.lambda$process$0(AccountServiceImpl.java:256)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$7.process(AccountServiceImpl.java:255)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$7.process(AccountServiceImpl.java:240)
+	at com.alipay.account_center.biz.service.impl.template.AccountServiceTemplate.execute(AccountServiceTemplate.java:54)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.account_center.web.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.account_center.biz.service.impl.template.AccountServiceTemplate$$SpringCGLIB$$0.execute(<generated>)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl.insertTransactionRecord(AccountServiceImpl.java:239)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.account_center.web.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$$SpringCGLIB$$0.insertTransactionRecord(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at com.alipay.sofa.rpc.filter.ProviderInvoker.invoke(ProviderInvoker.java:103)
+	at com.alipay.account_center.rpc.TraceIdProviderFilter.invoke(TraceIdProviderFilter.java:38)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.PressureMarkTransformFilter.invoke(PressureMarkTransformFilter.java:63)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.sofatracer.ProviderTracerFilter.invoke(ProviderTracerFilter.java:74)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.ProviderBaggageFilter.invoke(ProviderBaggageFilter.java:45)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.RpcServiceContextFilter.invoke(RpcServiceContextFilter.java:62)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.ProviderExceptionFilter.invoke(ProviderExceptionFilter.java:37)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.FilterChain.invoke(FilterChain.java:269)
+	at com.alipay.sofa.rpc.server.ProviderProxyInvoker.invoke(ProviderProxyInvoker.java:68)
+	at com.alipay.account_center.common.service.facade.api.AccountService_proxy_2.insertTransactionRecord(AccountService_proxy_2.java)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:139)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:510)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:400)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:364)
+	at org.jboss.resteasy.core.interception.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:355)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:366)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:338)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:311)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:439)
+	at com.alipay.sofa.rpc.server.rest.SofaSynchronousDispatcher.invoke(SofaSynchronousDispatcher.java:49)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$4(SynchronousDispatcher.java:229)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:135)
+	at org.jboss.resteasy.core.interception.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:355)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:138)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:215)
+	at org.jboss.resteasy.plugins.server.netty.RequestDispatcher.service(RequestDispatcher.java:83)
+	at com.alipay.sofa.rpc.server.rest.SofaRestRequestHandler.channelRead0(SofaRestRequestHandler.java:103)
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:99)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.access$600(AbstractChannelHandlerContext.java:61)
+	at io.netty.channel.AbstractChannelHandlerContext$7.run(AbstractChannelHandlerContext.java:425)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NullPointerException: Cannot invoke "com.alipay.account_center.common.service.facade.enums.TransactionCategory.getCode()" because the return value of "com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest.getCategory()" is null
+	at com.alipay.account_center.core.service.repository.impl.AccountTransactionRepositoryImpl.insertTransactionRecord(AccountTransactionRepositoryImpl.java:65)
+	... 107 common frames omitted
+2026-06-07 23:45:21.774 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@154f2788]] [request =[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@141d4041]
+2026-06-07 23:45:21.774 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (48ms)
+2026-06-07 23:45:21.774 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=a9485626-b843-4bd7-82ee-ea99f0e59c3a c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.insertTransactionRecord(..) (49ms)
+2026-06-07 23:45:36.966 INFO  [main] service=iaccount traceId= com.alipay.account_center.web.Main - Starting Main using Java 25.0.2 with PID 33712 (/Users/adam/IdeaProjects/iaccount/app/web/target/classes started by adam in /Users/adam/IdeaProjects/iaccount)
+2026-06-07 23:45:36.973 INFO  [main] service=iaccount traceId= com.alipay.account_center.web.Main - No active profile set, falling back to 1 default profile: "default"
+2026-06-07 23:45:37.957 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-07 23:45:37.963 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 23:45:37.980 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2026-06-07 23:45:37.997 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-07 23:45:37.998 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-07 23:45:38.011 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2026-06-07 23:45:38.438 WARN  [main] service=iaccount traceId= o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'asyncInitMethodManager' of type [com.alipay.sofa.runtime.async.AsyncInitMethodManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [asyncProxyBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-07 23:45:38.931 INFO  [main] service=iaccount traceId= o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8887 (http)
+2026-06-07 23:45:38.947 INFO  [main] service=iaccount traceId= o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-0.0.0.0-8887"]
+2026-06-07 23:45:38.952 INFO  [main] service=iaccount traceId= o.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 23:45:38.953 INFO  [main] service=iaccount traceId= org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-06-07 23:45:38.982 INFO  [main] service=iaccount traceId= o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-07 23:45:38.982 INFO  [main] service=iaccount traceId= o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1974 ms
+2026-06-07 23:45:39.256 INFO  [main] service=iaccount traceId= o.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 23:45:39.310 INFO  [main] service=iaccount traceId= org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-06-07 23:45:39.333 INFO  [main] service=iaccount traceId= o.h.c.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 23:45:39.740 INFO  [main] service=iaccount traceId= o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 23:45:39.801 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-07 23:45:40.007 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@375c6b98
+2026-06-07 23:45:40.011 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-07 23:45:40.085 WARN  [main] service=iaccount traceId= org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 23:45:40.105 INFO  [main] service=iaccount traceId= org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 18.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-07 23:45:40.420 INFO  [main] service=iaccount traceId= o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 23:45:40.424 INFO  [main] service=iaccount traceId= o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 23:45:42.640 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Entering: TopUpHandler.getType()
+2026-06-07 23:45:42.640 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Exiting: TopUpHandler.getType() (0ms)
+2026-06-07 23:45:42.640 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Entering: TransactionHandler.getType()
+2026-06-07 23:45:42.641 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Exiting: TransactionHandler.getType() (1ms)
+2026-06-07 23:45:42.715 WARN  [main] service=iaccount traceId= o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-07 23:45:43.074 INFO  [main] service=iaccount traceId= o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoints beneath base path '/actuator'
+2026-06-07 23:45:43.107 INFO  [main] service=iaccount traceId= o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-06-07 23:45:44.595 WARN  [main] service=iaccount traceId= o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ServiceFactoryBean#com.alipay.account_center.common.service.facade.api.AccountService:accountServiceImpl': SOFA-BOOT-01-03004: Failed to resolve and active component [service:com.alipay.account_center.common.service.facade.api.AccountService]
+2026-06-07 23:45:44.617 INFO  [main] service=iaccount traceId= o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 23:45:44.620 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-07 23:45:44.624 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-07 23:45:44.628 INFO  [main] service=iaccount traceId= o.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2026-06-07 23:45:44.657 INFO  [main] service=iaccount traceId= o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-07 23:45:44.671 ERROR [main] service=iaccount traceId= o.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ServiceFactoryBean#com.alipay.account_center.common.service.facade.api.AccountService:accountServiceImpl': SOFA-BOOT-01-03004: Failed to resolve and active component [service:com.alipay.account_center.common.service.facade.api.AccountService]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1215)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.alipay.account_center.web.Main.main(Main.java:11)
+Caused by: com.alipay.sofa.runtime.api.ServiceRuntimeException: SOFA-BOOT-01-03004: Failed to resolve and active component [service:com.alipay.account_center.common.service.facade.api.AccountService]
+	at com.alipay.sofa.runtime.impl.ComponentManagerImpl.doRegister(ComponentManagerImpl.java:212)
+	at com.alipay.sofa.runtime.impl.ComponentManagerImpl.register(ComponentManagerImpl.java:159)
+	at com.alipay.sofa.runtime.spring.factory.ServiceFactoryBean.afterPropertiesSet(ServiceFactoryBean.java:88)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 18 common frames omitted
+2026-06-07 23:46:22.093 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:46:22.095 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:46:22.095 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@6bae7228]
+2026-06-07 23:46:22.095 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:46:22.108 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfoByUserId(..) (13ms)
+2026-06-07 23:46:22.108 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@121ca4f4]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@6bae7228]
+2026-06-07 23:46:22.109 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (14ms)
+2026-06-07 23:46:22.109 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfoByUserId(..) (14ms)
+2026-06-07 23:46:22.115 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.insertTransactionRecord(..)
+2026-06-07 23:46:22.116 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:46:22.117 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@38b38f3f]
+2026-06-07 23:46:22.121 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.insertTransactionRecord(..)
+2026-06-07 23:46:22.122 ERROR [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Error in: AccountTransactionRepositoryImpl.insertTransactionRecord(..) (0ms). Message: DB error during insert
+2026-06-07 23:46:22.122 ERROR [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 RISK-BIZ-SERVICE - service process unexpected exception[[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@38b38f3f]
+com.alipay.account_center.core.model.exception.RepositoryException: DB error during insert
+	at com.alipay.account_center.core.service.repository.impl.AccountTransactionRepositoryImpl.insertTransactionRecord(AccountTransactionRepositoryImpl.java:84)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.account_center.web.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.account_center.core.service.repository.impl.AccountTransactionRepositoryImpl$$SpringCGLIB$$0.insertTransactionRecord(<generated>)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$7.lambda$process$0(AccountServiceImpl.java:256)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$7.process(AccountServiceImpl.java:255)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$7.process(AccountServiceImpl.java:240)
+	at com.alipay.account_center.biz.service.impl.template.AccountServiceTemplate.execute(AccountServiceTemplate.java:54)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.account_center.web.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.account_center.biz.service.impl.template.AccountServiceTemplate$$SpringCGLIB$$0.execute(<generated>)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl.insertTransactionRecord(AccountServiceImpl.java:239)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.account_center.web.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.account_center.biz.service.impl.account.impl.AccountServiceImpl$$SpringCGLIB$$0.insertTransactionRecord(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at com.alipay.sofa.rpc.filter.ProviderInvoker.invoke(ProviderInvoker.java:103)
+	at com.alipay.account_center.rpc.TraceIdProviderFilter.invoke(TraceIdProviderFilter.java:38)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.PressureMarkTransformFilter.invoke(PressureMarkTransformFilter.java:63)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.sofatracer.ProviderTracerFilter.invoke(ProviderTracerFilter.java:74)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.ProviderBaggageFilter.invoke(ProviderBaggageFilter.java:45)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.RpcServiceContextFilter.invoke(RpcServiceContextFilter.java:62)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.ProviderExceptionFilter.invoke(ProviderExceptionFilter.java:37)
+	at com.alipay.sofa.rpc.filter.FilterInvoker.invoke(FilterInvoker.java:100)
+	at com.alipay.sofa.rpc.filter.FilterChain.invoke(FilterChain.java:269)
+	at com.alipay.sofa.rpc.server.ProviderProxyInvoker.invoke(ProviderProxyInvoker.java:68)
+	at com.alipay.account_center.common.service.facade.api.AccountService_proxy_2.insertTransactionRecord(AccountService_proxy_2.java)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:139)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:510)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:400)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:364)
+	at org.jboss.resteasy.core.interception.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:355)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:366)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:338)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:311)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:439)
+	at com.alipay.sofa.rpc.server.rest.SofaSynchronousDispatcher.invoke(SofaSynchronousDispatcher.java:49)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$4(SynchronousDispatcher.java:229)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:135)
+	at org.jboss.resteasy.core.interception.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:355)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:138)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:215)
+	at org.jboss.resteasy.plugins.server.netty.RequestDispatcher.service(RequestDispatcher.java:83)
+	at com.alipay.sofa.rpc.server.rest.SofaRestRequestHandler.channelRead0(SofaRestRequestHandler.java:103)
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:99)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.access$600(AbstractChannelHandlerContext.java:61)
+	at io.netty.channel.AbstractChannelHandlerContext$7.run(AbstractChannelHandlerContext.java:425)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NullPointerException: Cannot invoke "com.alipay.account_center.common.service.facade.enums.TransactionCategory.getCode()" because the return value of "com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest.getCategory()" is null
+	at com.alipay.account_center.core.service.repository.impl.AccountTransactionRepositoryImpl.insertTransactionRecord(AccountTransactionRepositoryImpl.java:65)
+	... 107 common frames omitted
+2026-06-07 23:46:22.124 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@3bc7ad38]] [request =[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@38b38f3f]
+2026-06-07 23:46:22.124 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (7ms)
+2026-06-07 23:46:22.125 INFO  [SOFA-SEV-REST-BIZ-8341-12-T2] service=iaccount traceId=e4ba5088-726a-4492-aa53-ab5385600567 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.insertTransactionRecord(..) (9ms)
+2026-06-07 23:47:38.794 INFO  [SpringApplicationShutdownHook] service=iaccount traceId= o.s.b.w.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-07 23:47:38.834 INFO  [tomcat-shutdown] service=iaccount traceId= o.s.b.w.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-06-07 23:47:38.855 INFO  [SpringApplicationShutdownHook] service=iaccount traceId= o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-06-07 23:47:38.855 INFO  [SpringApplicationShutdownHook] service=iaccount traceId= o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7b7d69c7]]
+2026-06-07 23:47:38.855 INFO  [SpringApplicationShutdownHook] service=iaccount traceId= o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-06-07 23:47:39.085 INFO  [SpringApplicationShutdownHook] service=iaccount traceId= o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 23:47:39.117 INFO  [SpringApplicationShutdownHook] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-07 23:47:39.130 INFO  [SpringApplicationShutdownHook] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-07 23:47:41.021 INFO  [main] service=iaccount traceId= com.alipay.account_center.web.Main - Starting Main using Java 25.0.2 with PID 34532 (/Users/adam/IdeaProjects/iaccount/app/web/target/classes started by adam in /Users/adam/IdeaProjects/iaccount)
+2026-06-07 23:47:41.029 INFO  [main] service=iaccount traceId= com.alipay.account_center.web.Main - No active profile set, falling back to 1 default profile: "default"
+2026-06-07 23:47:41.741 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-07 23:47:41.746 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 23:47:41.757 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 0 JPA repository interfaces.
+2026-06-07 23:47:41.766 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-07 23:47:41.766 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-07 23:47:41.772 INFO  [main] service=iaccount traceId= o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2026-06-07 23:47:42.241 WARN  [main] service=iaccount traceId= o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'asyncInitMethodManager' of type [com.alipay.sofa.runtime.async.AsyncInitMethodManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [asyncProxyBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-06-07 23:47:42.757 INFO  [main] service=iaccount traceId= o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8887 (http)
+2026-06-07 23:47:42.771 INFO  [main] service=iaccount traceId= o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-0.0.0.0-8887"]
+2026-06-07 23:47:42.775 INFO  [main] service=iaccount traceId= o.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 23:47:42.775 INFO  [main] service=iaccount traceId= org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-06-07 23:47:42.799 INFO  [main] service=iaccount traceId= o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-07 23:47:42.799 INFO  [main] service=iaccount traceId= o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1756 ms
+2026-06-07 23:47:43.045 INFO  [main] service=iaccount traceId= o.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 23:47:43.148 INFO  [main] service=iaccount traceId= org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-06-07 23:47:43.178 INFO  [main] service=iaccount traceId= o.h.c.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 23:47:43.347 INFO  [main] service=iaccount traceId= o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 23:47:43.362 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-07 23:47:43.492 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@76425cc2
+2026-06-07 23:47:43.495 INFO  [main] service=iaccount traceId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-07 23:47:43.543 WARN  [main] service=iaccount traceId= org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 23:47:43.550 INFO  [main] service=iaccount traceId= org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 18.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-07 23:47:43.701 INFO  [main] service=iaccount traceId= o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 23:47:43.703 INFO  [main] service=iaccount traceId= o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 23:47:44.819 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Entering: TopUpHandler.getType()
+2026-06-07 23:47:44.819 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Exiting: TopUpHandler.getType() (0ms)
+2026-06-07 23:47:44.819 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Entering: TransactionHandler.getType()
+2026-06-07 23:47:44.819 INFO  [main] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Exiting: TransactionHandler.getType() (0ms)
+2026-06-07 23:47:44.853 WARN  [main] service=iaccount traceId= o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-07 23:47:45.082 INFO  [main] service=iaccount traceId= o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoints beneath base path '/actuator'
+2026-06-07 23:47:45.101 INFO  [main] service=iaccount traceId= o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-06-07 23:47:45.661 INFO  [main] service=iaccount traceId= o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-06-07 23:47:45.661 INFO  [main] service=iaccount traceId= o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@276bb456]]
+2026-06-07 23:47:45.662 INFO  [main] service=iaccount traceId= o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-06-07 23:47:45.662 INFO  [main] service=iaccount traceId= o.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-0.0.0.0-8887"]
+2026-06-07 23:47:45.680 INFO  [main] service=iaccount traceId= o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat started on port 8887 (http) with context path '/'
+2026-06-07 23:47:45.845 INFO  [main] service=iaccount traceId= com.alipay.account_center.web.Main - Started Main in 5.013 seconds (process running for 6.321)
+2026-06-07 23:47:49.227 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:47:49.227 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:47:49.228 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@e6526ba]
+2026-06-07 23:47:49.230 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:47:49.298 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfoByUserId(..) (68ms)
+2026-06-07 23:47:49.301 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@53867bf4]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@e6526ba]
+2026-06-07 23:47:49.301 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (74ms)
+2026-06-07 23:47:49.301 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfoByUserId(..) (74ms)
+2026-06-07 23:47:49.341 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.insertTransactionRecord(..)
+2026-06-07 23:47:49.341 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:47:49.341 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@44d6929f]
+2026-06-07 23:47:49.418 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.insertTransactionRecord(..)
+2026-06-07 23:47:49.540 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Exiting: AccountTransactionRepositoryImpl.insertTransactionRecord(..) (122ms)
+2026-06-07 23:47:49.545 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@1bcb35a1]] [request =[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@44d6929f]
+2026-06-07 23:47:49.545 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (204ms)
+2026-06-07 23:47:49.545 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=0f99ba25-f7ed-4179-b0ef-7f4480482075 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.insertTransactionRecord(..) (204ms)
+2026-06-07 23:48:45.692 INFO  [MessageBroker-1] service=iaccount traceId= o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-06-07 23:49:56.542 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:49:56.542 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:49:56.542 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@306cd48c]
+2026-06-07 23:49:56.543 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:49:56.550 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfoByUserId(..) (7ms)
+2026-06-07 23:49:56.550 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@3eab2cf1]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@306cd48c]
+2026-06-07 23:49:56.550 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (8ms)
+2026-06-07 23:49:56.550 INFO  [SOFA-SEV-REST-BIZ-8341-12-T3] service=iaccount traceId=614519d5-0ab0-411c-a5a3-b37b36e48c51 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfoByUserId(..) (8ms)
+2026-06-07 23:49:56.754 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfo(..)
+2026-06-07 23:49:56.754 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:49:56.755 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@ec0903b]
+2026-06-07 23:49:56.758 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfo(..)
+2026-06-07 23:49:56.760 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfo(..) (2ms)
+2026-06-07 23:49:56.761 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@71471b61]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@ec0903b]
+2026-06-07 23:49:56.761 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (6ms)
+2026-06-07 23:49:56.761 INFO  [SOFA-SEV-REST-BIZ-8341-12-T1] service=iaccount traceId=114a20cf-2315-4471-ae01-23811372915e c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfo(..) (7ms)
+2026-06-07 23:49:56.782 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryTransactionHistory(..)
+2026-06-07 23:49:56.783 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:49:56.783 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryTransactionHistoryRequest@326fb52e]
+2026-06-07 23:49:56.783 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfo(..)
+2026-06-07 23:49:56.785 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfo(..) (2ms)
+2026-06-07 23:49:56.785 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.queryTransactionHistory(..)
+2026-06-07 23:49:56.858 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Exiting: AccountTransactionRepositoryImpl.queryTransactionHistory(..) (72ms)
+2026-06-07 23:49:56.859 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.queryTransactionTotalCount(..)
+2026-06-07 23:49:56.910 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Exiting: AccountTransactionRepositoryImpl.queryTransactionTotalCount(..) (51ms)
+2026-06-07 23:49:56.911 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@72608897]] [request =[com.alipay.account_center.common.service.facade.request.QueryTransactionHistoryRequest@326fb52e]
+2026-06-07 23:49:56.911 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (128ms)
+2026-06-07 23:49:56.911 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=df62826b-34f4-4afe-8f69-5d840e142596 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryTransactionHistory(..) (129ms)
+2026-06-07 23:50:05.734 INFO  [http-nio-0.0.0.0-8887-exec-1] service=iaccount traceId= o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-07 23:50:05.735 INFO  [http-nio-0.0.0.0-8887-exec-1] service=iaccount traceId= o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-07 23:50:05.745 INFO  [http-nio-0.0.0.0-8887-exec-1] service=iaccount traceId= o.s.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+2026-06-07 23:50:05.816 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.TraceIdFilter - Starting request: POST /account/basic/queryAccountInfoByUserId.json
+2026-06-07 23:50:05.852 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:50:05.853 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:50:05.853 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@442c855b]
+2026-06-07 23:50:05.853 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfoByUserId(..)
+2026-06-07 23:50:05.855 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfoByUserId(..) (2ms)
+2026-06-07 23:50:05.855 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@24e1a38b]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@442c855b]
+2026-06-07 23:50:05.855 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (2ms)
+2026-06-07 23:50:05.855 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfoByUserId(..) (2ms)
+2026-06-07 23:50:05.866 INFO  [http-nio-0.0.0.0-8887-exec-2] service=iaccount traceId=b17270ca-cc1f-4161-957a-29391eedefa6 c.a.account_center.web.TraceIdFilter - Finished request: POST /account/basic/queryAccountInfoByUserId.json - Status: 200
+2026-06-07 23:50:10.673 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfo(..)
+2026-06-07 23:50:10.673 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:50:10.673 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@7d2c971c]
+2026-06-07 23:50:10.673 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfo(..)
+2026-06-07 23:50:10.675 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfo(..) (2ms)
+2026-06-07 23:50:10.675 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@322359da]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@7d2c971c]
+2026-06-07 23:50:10.675 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (2ms)
+2026-06-07 23:50:10.675 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfo(..) (2ms)
+2026-06-07 23:50:10.680 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfo(..)
+2026-06-07 23:50:10.680 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:50:10.681 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@1db7557b]
+2026-06-07 23:50:10.681 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfo(..)
+2026-06-07 23:50:10.683 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfo(..) (1ms)
+2026-06-07 23:50:10.683 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@2172bc5c]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@1db7557b]
+2026-06-07 23:50:10.683 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (2ms)
+2026-06-07 23:50:10.683 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=6370a444-64e3-41e6-a685-39b654010b9b c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfo(..) (3ms)
+2026-06-07 23:50:10.887 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryAccountInfo(..)
+2026-06-07 23:50:10.888 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:50:10.888 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@387f4b19]
+2026-06-07 23:50:10.888 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfo(..)
+2026-06-07 23:50:10.889 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfo(..) (1ms)
+2026-06-07 23:50:10.889 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@3701bba4]] [request =[com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest@387f4b19]
+2026-06-07 23:50:10.889 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (1ms)
+2026-06-07 23:50:10.889 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryAccountInfo(..) (1ms)
+2026-06-07 23:50:11.199 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.insertTransactionRecord(..)
+2026-06-07 23:50:11.200 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:50:11.200 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@3a56144]
+2026-06-07 23:50:11.201 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.insertTransactionRecord(..)
+2026-06-07 23:50:11.248 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountTransactionRepositoryImpl.insertTransactionRecord(..) (47ms)
+2026-06-07 23:50:11.298 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@7925c7]] [request =[com.alipay.account_center.common.service.facade.request.InsertTransactionRecordRequest@3a56144]
+2026-06-07 23:50:11.298 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (98ms)
+2026-06-07 23:50:11.298 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.insertTransactionRecord(..) (98ms)
+2026-06-07 23:50:11.331 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountServiceImpl.queryTransactionRecord(..)
+2026-06-07 23:50:11.331 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountServiceTemplate.execute(..)
+2026-06-07 23:50:11.331 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 RISK-BIZ-SERVICE - service request[[com.alipay.account_center.common.service.facade.request.QueryTransactionRecordRequest@4aae408d]
+2026-06-07 23:50:11.331 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.queryAccountInfo(..)
+2026-06-07 23:50:11.333 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.queryAccountInfo(..) (2ms)
+2026-06-07 23:50:11.333 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.queryTransactionRecord(..)
+2026-06-07 23:50:11.334 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountTransactionRepositoryImpl.queryTransactionRecord(..) (1ms)
+2026-06-07 23:50:11.334 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 RISK-BIZ-SERVICE - service result[[com.alipay.account_center.common.service.facade.baseresult.AccountBizResult@39b2f3a5]] [request =[com.alipay.account_center.common.service.facade.request.QueryTransactionRecordRequest@4aae408d]
+2026-06-07 23:50:11.334 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceTemplate.execute(..) (3ms)
+2026-06-07 23:50:11.334 INFO  [SOFA-SEV-REST-BIZ-8341-12-T4] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountServiceImpl.queryTransactionRecord(..) (3ms)
+2026-06-07 23:50:13.864 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Entering: TraceIdRecordInterceptor.intercept(..)
+2026-06-07 23:50:13.864 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: TraceIdRecordInterceptor.intercept(..) (0ms)
+2026-06-07 23:50:13.867 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: EcTransactionListener.transfer(..)
+2026-06-07 23:50:13.893 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: TransactionServiceImpl.processTransfer(..)
+2026-06-07 23:50:13.895 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: DistributedLockImpl.tryLock(..)
+2026-06-07 23:50:14.294 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: DistributedLockImpl.tryLock(..) (399ms)
+2026-06-07 23:50:14.295 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: TransactionHandlerFactory.getHandler(..)
+2026-06-07 23:50:14.295 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: TransactionHandlerFactory.getHandler(..) (0ms)
+2026-06-07 23:50:14.296 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: TransactionHandler.setFirstAndSecondLock(..)
+2026-06-07 23:50:14.296 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: DistributedLockImpl.tryLock(..)
+2026-06-07 23:50:14.306 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: DistributedLockImpl.tryLock(..) (10ms)
+2026-06-07 23:50:14.306 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: DistributedLockImpl.tryLock(..)
+2026-06-07 23:50:14.308 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: DistributedLockImpl.tryLock(..) (1ms)
+2026-06-07 23:50:14.308 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: TransactionHandler.setFirstAndSecondLock(..) (12ms)
+2026-06-07 23:50:14.309 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: WalletServiceClientImpl.queryIdempotencyKeys(..)
+2026-06-07 23:50:14.446 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: WalletServiceClientImpl.queryIdempotencyKeys(..) (137ms)
+2026-06-07 23:50:14.446 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: WalletServiceClientImpl.updateIdempotencyKey(..)
+2026-06-07 23:50:14.502 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: WalletServiceClientImpl.updateIdempotencyKey(..) (56ms)
+2026-06-07 23:50:14.502 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.queryTransactionRecord(..)
+2026-06-07 23:50:14.506 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountTransactionRepositoryImpl.queryTransactionRecord(..) (4ms)
+2026-06-07 23:50:14.509 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: TransactionHandler.updateAccountRecord(..)
+2026-06-07 23:50:14.511 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.lockById(..)
+2026-06-07 23:50:14.517 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.lockById(..) (6ms)
+2026-06-07 23:50:14.517 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.lockById(..)
+2026-06-07 23:50:14.518 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.lockById(..) (1ms)
+2026-06-07 23:50:14.518 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.updateAccountRecord(..)
+2026-06-07 23:50:14.651 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.updateAccountRecord(..) (133ms)
+2026-06-07 23:50:14.651 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountRepositoryImpl.updateAccountRecord(..)
+2026-06-07 23:50:14.652 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountRepositoryImpl.updateAccountRecord(..) (1ms)
+2026-06-07 23:50:14.653 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: TopUpServiceClientImpl.queryAutoReloadConfig(..)
+2026-06-07 23:50:14.681 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: TopUpServiceClientImpl.queryAutoReloadConfig(..) (28ms)
+2026-06-07 23:50:14.682 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: TransactionHandler.updateAccountRecord(..) (173ms)
+2026-06-07 23:50:14.682 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountTransactionRepositoryImpl.updateTransactionRecord(..)
+2026-06-07 23:50:14.683 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountTransactionRepositoryImpl.updateTransactionRecord(..) (1ms)
+2026-06-07 23:50:14.683 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountLedgerRepositoryImpl.insertLedger(..)
+2026-06-07 23:50:14.725 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountLedgerRepositoryImpl.insertLedger(..) (42ms)
+2026-06-07 23:50:14.726 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: AccountLedgerRepositoryImpl.insertLedger(..)
+2026-06-07 23:50:14.727 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: AccountLedgerRepositoryImpl.insertLedger(..) (1ms)
+2026-06-07 23:50:14.727 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: WalletServiceClientImpl.updateIdempotencyKey(..)
+2026-06-07 23:50:14.732 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: WalletServiceClientImpl.updateIdempotencyKey(..) (5ms)
+2026-06-07 23:50:14.734 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: DistributedLockImpl.unlock(..)
+2026-06-07 23:50:14.777 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: DistributedLockImpl.unlock(..) (43ms)
+2026-06-07 23:50:14.777 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: DistributedLockImpl.unlock(..)
+2026-06-07 23:50:14.777 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: DistributedLockImpl.unlock(..) (0ms)
+2026-06-07 23:50:14.777 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: DistributedLockImpl.unlock(..)
+2026-06-07 23:50:14.777 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: DistributedLockImpl.unlock(..) (0ms)
+2026-06-07 23:50:14.802 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: TransactionServiceImpl.processTransfer(..) (909ms)
+2026-06-07 23:50:14.802 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Exiting: EcTransactionListener.transfer(..) (935ms)
+2026-06-07 23:50:14.803 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId=1feb7ced-4f02-421b-b332-f5d1a4dc6b40 c.a.account_center.web.LoggingAspect - Entering: TraceIdRecordInterceptor.afterRecord(..)
+2026-06-07 23:50:14.803 INFO  [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] service=iaccount traceId= c.a.account_center.web.LoggingAspect - Exiting: TraceIdRecordInterceptor.afterRecord(..) (0ms)
