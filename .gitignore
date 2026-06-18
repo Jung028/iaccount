@@ -8,7 +8,7 @@ target/
 **/*.jar
 !libs/**/*.jar
 *.pem
-
+*.log
 # -------------------------
 # IDE / editor files
 # -------------------------
@@ -29,3 +29,5 @@ Thumbs.db
 # -------------------------
 !**/src/main/java/
 !**/src/main/resources/
+
+graphify-out/
