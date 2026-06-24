@@ -10,7 +10,10 @@ public enum AccountActionEnum {
     INSERT_TRANSACTION_RECORD("INSERT_TRANSACTION_RECORD", "Insert new transaction record"),
     UPDATE_TRANSACTION_RECORD("UPDATE_TRANSACTION_RECORD", "update transaction record"),
     PUBLISH_TRANSFER_EVENT("PUBLISH_TRANSFER_EVENT", "publish transfer event"),
-    QUERY_TRANSACTION_BY_STATUS("QUERY_TRANSACTION_BY_STATUS", "Query transaction record by status list");
+    QUERY_TRANSACTION_BY_STATUS("QUERY_TRANSACTION_BY_STATUS", "Query transaction record by status list"),
+    QUERY_MERCHANT_TRANSACTION_HISTORY("QUERY_MERCHANT_TRANSACTION_HISTORY", "Query merchant transaction history"),
+    QUERY_NEW_CUSTOMER_COUNT("QUERY_NEW_CUSTOMER_COUNT", "Query new customer count for merchant dashboard"),
+    QUERY_AVERAGE_BASKET("QUERY_AVERAGE_BASKET", "Query average bascket"),;
 
     private String code;
     private String desc;

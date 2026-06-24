@@ -8,6 +8,7 @@ import com.alipay.account_center.common.service.integration.wallet.WalletService
 import com.alipay.account_center.core.service.repository.AccountLedgerRepository;
 import com.alipay.account_center.core.service.repository.AccountRepository;
 import com.alipay.account_center.core.service.repository.AccountTransactionRepository;
+import com.alipay.account_center.core.service.repository.MerchantTransactionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public abstract class AbstractAccountBizService {
      */
     @Autowired
     protected AccountTransactionRepository accountTransactionRepository;
+
+    /**
+     * merchant transaction repository
+     */
+    @Autowired
+    protected MerchantTransactionRepository merchantTransactionRepository;
 
     /**
      * transaction template

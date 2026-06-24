@@ -43,4 +43,15 @@ public class CheckParamUtil {
     public static void checkTopUpRequest(TopUpRequest request) {
 
     }
+
+    public static void checkQueryTotalRevenueRequest(QueryTotalRevenueRequest request) {
+        AssertUtil.notBlank(request.getMerchantId(), AccountResultCode.PARAM_ILLEGAL, "merchantId cannot be blank");
+    }
+
+    public static void checkQueryNewCustomerCountRequest(QueryNewCustomerCountRequest request) {
+        AssertUtil.notBlank(request.getMerchantId(), AccountResultCode.PARAM_ILLEGAL, "merchantId cannot be blank");
+    }
+
+    public static void checkQueryAverageBasketRequest(QueryAverageBasketRequest request) {
+    }
 }

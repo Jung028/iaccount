@@ -46,7 +46,18 @@ public enum AccountResultCode {
     /**
      * transaction not found
      */
-    TRANSACTION_NOT_FOUND(GlobalResultCodes.PARAM_ILLEGAL, "Transaction record not found" ),;
+    TRANSACTION_NOT_FOUND(GlobalResultCodes.PARAM_ILLEGAL, "Transaction record not found" ),
+
+    /**
+     * query total revenue
+     */
+    QUERY_TOTAL_REVENUE("QUERY_TOTAL_REVENUE", "Total Revenue"),
+
+    QUERY_NEW_CUSTOMER_COUNT("QUERY_NEW_CUSTOMER_COUNT", "New Customer Count"),
+
+    QUERY_AVERAGE_BASKET("QUERY_AVERAGE_BASKET", "Average Basket"),
+
+    ;
 
 
     private final String code;

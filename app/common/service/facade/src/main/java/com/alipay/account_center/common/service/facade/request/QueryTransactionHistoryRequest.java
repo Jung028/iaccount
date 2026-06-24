@@ -1,16 +1,20 @@
 package com.alipay.account_center.common.service.facade.request;
 
+import com.alipay.account_center.common.service.facade.enums.TxnQueryType;
+
 import java.time.LocalDateTime;
 
 public class QueryTransactionHistoryRequest extends QueryPageBaseRequest {
     private String accountId;
     private String payerAccountId;
     private LocalDateTime gmtCreate;
+    private LocalDateTime gmtCompleted;
     private int amountMin;
     private int amountMax;
     private String txnStatus;
     private String txnType;
     private String txnCategory;
+    private TxnQueryType txnQueryType; // Either CUSTOMER / MERCHANT
 
     public String getAccountId() {
         return accountId;
@@ -76,4 +80,19 @@ public class QueryTransactionHistoryRequest extends QueryPageBaseRequest {
         this.txnCategory = txnCategory;
     }
 
+    public TxnQueryType getTxnQueryType() {
+        return txnQueryType;
+    }
+
+    public void setTxnQueryType(TxnQueryType txnQueryType) {
+        this.txnQueryType = txnQueryType;
+    }
+
+    public LocalDateTime getGmtCompleted() {
+        return gmtCompleted;
+    }
+
+    public void setGmtCompleted(LocalDateTime gmtCompleted) {
+        this.gmtCompleted = gmtCompleted;
+    }
 }

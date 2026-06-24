@@ -13,7 +13,6 @@ import com.alipay.account_center.core.service.repository.AbstractDomainRepositor
 import com.alipay.account_center.core.service.repository.AccountTransactionRepository;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -46,10 +45,10 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
         if (request == null) {
             return Collections.emptyList();
         }
-        List<TransactionDO> transactionDOS = accountTransactionDAO.queryTransactionHistory (
+        List<TransactionDO> transactionDOS = accountTransactionDAO.queryTransactionHistory(
                 request.getAccountId(), request.getPageSize(), request.getPageNo(), request.getPayerAccountId(),
-                request.getGmtCreate(), request.getAmountMax(), request.getAmountMin(), request.getTxnCategory(),
-                request.getTxnType(), request.getTxnStatus());
+                request.getGmtCreate(), request.getGmtCompleted(), request.getAmountMax(), request.getAmountMin(),
+                request.getTxnCategory(), request.getTxnType(), request.getTxnStatus());
         return DomainConverter.convertToModelList(transactionDOS);
     }
 
@@ -86,8 +85,8 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
     }
 
     @Override
-    public int updateTransactionRecord(UpdateTransactionRecordRequest request) {
-        if (request == null) return 0;
+    public void updateTransactionRecord(UpdateTransactionRecordRequest request) {
+        if (request == null) return;
         try {
             TransactionDO record = new TransactionDO();
             record.setTxnId(request.getTxnId());
@@ -98,7 +97,6 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             if (rows <= 0) {
                 throw new RepositoryException("Update affected 0 rows for txnId: " + request.getTxnId());
             }
-            return rows;
         } catch (RepositoryException e) {
             throw e;
         } catch (Exception e) {

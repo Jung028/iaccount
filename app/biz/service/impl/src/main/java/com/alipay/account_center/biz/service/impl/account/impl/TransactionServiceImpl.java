@@ -235,7 +235,7 @@ public class TransactionServiceImpl extends AbstractAccountBizService implements
             System.out.println("FINISH, PUBLISH TRANSACTION");
             System.out.println(resultEvent.getTxnStatus());
             // publish result back to frontend via Kafka
-            kafkaTemplate.send("EC_TRANSACTION_RESULT", resultEvent);
+            kafkaTemplate.send("EC_TRANSACTION_RESULT", event.getPayerAccountNo(), resultEvent);
         }
     }
 

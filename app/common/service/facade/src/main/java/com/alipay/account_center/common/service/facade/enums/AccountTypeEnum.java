@@ -5,7 +5,9 @@ package com.alipay.account_center.common.service.facade.enums;
  * @date 16/3/2026 12:54 AM
  */
 public enum AccountTypeEnum {
-    SAVINGS("SAVINGS", "savings account");
+    SAVINGS("SAVINGS", "savings account"),
+    MERCHANT_ACCOUNT("MERCHANT_ACCOUNT", "merchant account"),
+    IPAY_ACCOUNT("IPAY_ACCOUNT", "company account");
 
 
     private String code;

@@ -66,6 +66,10 @@
                 AND gmt_create &gt;= #{gmtCreate}
             </if>
 
+            <if test="gmtComplete != null">
+                AND gmt_complete &lt;= #{gmtComplete}
+            </if>
+
             <if test="amountMin != 0">
                 AND amount &gt;= #{amountMin}
             </if>
@@ -121,6 +125,81 @@
         SELECT COUNT(*)
         FROM transaction
         WHERE payer_account_id = #{accountId}
+    </select>
+
+    <!-- Query transaction history with pagination -->
+    <select id="queryCustomerTransactionHistoryByMerchantId" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        txn_id, gmt_create, gmt_modified, gmt_complete,
+        payer_account_id, payee_account_id, amount, currency,
+        type, status, failure_reason, ext_info, category
+        FROM transaction
+        <where>
+            AND payee_account_id = #{accountId}
+
+            <if test="gmtCreate != null">
+                AND gmt_create &gt;= #{gmtCreate}
+            </if>
+
+            <if test="amountMin != 0">
+                AND amount &gt;= #{amountMin}
+            </if>
+            <if test="amountMax != 0">
+                AND amount &lt;= #{amountMax}
+            </if>
+
+            <if test="txnCategory != null and txnCategory != ''">
+                AND category = #{txnCategory}
+            </if>
+
+            <if test="txnType != null and txnType != ''">
+                AND type = #{txnType}
+            </if>
+
+            <if test="txnStatus != null and txnStatus != ''">
+                AND status = #{txnStatus}
+            </if>
+        </where>
+        ORDER BY gmt_create DESC
+        LIMIT #{pageSize} OFFSET #{pageNo}
+    </select>
+
+    <select id="queryTotalRevenue" resultType="int">
+        SELECT COALESCE(SUM(amount), 0)
+        FROM transaction
+        WHERE payee_account_id = #{merchantId}
+        AND status = 'FINISH'
+        <if test="gmtCreateFrom != null">
+            AND gmt_complete &gt;= #{gmtCreateFrom}
+        </if>
+        <if test="gmtCreateTo != null">
+            AND gmt_complete &lt;= #{gmtCreateTo}
+        </if>
+    </select>
+
+    <select id="queryAverageBasket" resultType="double">
+        SELECT COALESCE(AVG(amount), 0)
+        FROM transaction
+        WHERE payee_account_id = #{merchantId}
+        AND status = 'FINISH'
+        AND gmt_complete &gt;= #{gmtCreateFrom}
+        AND gmt_complete &lt;= #{gmtCreateTo}
+    </select>
+
+    <select id="queryNewCustomerCount" resultType="int">
+        SELECT COUNT(DISTINCT payer_account_id)
+        FROM transaction
+        WHERE payee_account_id = #{merchantId}
+        AND status = 'FINISH'
+        AND gmt_complete &gt;= #{gmtCreateFrom}
+        AND gmt_complete &lt;= #{gmtCreateTo}
+        AND payer_account_id NOT IN (
+            SELECT DISTINCT payer_account_id
+            FROM transaction
+            WHERE payee_account_id = #{merchantId}
+            AND status = 'FINISH'
+            AND gmt_complete &lt; #{gmtCreateFrom}
+        )
     </select>
 
 </mapper>

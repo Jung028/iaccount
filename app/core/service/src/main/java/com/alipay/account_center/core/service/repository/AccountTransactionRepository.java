@@ -18,7 +18,8 @@ public interface AccountTransactionRepository {
 
     TransactionRecord insertTransactionRecord(InsertTransactionRecordRequest request);
 
-    int updateTransactionRecord(UpdateTransactionRecordRequest request);
+    void updateTransactionRecord(UpdateTransactionRecordRequest request);
 
     int queryTransactionTotalCount(QueryTransactionHistoryRequest request);
+
 }

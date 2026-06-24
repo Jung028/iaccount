@@ -15,14 +15,16 @@ public class EcTransactionEvent {
     private String failReason;
     private String gmtTaskOccur;
     private String txnEventType;
+    private boolean feeActive;
 
-    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency, String txnEventType) {
+    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency, String txnEventType, boolean feeActive) {
         this.txnId = txnId;
         this.payerAccountNo = payerAccountNo;
         this.payeeAccountNo = payeeAccountNo;
         this.amount = amount;
         this.currency = currency;
         this.txnEventType = txnEventType;
+        this.feeActive = feeActive;
     }
 
     public EcTransactionEvent() {
@@ -99,5 +101,13 @@ public class EcTransactionEvent {
 
     public void setTxnEventType(String txnEventType) {
         this.txnEventType = txnEventType;
+    }
+
+    public boolean isFeeActive() {
+        return feeActive;
+    }
+
+    public void setFeeActive(boolean feeActive) {
+        this.feeActive = feeActive;
     }
 }

@@ -2,6 +2,7 @@ package com.alipay.account_center.common.dal.auto.custom;
 
 
 import com.alipay.account_center.common.dal.auto.dataobject.TransactionDO;
+import com.alipay.account_center.common.dal.auto.dataobject.TransactionMetricsDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,9 +29,39 @@ public interface TransactionDAO {
 
     int queryTransactionTotalCount(@Param("accountId") String accountId);
 
-    List<TransactionDO> queryTransactionHistory(@Param("accountId") String accountId, @Param("pageSize") int pageSize, @Param("pageNo") int pageNo,
-                                                @Param("payerAccountId") String payerAccountId, @Param("gmtCreate") LocalDateTime gmtCreate,
-                                                @Param("amountMax") int amountMax, @Param("amountMin") int amountMin,
-                                                @Param("txnCategory") String txnCategory, @Param("txnType") String txnType,
+    List<TransactionDO> queryTransactionHistory(@Param("accountId") String accountId,
+                                                @Param("pageSize") int pageSize,
+                                                @Param("pageNo") int pageNo,
+                                                @Param("payerAccountId") String payerAccountId,
+                                                @Param("gmtCreate") LocalDateTime gmtCreate,
+                                                @Param("gmtComplete") LocalDateTime gmtComplete,
+                                                @Param("amountMax") int amountMax,
+                                                @Param("amountMin") int amountMin,
+                                                @Param("txnCategory") String txnCategory,
+                                                @Param("txnType") String txnType,
                                                 @Param("txnStatus") String txnStatus);
+
+
+    List<TransactionDO> queryCustomerTransactionHistoryByMerchantId(@Param("accountId") String accountId,
+                                                                    @Param("pageSize") int pageSize,
+                                                                    @Param("pageNo") int pageNo,
+                                                                    @Param("gmtCreate") LocalDateTime gmtCreate,
+                                                                    @Param("gmtCompleted") LocalDateTime gmtCompleted,
+                                                                    @Param("amountMax") int amountMax,
+                                                                    @Param("amountMin") int amountMin,
+                                                                    @Param("txnCategory") String txnCategory,
+                                                                    @Param("txnType") String txnType,
+                                                                    @Param("txnStatus") String txnStatus);
+
+    int queryTotalRevenue(@Param("merchantId") String merchantId,
+                          @Param("gmtCreateFrom") LocalDateTime gmtCreateFrom,
+                          @Param("gmtCreateTo") LocalDateTime gmtCreateTo);
+
+    double queryAverageBasket(@Param("merchantId") String merchantId,
+                              @Param("gmtCreateFrom") LocalDateTime gmtCreateFrom,
+                              @Param("gmtCreateTo") LocalDateTime gmtCreateTo);
+
+    int queryNewCustomerCount(@Param("merchantId") String merchantId,
+                              @Param("gmtCreateFrom") LocalDateTime gmtCreateFrom,
+                              @Param("gmtCreateTo") LocalDateTime gmtCreateTo);
 }

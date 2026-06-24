@@ -80,7 +80,8 @@ public class TransactionHandler extends AbstractAccountBizService implements Tra
         queryAutoReloadConfigRequest.setUserId(accountRelationId);
         UserBizResult<AutoReloadConfigItem> autoReloadConfig =
                 topUpServiceClient.queryAutoReloadConfig(queryAutoReloadConfigRequest);
-        if (autoReloadConfig != null && autoReloadConfig.getResult().getIsActive().equals(true)) {
+        if (autoReloadConfig != null && autoReloadConfig.getResult() != null &&
+            autoReloadConfig.getResult().getIsActive().equals(true)) {
             System.out.println(autoReloadConfig.getResult().getUserId());
             // if balanceAfter < thresholdAmount
             if (balanceAfter.compareTo(autoReloadConfig.getResult().getThresholdAmount()) < 0) {
