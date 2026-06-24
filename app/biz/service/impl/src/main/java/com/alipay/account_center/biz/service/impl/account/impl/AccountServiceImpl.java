@@ -230,14 +230,7 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
                         AssertUtil.isTrue(accountInfo.getStatus().equals(AccountStatusEnum.ACTIVE.getCode()),
                                 AccountResultCode.ACCOUNT_STATUS_ILLEGAL, "Account status is not valid");
 
-                        // if query type is merchant, query by merchant txn repository
-                        List<TransactionHistory> transactionHistory = new ArrayList<>();
-                        if (request.getTxnQueryType().equals(TxnQueryType.MERCHANT)) {
-                             transactionHistory = merchantTransactionRepository.
-                                    queryCustomerTransactionHistoryByMerchantId(request);
-                        } else if (request.getTxnQueryType().equals(TxnQueryType.CUSTOMER)) {
-                            transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
-                        }
+                        List<TransactionHistory> transactionHistory = accountTransactionRepository.queryTransactionHistory(request);
 
                         // Query total count
                         int totalCount = accountTransactionRepository.queryTransactionTotalCount(request);
