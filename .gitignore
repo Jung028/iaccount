@@ -9,6 +9,7 @@ target/
 !libs/**/*.jar
 *.pem
 *.log
+**/logs/
 logs/
 # -------------------------
 # IDE / editor files

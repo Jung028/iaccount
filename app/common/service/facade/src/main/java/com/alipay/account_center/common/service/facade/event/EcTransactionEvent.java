@@ -16,6 +16,7 @@ public class EcTransactionEvent {
     private String gmtTaskOccur;
     private String txnEventType;
     private boolean feeActive;
+    private String txnCategory;
 
     public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency, String txnEventType, boolean feeActive) {
         this.txnId = txnId;
@@ -109,5 +110,13 @@ public class EcTransactionEvent {
 
     public void setFeeActive(boolean feeActive) {
         this.feeActive = feeActive;
+    }
+
+    public String getTxnCategory() {
+        return txnCategory;
+    }
+
+    public void setTxnCategory(String txnCategory) {
+        this.txnCategory = txnCategory;
     }
 }

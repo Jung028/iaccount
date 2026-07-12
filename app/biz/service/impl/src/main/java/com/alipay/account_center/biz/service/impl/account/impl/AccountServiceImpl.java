@@ -381,12 +381,12 @@ public class AccountServiceImpl extends AbstractAccountBizService implements Acc
 
                         // if query type is merchant, query by merchant txn repository
                         List<TransactionHistory> transactionHistory = merchantTransactionRepository.
-                                    queryCustomerTransactionHistoryByMerchantId(request.getAccountId(), thisMonday, thisSunday);
+                                    queryCustomerTransactionHistoryByMerchantId(request, thisMonday, thisSunday);
 
                         // Query total count
                         int countTransactionHistoryThisWeek = transactionHistory.size();
                         List<TransactionHistory> transactionHistoryLastWeek = merchantTransactionRepository.
-                                queryCustomerTransactionHistoryByMerchantId(request.getAccountId(), thisMonday.minusWeeks(1), thisSunday.minusWeeks(1));
+                                queryCustomerTransactionHistoryByMerchantId(request, thisMonday.minusWeeks(1), thisSunday.minusWeeks(1));
 
                         int countTransactionHistoryLastWeek = transactionHistoryLastWeek.size();
 

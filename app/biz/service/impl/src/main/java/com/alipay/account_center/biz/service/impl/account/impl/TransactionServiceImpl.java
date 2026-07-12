@@ -74,6 +74,7 @@ public class TransactionServiceImpl extends AbstractAccountBizService implements
         resultEvent.setAmount(event.getAmount());
         resultEvent.setCurrency(event.getCurrency());
         resultEvent.setGmtTaskOccur(String.valueOf(System.currentTimeMillis()));
+        resultEvent.setTxnCategory(event.getTxnCategory());
 
         BusinessBizResult<IdempotencyKeysItem> queryIdempotencyKeysResult = null;
 

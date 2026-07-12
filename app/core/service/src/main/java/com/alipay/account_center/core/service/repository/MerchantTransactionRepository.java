@@ -20,5 +20,5 @@ public interface MerchantTransactionRepository {
 
     int queryNewCustomerCount(String merchantId, LocalDateTime from, LocalDateTime to);
 
-    List<TransactionHistory> queryCustomerTransactionHistoryByMerchantId(String merchantId, LocalDateTime from, LocalDateTime to);
+    List<TransactionHistory> queryCustomerTransactionHistoryByMerchantId(QueryTransactionHistoryRequest request, LocalDateTime from, LocalDateTime to);
 }

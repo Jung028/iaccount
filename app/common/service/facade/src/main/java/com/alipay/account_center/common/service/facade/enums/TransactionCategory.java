@@ -18,6 +18,7 @@ public enum TransactionCategory {
     EDUCATION("EDUCATION", "Schools, courses, tuition"),
     TRANSFER("TRANSFER", "Peer-to-peer individual transfer"),
     TOP_UP("TOP_UP", "Wallet reload"),
+    GROUP_RECEIPT("GROUP_RECEIPT", "Group receipt"),
     OTHER("OTHER", "Uncategorised");
 
     private String code;
