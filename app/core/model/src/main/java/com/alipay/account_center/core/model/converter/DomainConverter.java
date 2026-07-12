@@ -59,6 +59,8 @@ public class DomainConverter {
         transactionRecord.setFailureReason(transactionDO.getFailureReason());
         transactionRecord.setExtInfo(transactionDO.getExtInfo());
         transactionRecord.setCategory(TransactionCategory.fromCode(transactionDO.getCategory()));
+        transactionRecord.setReferenceType(transactionDO.getReferenceType());
+        transactionRecord.setReferenceId(transactionDO.getReferenceId());
         return transactionRecord;
     }
 

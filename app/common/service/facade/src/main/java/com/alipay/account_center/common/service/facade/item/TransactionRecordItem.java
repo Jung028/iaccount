@@ -24,6 +24,8 @@ public class TransactionRecordItem {
     private String extInfo;
     private TransactionDirection txnDirection;
     private TransactionCategory txnCategory;
+    private String referenceType;
+    private String referenceId;
 
     public String getTxnId() {
         return txnId;
@@ -135,5 +137,21 @@ public class TransactionRecordItem {
 
     public void setTxnCategory(TransactionCategory txnCategory) {
         this.txnCategory = txnCategory;
+    }
+
+    public String getReferenceType() {
+        return referenceType;
+    }
+
+    public void setReferenceType(String referenceType) {
+        this.referenceType = referenceType;
+    }
+
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 }

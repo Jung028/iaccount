@@ -58,6 +58,8 @@ public class ItemConverter {
         transactionRecordItem.setFailureReason(transactionRecord.getFailureReason());
         transactionRecordItem.setExtInfo(transactionRecord.getExtInfo());
         transactionRecordItem.setTxnCategory(transactionRecord.getCategory());
+        transactionRecordItem.setReferenceType(transactionRecord.getReferenceType());
+        transactionRecordItem.setReferenceId(transactionRecord.getReferenceId());
 
         return transactionRecordItem;
     }
@@ -80,6 +82,8 @@ public class ItemConverter {
         transactionRecordItem.setFailureReason(transactionRecord.getFailureReason());
         transactionRecordItem.setExtInfo(transactionRecord.getExtInfo());
         transactionRecordItem.setTxnCategory(transactionRecord.getCategory());
+        transactionRecordItem.setReferenceType(transactionRecord.getReferenceType());
+        transactionRecordItem.setReferenceId(transactionRecord.getReferenceId());
         return transactionRecordItem;
     }
 

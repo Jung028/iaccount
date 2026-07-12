@@ -71,6 +71,8 @@ public class AccountTransactionRepositoryImpl extends AbstractDomainRepository i
             record.setGmtModified(new Date());
             record.setGmtComplete(new Date());
             record.setType(request.getTxnType().getCode());
+            record.setReferenceType(request.getReferenceType());
+            record.setReferenceId(request.getReferenceId());
 
             int rows = accountTransactionDAO.insertTransactionRecord(record); // DAO returns int
             if (rows <= 0) {

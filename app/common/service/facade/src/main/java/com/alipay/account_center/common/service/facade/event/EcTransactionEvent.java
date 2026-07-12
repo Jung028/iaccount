@@ -18,7 +18,7 @@ public class EcTransactionEvent {
     private boolean feeActive;
     private String txnCategory;
 
-    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency, String txnEventType, boolean feeActive) {
+    public EcTransactionEvent(String txnId, String payerAccountNo, String payeeAccountNo, BigDecimal amount, String currency, String txnEventType, boolean feeActive, String txnCategory) {
         this.txnId = txnId;
         this.payerAccountNo = payerAccountNo;
         this.payeeAccountNo = payeeAccountNo;
@@ -26,6 +26,7 @@ public class EcTransactionEvent {
         this.currency = currency;
         this.txnEventType = txnEventType;
         this.feeActive = feeActive;
+        this.txnCategory = txnCategory;
     }
 
     public EcTransactionEvent() {

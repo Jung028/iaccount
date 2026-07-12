@@ -16,6 +16,8 @@ public class InsertTransactionRecordRequest extends AccountBaseRequest {
     private TransactionStatusEnum status;
     private TransactionType txnType;
     private TransactionCategory category;
+    private String referenceType;
+    private String referenceId;
 
     public String getTxnId() {
         return txnId;
@@ -79,5 +81,21 @@ public class InsertTransactionRecordRequest extends AccountBaseRequest {
 
     public void setCategory(TransactionCategory category) {
         this.category = category;
+    }
+
+    public String getReferenceType() {
+        return referenceType;
+    }
+
+    public void setReferenceType(String referenceType) {
+        this.referenceType = referenceType;
+    }
+
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 }

@@ -22,6 +22,8 @@ public class TransactionRecord {
     private String failureReason;
     private String extInfo;
     private TransactionCategory category;
+    private String referenceType;
+    private String referenceId;
 
     public String getTxnId() {
         return txnId;
@@ -125,5 +127,21 @@ public class TransactionRecord {
 
     public void setCategory(TransactionCategory category) {
         this.category = category;
+    }
+
+    public String getReferenceType() {
+        return referenceType;
+    }
+
+    public void setReferenceType(String referenceType) {
+        this.referenceType = referenceType;
+    }
+
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 }

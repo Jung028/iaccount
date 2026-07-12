@@ -1,17 +1,13 @@
 package com.alipay.account_center.biz.service.impl.account.impl;
 
 import com.alipay.account_center.biz.service.impl.helper.ResponseBuilder;
-import com.alipay.account_center.common.service.facade.enums.TxnQueryType;
-import com.alipay.account_center.common.dal.auto.dataobject.TransactionMetricsDTO;
 import com.alipay.account_center.common.service.facade.item.MetricCard;
-import com.alipay.account_center.common.service.facade.item.TransactionHistoryItem;
 import com.alipay.account_center.common.service.facade.request.*;
 import com.alipay.account_center.common.service.facade.result.QueryAverageBasketResult;
 import com.alipay.account_center.common.service.facade.result.QueryNewCustomerCountResult;
 import com.alipay.account_center.common.service.facade.result.QueryTotalRevenueResult;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
-import org.apache.zookeeper.Op;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import com.alipay.account_center.common.service.facade.api.AccountService;
@@ -34,7 +30,6 @@ import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

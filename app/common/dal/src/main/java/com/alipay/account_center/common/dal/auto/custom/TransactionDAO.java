@@ -2,12 +2,10 @@ package com.alipay.account_center.common.dal.auto.custom;
 
 
 import com.alipay.account_center.common.dal.auto.dataobject.TransactionDO;
-import com.alipay.account_center.common.dal.auto.dataobject.TransactionMetricsDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
